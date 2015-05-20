@@ -1,8 +1,11 @@
 package tools;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Browser {
     private WebDriver driver;
@@ -15,85 +18,49 @@ public class Browser {
         driver.get(url);
     }
 
-    public WebElement findElement (By locator){
-        try {
-            return driver.findElement(locator);
-        } catch (Exception e) {
-            System.out.println("Element: " + locator + ", is not available on page - "
-                    + driver.getCurrentUrl());
-            return null;
-        }
+    public WebElement findElementByName(String locator) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.name(locator)));
+        return element;
     }
 
-    public WebElement findElementByName(String elementLocator) {
-        By locator = By.name(elementLocator);
-        WebElement webElement = findElement(locator);
-        return webElement;
+    public WebElement findElementById(String locator) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id(locator)));
+        return element;
     }
 
-    public WebElement findElementById(String elementLocator) {
-        By locator = By.id(elementLocator);
-        return findElement(locator);
+    public WebElement findElementByLinkText(String locator) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.linkText(locator)));
+        return element;
     }
 
-    public WebElement findElementByLinkText(String elementLocator) {
-        By locator = By.linkText(elementLocator);
-        return findElement(locator);
+    public WebElement findElementByCssSelector(String locator) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+        return element;
     }
 
-    public WebElement findElementByCssSelector(String elementLocator) {
-        By locator = By.cssSelector(elementLocator);
-        return findElement(locator);
+    public WebElement findElementByXpath(String locator) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+        return element;
     }
 
-    public WebElement findElementByXpath(String elementLocator) {
-        By locator = By.xpath(elementLocator);
-        return findElement(locator);
+
+    public WebElement findElementByClassName(String locator) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.className(locator)));
+        return element;
     }
 
-    public WebElement findElementByClassName(String elementLocator) {
-        By locator = By.className(elementLocator);
-        return findElement(locator);
+    public WebElement findElementByPartialLinkText(String locator) {
+        WebElement element = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(locator)));
+        return element;
     }
 
-    public WebElement findPartialLinkText(String elementLocator) {
-        By locator = By.partialLinkText(elementLocator);
-        return findElement(locator);
-    }
 
-    public boolean isElementPresentByPartialLinkText(String elementLocator) {
-        WebElement webElement = findPartialLinkText(elementLocator);
-        return webElement != null;
-    }
-
-    public boolean isElementPresentByXpath(String elementLocator) {
-        WebElement webElement = findElementByXpath(elementLocator);
-        return webElement != null;
-    }
-
-    public boolean isElementPresentByClassName(String elementLocator) {
-        WebElement webElement = findElementByClassName(elementLocator);
-        return webElement != null;
-    }
-
-    public boolean isElementPresentByCssSelector(String elementLocator) {
-        WebElement webElement = findElementByCssSelector(elementLocator);
-        return webElement != null;
-    }
-
-    public boolean isElementPresentByName(String elementLocator) {
-        WebElement webElement = findElementByName(elementLocator);
-        return webElement != null;
-    }
-
-    public boolean isElementPresentByLinkText(String elementLocator) {
-        WebElement webElement = findElementByLinkText(elementLocator);
-        return webElement != null;
-    }
-
-    public boolean isElementPresentById(String elementLocator) {
-        WebElement webElement = findElementById(elementLocator);
-        return webElement != null;
-    }
 
 }
