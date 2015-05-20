@@ -1,9 +1,7 @@
 package pages;
 
-import org.openqa.selenium.*;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
 
