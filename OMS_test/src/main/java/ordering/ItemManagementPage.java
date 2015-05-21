@@ -25,11 +25,12 @@ public class ItemManagementPage {
     public ItemManagementPage(WebDriver driver) {
 
         this.driver = driver;
+        browser = new Browser(driver);
     }
 
-    public ItemManagementPage(Browser browser) {
-        this.browser = new Browser(driver);
-    }
+//    public ItemManagementPage(Browser browser) {
+//        this.browser = new Browser(driver);
+//    }
 
     public List<String> getFilterByValues() {
         List<String> values = new ArrayList<String>();
