@@ -12,7 +12,7 @@
                RoleRef="1"
                CustomerTypeRef="1"
                balance="0"
-               IsUserActive="0"
+               IsUserActive="1"
                 />
         <Users
                id="2"
@@ -56,5 +56,32 @@
             balance="0"
             IsUserActive="1"
             />
-
+    <Users
+            id="5"
+            login="User4"
+            firstName="Hidden"
+            lastName="User"
+            password="pass"
+            confirmPassword="pass"
+            email="hidden@mail.com"
+            RegionRef="1"
+            RoleRef="1"
+            CustomerTypeRef="1"
+            balance="0"
+            IsUserActive="0"
+            />
+    <Users
+            id="6"
+            login="User5"
+            firstName="eve"
+            lastName="e."
+            password="pass"
+            confirmPassword="pass"
+            email="eve@mail.com"
+            RegionRef="3"
+            RoleRef="3"
+            CustomerTypeRef="3"
+            balance="0"
+            IsUserActive="1"
+            />
 </dataset>

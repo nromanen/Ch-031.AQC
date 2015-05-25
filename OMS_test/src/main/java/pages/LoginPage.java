@@ -2,10 +2,12 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import tools.SeleniumWrapper;
 
 public class LoginPage {
 
   private WebDriver driver;
+  SeleniumWrapper sw;
 
   private final static String admin_name = "admin";
   private final static String admin_password = "pass";
@@ -13,14 +15,14 @@ public class LoginPage {
 
   public LoginPage(WebDriver driver) {
     this.driver = driver;
+    sw = new SeleniumWrapper(driver);
   }
 
   public UserinfoPage loginSuccess() {
-    driver.findElement(By.name("j_username")).clear();
-    driver.findElement(By.name("j_username")).sendKeys(admin_name);
-    driver.findElement(By.name("j_password")).clear();
-    driver.findElement(By.name("j_password")).sendKeys(admin_password);
-    driver.findElement(By.name("submit")).click();
+
+    sw.findByNameAndSendKeys("j_username", admin_name);
+    sw.findByNameAndSendKeys("j_password", admin_password);
+    sw.findByNameAndClick("submit");
 
     return new UserinfoPage(driver);
   }

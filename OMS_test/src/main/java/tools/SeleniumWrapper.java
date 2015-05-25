@@ -4,6 +4,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.Assert.assertTrue;
 
@@ -81,8 +82,21 @@ public class SeleniumWrapper {
 
 
     ///////////////////////////////////////////////////////////////////////////
+    // BY XPATH
+    ///////////////////////////////////////////////////////////////////////////
+
+    public WebElement findByXPath(String path) {
+        return driver.findElement(By.xpath(path));
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////
     // ETC
     ///////////////////////////////////////////////////////////////////////////
+
+    public void selectByVisibleText(WebElement e, String text) {
+        new Select(e).selectByVisibleText(text);
+    }
 
     public void closeAlert(String msg) {
         assertTrue(closeAlertAndGetItsText().matches(msg));
