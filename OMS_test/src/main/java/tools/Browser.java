@@ -1,6 +1,7 @@
 package tools;
 
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -60,6 +61,11 @@ public class Browser {
         WebElement element = (new WebDriverWait(driver, TIME_OUT_SECONDS))
                 .until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(locator)));
         return element;
+    }
+
+    public void alertAccept(){
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
     }
 
 
