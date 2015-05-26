@@ -15,11 +15,13 @@ public class ItemManagementPage {
     private WebDriver driver;
     private Browser browser;
 
-    String filterBySelectBoxIdLocator = "field";
-    String productTableIdLocator = "table";
-    String showItemLinkXPathLocator = "//div[@id='list']/p/a";
-    String createReportLinkTextLocator = "create report";
-    String addProductLinkTextLocator = "Add Product";
+    private static String filterBySelectBoxIdLocator = "field";
+    private static String productTableIdLocator = "table";
+    private static String tableRowTagNameLocator = "tr";
+    private static String tableHeaderTagNameLocator = "th";
+    private static String showItemLinkXPathLocator = "//div[@id='list']/p/a";
+    private static String createReportLinkTextLocator = "create report";
+    private static String addProductLinkTextLocator = "Add Product";
 
 
     public ItemManagementPage(WebDriver driver) {
@@ -28,11 +30,8 @@ public class ItemManagementPage {
         browser = new Browser(driver);
     }
 
-//    public ItemManagementPage(Browser browser) {
-//        this.browser = new Browser(driver);
-//    }
 
-    public List<String> getFilterByValues() {
+    public List<String> getFilterValues() {
         List<String> values = new ArrayList<String>();
         Select select = new Select(browser.findElementById(filterBySelectBoxIdLocator));
         for (WebElement option : select.getOptions()) {
@@ -42,16 +41,8 @@ public class ItemManagementPage {
     }
 
 
-    public List<String> getFilterByValuesWithSelectWOSelectClass() {
-        List<String> values = new ArrayList<String>();
-        List<WebElement> options = browser.findElementById(filterBySelectBoxIdLocator).findElements(By.tagName("option"));
-        for (WebElement option : options) {
-            values.add(option.getText());
-        }
-        return values;
-    }
 
-    public String getFilterByCurrentValue() {
+    public String getFilterCurrentValue() {
         Select select = new Select(browser.findElementById(filterBySelectBoxIdLocator));
         return select.getFirstSelectedOption().getText();
 
@@ -59,7 +50,7 @@ public class ItemManagementPage {
 
     public List<String> getProductTableHeadersNames() {
         List<String> names = new ArrayList<String>();
-        List<WebElement> headers = browser.findElementById(productTableIdLocator).findElements(By.tagName("th"));
+        List<WebElement> headers = browser.findElementsByTagName(tableHeaderTagNameLocator);
         for (WebElement header : headers) {
             names.add(header.getText());
         }
@@ -67,7 +58,7 @@ public class ItemManagementPage {
     }
 
     public Integer getProductTableElementSize() {
-        List<WebElement> rows = browser.findElementById(productTableIdLocator).findElements(By.tagName("tr"));
+        List<WebElement> rows = browser.findElementsByTagName(tableRowTagNameLocator);
         return  rows.size() - 1;
     }
 
@@ -79,12 +70,7 @@ public class ItemManagementPage {
         browser.findElementByXpath(showItemLinkXPathLocator).click();
     }
 
-  /*  public ReportPage goToCreateReport(){
-        browser.findElementByLinkText(createReportLinkTextLocator).click();
-        return PageFactory.initElements(driver, ReportPage.class);
-    }
-*/
-    public AddProductPage goToAddProduct() {
+      public AddProductPage goToAddProduct() {
         browser.findElementByLinkText(addProductLinkTextLocator).click();
         return PageFactory.initElements(driver, AddProductPage.class);
     }

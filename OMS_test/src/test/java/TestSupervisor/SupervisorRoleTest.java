@@ -1,29 +1,27 @@
 package TestSupervisor;
 
+import auth.LoginPage;
+import auth.UserInfoPage;
 import ordering.AddProductPage;
 import ordering.ItemManagementPage;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import tools.Browser;
 import tools.ColoredString;
-import tools.SeleniumWrapperClass;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by Olya on 21.05.2015.
- */
 public class SupervisorRoleTest {
     WebDriver driver;
     String supervisorLogin = "login2";
@@ -35,7 +33,7 @@ public class SupervisorRoleTest {
         driver = new FirefoxDriver();
         Browser browser = new Browser(driver);
         browser.goToUrl("http://localhost:8080/OMS/login.htm");
-        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+        LoginPage loginPage = new LoginPage(driver);
         UserInfoPage userInfoPage = loginPage.loginAs(supervisorLogin, supervisorPassword);
         itemManagementPage = userInfoPage.selectItemManagementTab();
     }
@@ -45,7 +43,7 @@ public class SupervisorRoleTest {
         List<String> expectedValues = new ArrayList<String>();
         expectedValues.add("Name");
         expectedValues.add("Description");
-        List<String> actualValues = itemManagementPage.getFilterByValues();
+        List<String> actualValues = itemManagementPage.getFilterValues();
         assertEquals(expectedValues.size(), actualValues.size());
         for (String actualValue : actualValues) {
             assertTrue(expectedValues.contains(actualValue));
@@ -55,7 +53,7 @@ public class SupervisorRoleTest {
     @Test
     public void testFilterByDefaultValue() throws Exception {
         String expected = "Name";
-        String actual = itemManagementPage.getFilterByCurrentValue();
+        String actual = itemManagementPage.getFilterCurrentValue();
         assertEquals(expected, actual);
     }
 
@@ -69,7 +67,7 @@ public class SupervisorRoleTest {
         }
     }
 
-    @Test
+    @Ignore
     public void testProductListShowItemsDefaultValue() throws Exception {
         String expectedShowItemsLabel = "Show 10 items";
         int expectedNumberOfProducts = 5;
@@ -137,7 +135,7 @@ public class SupervisorRoleTest {
     @Test // Error!!!!
     public void testProductPriceCharactersErrorMessage() {
         AddProductPage addProductPage = itemManagementPage.goToAddProduct();
-        SeleniumWrapperClass wc = new SeleniumWrapperClass(driver);
+        Browser wc = new Browser(driver);
         wc.findElementById("price").sendKeys("#4rr");
         addProductPage.clickOkButton();
         ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();

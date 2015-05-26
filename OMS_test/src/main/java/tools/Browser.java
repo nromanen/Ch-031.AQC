@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class Browser {
     private WebDriver driver;
     private int time = 10;
@@ -59,6 +61,12 @@ public class Browser {
     public WebElement findElementByPartialLinkText(String locator) {
         WebElement element = (new WebDriverWait(driver, time))
                 .until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(locator)));
+        return element;
+    }
+
+    public List<WebElement> findElementsByTagName(String locator) {
+        List<WebElement> element = (new WebDriverWait(driver, time))
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName(locator)));
         return element;
     }
 

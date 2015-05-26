@@ -9,23 +9,20 @@ public class AddProductPage {
 
     private WebDriver driver;
     private Browser browser;
-    String productNameErrorIdLocator = "productName.errors";
-    String productPriceErrorIdLocator = "productPrice.errors";
-    String productDescriptionErrorIdLocator = "productDescription.errors";
-    String okButtonCssLocator = "input[type=\"submit\"]";
-    String cancelButtonCssLocator = "input[type=\"button\"]";
-    String productNameValueIdLocator = "name";
-    String productDescriptionValueIdLocator = "description";
-    String productPriceValueIdLocator = "price";
+    private static String productNameErrorIdLocator = "productName.errors";
+    private static String productPriceErrorIdLocator = "productPrice.errors";
+    private static String productDescriptionErrorIdLocator = "productDescription.errors";
+    private static String okButtonCssLocator = "input[type=\"submit\"]";
+    private static String cancelButtonCssLocator = "input[type=\"button\"]";
+    private static String productNameValueIdLocator = "name";
+    private static String productDescriptionValueIdLocator = "description";
+    private static String productPriceValueIdLocator = "price";
 
 
     public AddProductPage(WebDriver driver) {
 
         this.driver = driver;
-    }
-
-    public AddProductPage(Browser browser) {
-        this.browser = new Browser(driver);
+        browser = new Browser(driver);
     }
 
     public void clickOkButton(){

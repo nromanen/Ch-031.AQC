@@ -10,10 +10,10 @@ public class LoginPage {
 
     private WebDriver driver;
     private Browser browser;
-    String loginInputNameLocator = "j_username";
-    String passwordInputNameLocator = "j_password";
-    String submitButtonNameLocator = "submit";
-    String cancelButtonNameLocator = "reset";
+    private static String loginInputNameLocator = "j_username";
+    private static String passwordInputNameLocator = "j_password";
+    private static String submitButtonNameLocator = "submit";
+    private static String cancelButtonNameLocator = "reset";
 
 
     public LoginPage(WebDriver driver) {

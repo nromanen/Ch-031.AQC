@@ -10,7 +10,7 @@ import tools.Browser;
 public class UserInfoPage {
     private WebDriver driver;
     private Browser browser;
-    String itemManagementTabLinkTextLocator;
+    private static String itemManagementTabLinkTextLocator = "Item Management";
 
 
     public UserInfoPage(WebDriver driver) {
