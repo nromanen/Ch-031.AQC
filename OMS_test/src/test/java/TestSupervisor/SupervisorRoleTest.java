@@ -1,15 +1,14 @@
 package TestSupervisor;
 
-import auth.LoginPage;
-import auth.UserInfoPage;
-import ordering.AddProductPage;
-import ordering.ItemManagementPage;
+import pages.auth.LoginPage;
+import pages.administration.UserInfoPage;
+import pages.ordering.AddProductPage;
+import pages.ordering.ItemManagementPage;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.PageFactory;
 import tools.Browser;
 import tools.ColoredString;
 
@@ -34,7 +33,7 @@ public class SupervisorRoleTest {
         Browser browser = new Browser(driver);
         browser.goToUrl("http://localhost:8080/OMS/login.htm");
         LoginPage loginPage = new LoginPage(driver);
-        UserInfoPage userInfoPage = loginPage.loginAs(supervisorLogin, supervisorPassword);
+        UserInfoPage userInfoPage = loginPage.login(supervisorLogin, supervisorPassword);
         itemManagementPage = userInfoPage.selectItemManagementTab();
     }
 

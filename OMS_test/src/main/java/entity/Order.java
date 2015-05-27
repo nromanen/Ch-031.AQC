@@ -18,8 +18,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import entity.AbstractEntity;
-
 @Entity
 @Table(name = "Orders")
 public class Order extends AbstractEntity {

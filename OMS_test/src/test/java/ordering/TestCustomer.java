@@ -1,4 +1,4 @@
-package softserve.mvn_oms;
+package ordering;
 
 import static org.junit.Assert.*;
 
@@ -16,6 +16,11 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
+import pages.auth.LoginPage;
+import pages.ordering.CustomerAddProductsToOrderPage;
+import pages.ordering.CustomerCreateOrderPage;
+import pages.ordering.CustomerOrderingPage;
+import pages.ordering.CustomerUserInfoPage;
 import tools.Browser;
 
 public class TestCustomer {
@@ -49,7 +54,7 @@ public class TestCustomer {
 	@Test
 	public void testCustomerLogin() {
 		
-		Login login = new Login(driver); 
+		LoginPage login = new LoginPage(driver);
 		CustomerUserInfoPage result = login.loginWithCustomerAccount(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
 		String URL = result.getBrowser().getCurrentUrl(); 
 		assertEquals(URL, HOME_URL + "userInfo.htm"); 
@@ -61,7 +66,7 @@ public class TestCustomer {
 	@Test  // will not pass
 	public void testWrongLogin() {
 		
-		Login login = new Login(driver); 
+		LoginPage login = new LoginPage(driver);
 		login.loginWithCustomerAccount(WRONG_USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
 	    //assertEquals("Your login attempt was not successful, try again.\n\nReason: Bad credentials.", browser.findElementByCssSelector("font").getText());
 		assertEquals("Such user does not exist in the system – please try again.", browser.findElementByCssSelector("font").getText());
@@ -70,8 +75,8 @@ public class TestCustomer {
 	//@Ignore
 	@Test  // will not pass
 	public void testWrongPassword() {
-		
-		Login login = new Login(driver); 
+
+		LoginPage login = new LoginPage(driver);
 		login.loginWithCustomerAccount(USER_NAME_FOR_CUSTOMER, WRONG_PASSWORD_FOR_CUSTOMER);
 		assertEquals("Password is incorrect – please try again.", browser.findElementByCssSelector("font").getText());		
 	}
@@ -80,7 +85,7 @@ public class TestCustomer {
 	@Test // will not pass
 	public void testEmptyLogin() {
 
-		Login login = new Login(driver);
+		LoginPage login = new LoginPage(driver);
 		login.loginWithCustomerAccount("", PASSWORD_FOR_CUSTOMER);
 		assertEquals("Such user does not exist in the system – please try again.", browser.findElementByCssSelector("font").getText());
 	}	
@@ -88,8 +93,8 @@ public class TestCustomer {
 	//@Ignore
 	@Test  // will not pass
 	public void testEmptyPassword() {
-			
-		Login login = new Login(driver); 
+
+		LoginPage login = new LoginPage(driver);
 		login.loginWithCustomerAccount(USER_NAME_FOR_CUSTOMER, "");
 		assertEquals("Password is incorrect – please try again.", browser.findElementByCssSelector("font").getText());		
 	}
@@ -97,8 +102,8 @@ public class TestCustomer {
 	//@Ignore
 	@Test
 	public void testSwitchToOrderingPage(){
-					
-		Login login = new Login(driver); 	
+
+		LoginPage login = new LoginPage(driver);
 		CustomerUserInfoPage userInfo = login.loginWithCustomerAccount(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
 		CustomerOrderingPage ordering = userInfo.switchToOrderingPage();
 		String URL = ordering.getBrowser().getCurrentUrl();
@@ -124,8 +129,8 @@ public class TestCustomer {
 	//@Ignore
 	@Test
 	public void testSwitchToCreatingNewOrderPage(){
-		
-		Login login = new Login(driver); 	
+
+		LoginPage login = new LoginPage(driver);
 		CustomerUserInfoPage userInfo = login.loginWithCustomerAccount(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);		
 		CustomerOrderingPage ordering = userInfo.switchToOrderingPage();
 		
@@ -138,8 +143,8 @@ public class TestCustomer {
 	//@Ignore
 	@Test
 	public void testClickAddItemButton(){
-		
-		Login login = new Login(driver); 	
+
+		LoginPage login = new LoginPage(driver);
 		CustomerUserInfoPage userInfo = login.loginWithCustomerAccount(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);		
 		CustomerOrderingPage ordering = userInfo.switchToOrderingPage();
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();

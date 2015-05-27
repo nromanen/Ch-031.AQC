@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import entity.AbstractEntity;
-
 @Entity
 @Table(name = "Dimensions")
 public class Dimension extends AbstractEntity {

@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import entity.AbstractEntity;
-
 @Entity
 @Table(name = "Products")
 public class Product extends AbstractEntity implements Comparable<Product> {

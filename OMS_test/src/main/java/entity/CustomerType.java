@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import entity.AbstractEntity;
-
 @Entity
 @Table(name = "CustomerTypes")
 public class CustomerType extends AbstractEntity implements Serializable {
