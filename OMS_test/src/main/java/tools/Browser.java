@@ -1,10 +1,12 @@
-package softserve.mvn_oms;
+package tools;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class Browser {
     private WebDriver driver;
@@ -69,5 +71,13 @@ public class Browser {
                 .until(ExpectedConditions.presenceOfElementLocated(By.tagName(locator)));
         return element;
     }
+
+    public List<WebElement> findElementsByTagName(String locator) {
+        List<WebElement> element = (new WebDriverWait(driver, this.TIME_OUT_SECONDS))
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName(locator)));
+        return element;
+    }
+
+
 
 }

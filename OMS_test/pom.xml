@@ -8,12 +8,13 @@
     <artifactId>ch-031ID</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <dependencies>
 
+    <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -27,8 +28,6 @@
             <artifactId>selenium-java</artifactId>
             <version>2.45.0</version>
         </dependency>
-
-
     </dependencies>
 
 </project>
