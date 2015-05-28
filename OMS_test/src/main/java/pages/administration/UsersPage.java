@@ -47,14 +47,10 @@ public class UsersPage {
 
   public int countUsers() {
     WebElement e = browser.findElementById("pageCount");
-
     int pageCount = Integer.parseInt(e.getText());
-
     browser.findElementById("last").click();
-
     // get count of rows
     int lastPageCount = driver.findElements(By.xpath("//table[@id='table']/tbody/tr")).size();
-
     return (pageCount - 1) * USERS_PER_PAGE + lastPageCount;
   }
 

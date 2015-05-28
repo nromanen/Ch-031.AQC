@@ -9,7 +9,7 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.administration.UsersPage;
-import pages.administration.UserInfoPage;
+import pages.auth.UserInfoPage;
 import pages.auth.LoginPage;
 import tools.DBUnitConfig;
 
@@ -42,7 +42,6 @@ public class UserFilterTest extends DBUnitConfig {
         beforeData = new FlatXmlDataSetBuilder().build(
                 Thread.currentThread().getContextClassLoader()
                         .getResourceAsStream("data.xml"));
-
         tester.setDataSet(beforeData);
         tester.onSetup();
 

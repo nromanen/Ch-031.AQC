@@ -1,8 +1,6 @@
 package pages.auth;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import pages.administration.UserInfoPage;
 import pages.ordering.CustomerUserInfoPage;
 import tools.Browser;
 

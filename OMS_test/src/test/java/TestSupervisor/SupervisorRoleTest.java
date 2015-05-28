@@ -1,7 +1,7 @@
 package TestSupervisor;
 
 import pages.auth.LoginPage;
-import pages.administration.UserInfoPage;
+import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
 import org.junit.Before;
