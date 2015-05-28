@@ -1,2 +1,4 @@
 .idea/
-OMS_test.iml
+.target/
+*.iml
+
