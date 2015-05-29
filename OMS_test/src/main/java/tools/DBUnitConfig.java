@@ -5,7 +5,10 @@ import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
+import org.dbunit.dataset.CompositeDataSet;
+import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 
@@ -13,20 +16,19 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class DBUnitConfig extends DBTestCase {
-    protected IDatabaseTester tester;
     private Properties prop;
     protected IDataSet beforeData;
+    protected IDataSet initialDataSet;
 
-    @Before
-    public void setUp() throws Exception {
-        tester = new JdbcDatabaseTester(prop.getProperty("db.driver"),
-                                        prop.getProperty("db.url"),
-                                        prop.getProperty("db.username"),
-                                        prop.getProperty("db.password"));
-    }
- 
     public DBUnitConfig(String name) {
         super(name);
+        try {
+            initialDataSet = new FlatXmlDataSetBuilder().build(
+                    Thread.currentThread().getContextClassLoader()
+                            .getResourceAsStream(("initialData.xml")));
+        } catch (DataSetException e) {
+            e.printStackTrace();
+        }
         prop = new Properties();
         try {
             prop.load(Thread.currentThread()
@@ -39,15 +41,11 @@ public class DBUnitConfig extends DBTestCase {
         System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, prop.getProperty("db.username"));
         System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, prop.getProperty("db.password"));
         System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_SCHEMA, "");
-
-        //setProperty("FEATURE_CASE_SENSITIVE_TABLE_NAMES", String.valueOf(Boolean.TRUE));
-        //DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, String.valueOf(Boolean.TRUE);
-
     }
  
     @Override
     protected IDataSet getDataSet() throws Exception {
-        return beforeData;
+        return new CompositeDataSet(initialDataSet, beforeData);
     }
  
     @Override
@@ -55,8 +53,4 @@ public class DBUnitConfig extends DBTestCase {
         return DatabaseOperation.DELETE_ALL;
     }
 
-    protected void setUpDatabaseConfig(DatabaseConfig config) {
-        config.setProperty(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES, Boolean.TRUE);
-    }
- 
 }
