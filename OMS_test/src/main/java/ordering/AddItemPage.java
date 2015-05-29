@@ -25,6 +25,15 @@ public class AddItemPage {
         browser.findElementByCssSelector("input[value=\"Reset\"]").click();
     }
 
+    public void selectFirstItem(){
+        browser.findElementByXpath("//form[@id='selectFrom1']//a").click();
+    }
+
+    public void setItemQuantity(){
+        browser.findElementByName("quantity").clear();
+        //browser.findElementByName("quantity").sendkeys(quantity);
+    }
+
 
 
 }
