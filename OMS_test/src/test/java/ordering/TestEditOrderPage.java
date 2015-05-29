@@ -1,6 +1,6 @@
 package ordering;
 
-import auth.AuthPage;
+import pages.auth.LoginPage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class TestEditOrderPage {
         driver = new ChromeDriver();
         Browser browser = new Browser(driver);
         browser.goToUrl(BASE_URL + "/login.htm");
-        AuthPage auth = new AuthPage(driver);
+        pages.auth.LoginPage auth = new LoginPage(driver);
         auth.login("login3", "qwerty");
         browser.findElementByLinkText("Ordering").click();
     }
