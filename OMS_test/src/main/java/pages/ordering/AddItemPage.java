@@ -29,9 +29,9 @@ public class AddItemPage {
         browser.findElementByXpath("//form[@id='selectFrom1']//a").click();
     }
 
-    public void setItemQuantity(){
+    public void setItemQuantity(String qty){
         browser.findElementByName("quantity").clear();
-        //browser.findElementByName("quantity").sendkeys(quantity);
+        browser.findElementByName("quantity").sendKeys(qty);
     }
 
 

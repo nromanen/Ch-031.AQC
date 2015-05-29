@@ -11,6 +11,7 @@ public class UserInfoPage {
     private Browser browser;
     private static final String itemManagementTabLinkTextLocator = "Item Management";
     private static final String USERS_LOCATOR = "Administration";
+    private static final String ORDERING = "Ordering";
 
 
     public UserInfoPage(WebDriver driver) {

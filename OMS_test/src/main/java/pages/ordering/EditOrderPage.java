@@ -10,10 +10,12 @@ public class EditOrderPage {
 
     public EditOrderPage(WebDriver driver) {
         this.driver = driver;
+        browser = new Browser(driver);
     }
 
-    public EditOrderPage(Browser browser) {
-        this.browser = new Browser(driver);
+
+    public void addItemClick(){
+        browser.findElementByCssSelector("input[value=\"Add Item\"]").click();
     }
 
 

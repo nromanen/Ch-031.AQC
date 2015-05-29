@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.administration.UsersPage;
 import pages.auth.UserInfoPage;
@@ -46,9 +47,9 @@ public class UserFilterTest extends DBUnitConfig {
         tester.onSetup();
 
         // Selenium
-        driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-        driver.get(BASEURL);
+        System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
+        driver = new ChromeDriver();
+
     }
 
     public UserFilterTest(String column, String match, String value, int expected) {

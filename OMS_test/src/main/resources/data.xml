@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
+    <Roles
+            id="1"
+            RoleName = "Administrator"
+            />
+    <Roles
+            id="2"
+            RoleName="Customer"
+            />
+
+    <Regions
+            id="1"
+            />
+
+    <CustomerTypes
+            id="1"
+
+            />
+
         <Users
                id="1"
                login="User1"
