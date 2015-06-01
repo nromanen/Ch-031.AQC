@@ -16,7 +16,4 @@ public class EditOrderPage {
         this.browser = new Browser(driver);
     }
 
-
-
-
 }

@@ -19,7 +19,6 @@ public class DBUnitConfig extends DBTestCase {
     protected IDataSet[] beforeData;
     protected EntityManager em = Persistence.createEntityManagerFactory("persistence").createEntityManager();
 
-
     public DBUnitConfig(String name) {
         super(name);
         prop = new Properties();
