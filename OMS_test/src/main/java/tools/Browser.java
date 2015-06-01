@@ -92,6 +92,4 @@ public class Browser {
         new Select(e).selectByVisibleText(text);
     }
 
-
-
 }
