@@ -3,14 +3,12 @@ package pages.administration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import tools.Browser;
+import pages.BasePage;
+import pages.auth.UserInfoPage;
 
 
 
-public class UsersPage {
-
-  private WebDriver driver;
-  private Browser browser;
+public class UsersPage extends BasePage{
 
   private final static int USERS_PER_PAGE = 5;
   private final static String[] COLUMNS = new String[]{
@@ -28,14 +26,7 @@ public class UsersPage {
           "does not contain"};
 
   public UsersPage(WebDriver driver) {
-    this.driver = driver;
-    this.browser = new Browser(driver);
-  }
-
-  public AddUserPage gotoAddUser() {
-    driver.findElement(By.linkText("Create New User")).click();
-
-    return new AddUserPage(driver);
+    super(driver);
   }
 
   public int getFoundUsers() {
@@ -53,16 +44,6 @@ public class UsersPage {
     return (pageCount - 1) * USERS_PER_PAGE + lastPageCount;
   }
 
-//  public ArrayList<String> getFirst() {
-//    ArrayList<String> res = new ArrayList<String>();
-//    res.add(driver.findElements(By.xpath("//table[@id='table']/tbody/tr/td")).get(0).getText());
-//    res.add(driver.findElements(By.xpath("//table[@id='table']/tbody/tr/td")).get(1).getText());
-//    res.add(driver.findElements(By.xpath("//table[@id='table']/tbody/tr/td")).get(2).getText());
-//    res.add(driver.findElements(By.xpath("//table[@id='table']/tbody/tr/td")).get(3).getText());
-//    res.add(driver.findElements(By.xpath("//table[@id='table']/tbody/tr/td")).get(4).getText());
-//    return res;
-//  }
-
   public void setFilter(String column, String match, String value) {
     browser.selectByVisibleText(browser.findElementById("field"), column);
     browser.selectByVisibleText(browser.findElementById("condition"), match);
@@ -70,6 +51,15 @@ public class UsersPage {
     browser.findElementByName("search").click();
   }
 
+    public UsersPage goHere() {
+        UserInfoPage user_info_page = gotoRoot();
+        UsersPage users_page = user_info_page.gotoUsers();
+        return users_page;
+    }
+
+    public String getLogoText() {
+        return browser.findElementByXpath("//div[@id='logo']/h1").getText();
+    }
 
 
 

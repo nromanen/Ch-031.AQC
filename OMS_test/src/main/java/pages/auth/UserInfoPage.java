@@ -1,21 +1,19 @@
 package pages.auth;
 
-import pages.administration.UsersPage;
-import pages.ordering.ItemManagementPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import tools.Browser;
+import pages.BasePage;
+import pages.administration.UsersPage;
+import pages.ordering.ItemManagementPage;
 
-public class UserInfoPage {
-    private WebDriver driver;
-    private Browser browser;
+public class UserInfoPage extends BasePage{
+
     private static final String itemManagementTabLinkTextLocator = "Item Management";
     private static final String USERS_LOCATOR = "Administration";
 
 
     public UserInfoPage(WebDriver driver) {
-        this.driver = driver;
-        browser = new Browser(driver);
+        super(driver);
     }
 
     public ItemManagementPage selectItemManagementTab() {

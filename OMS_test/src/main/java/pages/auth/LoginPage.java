@@ -1,21 +1,19 @@
 package pages.auth;
 
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
 import pages.ordering.CustomerUserInfoPage;
-import tools.Browser;
 
-public class LoginPage {
 
-    private WebDriver driver;
-    private Browser browser;
+public class LoginPage extends BasePage{
+
     private static String loginInputNameLocator = "j_username";
     private static String passwordInputNameLocator = "j_password";
     private static String submitButtonNameLocator = "submit";
     private static String cancelButtonNameLocator = "reset";
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        browser = new Browser(driver);
+        super(driver);
     }
 
     public UserInfoPage login(String userName, String password) {
