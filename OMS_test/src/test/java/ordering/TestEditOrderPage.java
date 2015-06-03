@@ -48,7 +48,7 @@ public class TestEditOrderPage extends DBUnitConfig{
         UserInfoPage ui = lp.login(LOGIN, PASS);
         OrderPage op = ui.goToOrderingTab();
         EditOrderPage eo = op.goTo1EditOrder();
-        assertTrue("Can edit order", eo.isAddItem() == true);
+        assertTrue("Can't edit order", eo.isAddItem() == true);
     }
 
     @Test
