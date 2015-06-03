@@ -4,6 +4,7 @@ import pages.administration.UsersPage;
 import pages.ordering.ItemManagementPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import pages.ordering.OrderPage;
 import tools.Browser;
 
 public class UserInfoPage {
@@ -29,6 +30,13 @@ public class UserInfoPage {
 
         return new UsersPage(driver);
     }
+
+    public OrderPage goToOrderingTab(){
+        browser.findElementByLinkText(ORDERING).click();
+        return new OrderPage(driver);
+    }
+
+
 
 
 }

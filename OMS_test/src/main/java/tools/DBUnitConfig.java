@@ -8,6 +8,7 @@ import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
@@ -25,7 +26,7 @@ public class DBUnitConfig extends DBTestCase {
         try {
             initialDataSet = new FlatXmlDataSetBuilder().build(
                     Thread.currentThread().getContextClassLoader()
-                            .getResourceAsStream(("initialData.xml")));
+                            .getResourceAsStream(("dataset.xml")));
         } catch (DataSetException e) {
             e.printStackTrace();
         }

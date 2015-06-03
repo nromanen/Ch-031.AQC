@@ -13,8 +13,9 @@ public class AddItemPage {
         this.browser = new Browser(driver);
     }
 
-    public void clickDoneButton(){
+    public EditOrderPage clickDoneButton(){
         browser.findElementByCssSelector("input[value=\"Done\"]").click();
+        return new EditOrderPage(driver);
     }
 
     public void clickCancelButton(){
@@ -30,8 +31,8 @@ public class AddItemPage {
     }
 
     public void setItemQuantity(String qty){
-        browser.findElementByName("quantity").clear();
-        browser.findElementByName("quantity").sendKeys(qty);
+        browser.findElementByXpath("//form[@id='doneForm']//table//input[@name='quantity']").clear();
+        browser.findElementByXpath("//form[@id='doneForm']//table//input[@name='quantity']").sendKeys(qty);
     }
 
 
