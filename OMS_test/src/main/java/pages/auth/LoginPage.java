@@ -1,51 +1,52 @@
 package pages.auth;
 
 import org.openqa.selenium.WebDriver;
-import pages.ordering.CustomerUserInfoPage;
 import tools.Browser;
 
 public class LoginPage {
+	
+	private static final String USER_FIELD_NAME = "j_username"; 
+	private static final String PASSWORD_FIELD_NAME= "j_password";
+	private static final String	LOGIN_BUTTON_NAME = "submit";
+	private static final String CANCEL_BUTTON_NAME = "reset";
+	private static final String LOGOUT_ID = "logout";
+	
+	private  WebDriver driver;
+	private Browser browser;
+		
+	public LoginPage(WebDriver driver)
+	{
+		this.driver = driver;
+		browser = new Browser(driver);
+	}
+	
+	public WebDriver getDriver() {
+		return this.driver;
+	}
+	
+	public Browser getBrowser(){ 
+		return this.browser;
+	}
+	
+	public UserInfoPage login(String userName, String password) {
 
-    private WebDriver driver;
-    private Browser browser;
-    private static String loginInputNameLocator = "j_username";
-    private static String passwordInputNameLocator = "j_password";
-    private static String submitButtonNameLocator = "submit";
-    private static String cancelButtonNameLocator = "reset";
-
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        browser = new Browser(driver);
-    }
-
-    public UserInfoPage login(String userName, String password) {
-        browser.findElementByName(loginInputNameLocator).sendKeys(userName);
-        browser.findElementByName(passwordInputNameLocator).sendKeys(password);
-        browser.findElementByName(submitButtonNameLocator).click();
-        return new UserInfoPage(driver);
-    }
-
-    public UserInfoPage logout(){
-        browser.findElementById("logout").click();
+		browser.findElementByName(USER_FIELD_NAME).clear();
+		browser.findElementByName(USER_FIELD_NAME).sendKeys(userName);
+		browser.findElementByName(PASSWORD_FIELD_NAME).clear();
+		browser.findElementByName(PASSWORD_FIELD_NAME).sendKeys(password);
+		browser.findElementByName(LOGIN_BUTTON_NAME).click();
+		return new UserInfoPage(driver);
+	}
+	
+	public UserInfoPage logout(){
+        browser.findElementById(LOGOUT_ID).click();
         browser.alertAccept();
         return new UserInfoPage(driver);
     }
 
     public UserInfoPage loginEmpty(){
-        browser.findElementById("submit").click();
+    	browser.findElementByName(LOGIN_BUTTON_NAME).click();
         return new UserInfoPage(driver);
     }
-
-    public CustomerUserInfoPage loginWithCustomerAccount(String userName, String password) {
-
-        browser.findElementByName(loginInputNameLocator).clear();
-        browser.findElementByName(loginInputNameLocator).sendKeys(userName);
-        browser.findElementByName(passwordInputNameLocator).clear();
-        browser.findElementByName(passwordInputNameLocator).sendKeys(password);
-        browser.findElementByName(submitButtonNameLocator).click();
-
-        return new CustomerUserInfoPage(driver);
-    }
-
-   }
-
+	
+}
