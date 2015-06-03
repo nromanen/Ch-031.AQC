@@ -3,7 +3,6 @@ package pages.auth;
 import pages.administration.UsersPage;
 import pages.ordering.CustomerOrderingPage;
 import pages.ordering.ItemManagementPage;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
