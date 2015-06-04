@@ -1,5 +1,6 @@
 package ordering;
 
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.junit.*;
 import pages.auth.LoginPage;
@@ -25,9 +26,8 @@ public class TestEditOrderPage extends DBUnitConfig{
 
     @Before
     public  void setUp() throws Exception {
-        beforeData = new FlatXmlDataSetBuilder().build(
-                Thread.currentThread().getContextClassLoader()
-                        .getResourceAsStream("dataset.xml"));
+        IDataSet productData = getDataFromFile("dataset.xml");
+        beforeData = new IDataSet[] {productData};
         super.setUp();
 
         System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
