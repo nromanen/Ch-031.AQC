@@ -21,10 +21,6 @@ public class Browser {
         this.driver = driver;
     }
 
-    public void goToUrl(String url) {
-        driver.get(url);
-    }
-
     public String getCurrentUrl () {
     	return driver.getCurrentUrl();
     }

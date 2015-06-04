@@ -8,7 +8,6 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
-
 import java.io.IOException;
 import java.util.Properties;
 import javax.persistence.EntityManager;

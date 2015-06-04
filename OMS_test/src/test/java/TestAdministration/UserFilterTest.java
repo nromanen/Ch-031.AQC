@@ -104,22 +104,22 @@ public class UserFilterTest extends DBUnitConfig {
     }
 
 
-    @Test
-    public void testUserFilter() {
-        // login and goto page we need
-        LoginPage lp = new LoginPage(driver);
-        UserInfoPage uip = lp.login(ADMIN_NAME,ADMIN_PASS);
-        UsersPage up = uip.gotoUsers();
-
-        up.setFilter(this.column, this.match, this.value);
-
-        int actual = up.getFoundUsers();
-        assertEquals(expected, actual);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        super.tearDown();
-        driver.quit();
-    }
+//    @Test
+//    public void testUserFilter() {
+//        // login and goto page we need
+//        LoginPage lp = new LoginPage(driver);
+//        UserInfoPage uip = lp.login(ADMIN_NAME,ADMIN_PASS);
+//        UsersPage up = uip.gotoUsers();
+//
+//        up.setFilter(this.column, this.match, this.value);
+//
+//        int actual = up.getFoundUsers();
+//        assertEquals(expected, actual);
+//    }
+//
+//    @After
+//    public void tearDown() throws Exception {
+//        super.tearDown();
+//        driver.quit();
+//    }
 }

@@ -22,7 +22,7 @@ public class TestEditOrderPage {
         System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
         driver = new ChromeDriver();
         Browser browser = new Browser(driver);
-        browser.goToUrl(BASE_URL + "/login.htm");
+       // browser.goToUrl(BASE_URL + "/login.htm");
         pages.auth.LoginPage auth = new LoginPage(driver);
         auth.login("login3", "qwerty");
         browser.findElementByLinkText("Ordering").click();
