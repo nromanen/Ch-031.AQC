@@ -40,9 +40,9 @@ public class UserFilterTest extends DBUnitConfig {
     public void setUp() throws Exception {
         // DBUnit
 
-        beforeData = new FlatXmlDataSetBuilder().build(
+/*        beforeData = new FlatXmlDataSetBuilder().build(
                 Thread.currentThread().getContextClassLoader()
-                        .getResourceAsStream("dataset.xml"));
+                        .getResourceAsStream("dataset.xml"));*/
         super.setUp();
         // Selenium
         System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");

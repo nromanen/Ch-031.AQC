@@ -23,13 +23,7 @@ public class EditOrderPage {
 
     public Boolean isAddItem(){
         WebElement element = browser.findElementByCssSelector("input[value=\"Add Item\"]");
-        Boolean statement;
-        if (element != null){
-            statement = true;
-        }else{
-            statement = false;
-        }
-        return statement;
+        return element!=null ? true:false;
     }
 
     public void editItemClick(int itemNumber){

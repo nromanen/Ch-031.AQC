@@ -16,8 +16,8 @@ import tools.DBUnitConfig;
 public class TestEditOrderPage extends DBUnitConfig{
     private static WebDriver driver;
     private static String BASE_URL = "http://localhost:8080/OMS2";
-    String LOGIN = "cust";
-    String PASS = "pass";
+    String LOGIN = "customer1";
+    String PASS = "qwerty";
 
     public TestEditOrderPage(String name) {
         super(name);
@@ -35,7 +35,7 @@ public class TestEditOrderPage extends DBUnitConfig{
         driver.get(BASE_URL);
     }
 
-    @Test
+    @Ignore
     public  void testEditOrderStatus() throws javax.script.ScriptException{
 
         LoginPage lp = new LoginPage(driver);
@@ -45,7 +45,7 @@ public class TestEditOrderPage extends DBUnitConfig{
         assertTrue("Can't edit order", eo.isAddItem() == true);
     }
 
-    @Test
+    @Ignore
     public void testAddItem() throws Exception{
         LoginPage lp = new LoginPage(driver);
         UserInfoPage ui = lp.login(LOGIN, PASS);
