@@ -13,8 +13,7 @@ public class CustomerAddProductsToOrderPage {
 
 	private WebDriver driver;
 	private Browser browser;
-	private static final String SELECT_PRODUCT = "Select"; 
-
+	
 	
 	public CustomerAddProductsToOrderPage(WebDriver driver) {
 		this.driver = driver;
@@ -41,7 +40,7 @@ public class CustomerAddProductsToOrderPage {
 	
     public void selectProduct() { 
 		
-    	browser.findElementByLinkText(SELECT_PRODUCT).click();
+    	browser.findElementByCssSelector("#selectFrom1 > a").click();
 	}
        
 
