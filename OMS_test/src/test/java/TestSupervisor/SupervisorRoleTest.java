@@ -19,6 +19,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+/**
+ * This test is designed for testing of the Item Management view
+ */
 public class SupervisorRoleTest extends DBUnitConfig {
     static WebDriver driver;
     Browser browser;

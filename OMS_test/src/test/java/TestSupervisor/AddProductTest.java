@@ -32,7 +32,7 @@ public class AddProductTest extends DBUnitConfig {
     Browser browser;
     String supervisorLogin = "User3";
     String supervisorPassword = "pass";
-    ItemManagementPage itemManagementPage;
+   // ItemManagementPage itemManagementPage;
 
     public AddProductTest(String name) {
         super(name);
@@ -46,33 +46,33 @@ public class AddProductTest extends DBUnitConfig {
         browser.goToUrl("http://localhost:8080/OMS/login.htm");
         LoginPage loginPage = new LoginPage(driver);
         UserInfoPage userInfoPage = loginPage.login(supervisorLogin, supervisorPassword);
-        itemManagementPage = userInfoPage.selectItemManagementTab();
+        ItemManagementPage itemManagementPage = userInfoPage.selectItemManagementTab();
 
     }
     @Test
     public void testAddProducts() throws Exception {
-        AddProductPage addProductPage = itemManagementPage.goToAddProduct();
+        AddProductPage addProductPage = new ItemManagementPage(driver).goToAddProduct();
         addProductPage.setProductNameValue("Test Product");
         addProductPage.setProductDescriptionValue("Function test");
         addProductPage.setProductPriceValue("65");
         addProductPage.clickOkButton();
-        assertNotNull(itemManagementPage);
+        assertNotNull(new ItemManagementPage(driver));
 
         // Fetch database data after executing your code
         IDataSet databaseDataSet = getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("products");
-
 
         // Load expected data from an XML dataset
         IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("src/main/resources/expectedDataProduct.xml"));
         ITable expectedTable = expectedDataSet.getTable("products");
 
         ITable filteredTable = DefaultColumnFilter.includedColumnsTable(actualTable,
-                expectedTable.getTableMetaData().getColumns());
+        expectedTable.getTableMetaData().getColumns());
 
         // Assert actual database table match expected table
         Assertion.assertEquals(expectedTable, filteredTable);
     }
+
     @After
     public void tearDown() throws Exception {
         browser.findElementById("logout").click();
