@@ -7,7 +7,7 @@ public class LoginPage {
 	
 	private static final String USER_FIELD_NAME = "j_username"; 
 	private static final String PASSWORD_FIELD_NAME= "j_password";
-	private static final String	LOGIN_BUTTON_NAME = "submit";
+	private static final String LOGIN_BUTTON_NAME = "submit";
 	private static final String CANCEL_BUTTON_NAME = "reset";
 	private static final String LOGOUT_ID = "logout";
 	
