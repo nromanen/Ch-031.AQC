@@ -1,5 +1,6 @@
 package TestAdministration;
 
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.junit.After;
 import org.junit.Before;
@@ -7,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.administration.UsersPage;
 import pages.auth.UserInfoPage;
@@ -28,7 +28,7 @@ public class UserFilterTest extends DBUnitConfig {
     private String value;
     private int expected;
 
-    private static final String BASEURL = "http://localhost:8080/OMS2/";
+    private static final String BASEURL = "http://localhost:8080/OMS/";
     private static final int TIMEOUT = 30;
 
     private static final String ADMIN_NAME = "admin";
@@ -39,14 +39,9 @@ public class UserFilterTest extends DBUnitConfig {
     @Before
     public void setUp() throws Exception {
         // DBUnit
-
-/*        beforeData = new FlatXmlDataSetBuilder().build(
-                Thread.currentThread().getContextClassLoader()
-                        .getResourceAsStream("dataset.xml"));*/
-        super.setUp();
         // Selenium
-        System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get(BASEURL);
     }
 
@@ -68,7 +63,7 @@ public class UserFilterTest extends DBUnitConfig {
                 { "All Columns", "equals", "", 5 },
                 { "All Columns", "equals", "Alice", 1 },
                 { "All Columns", "not equals to", "Alice", 4 },
-                /*{ "All Columns", "starts with", "Ev", 2 },
+                { "All Columns", "starts with", "Ev", 2 },
                 { "All Columns", "contains", "A", 3 },
                 { "All Columns", "does not contain", "A", 2 },
 
@@ -100,8 +95,7 @@ public class UserFilterTest extends DBUnitConfig {
                 { "Region", "not equals to", "North", 3 },
                 { "Region", "starts with", "N", 2 },
                 { "Region", "contains", "o", 4 },
-                { "Region", "does not contain", "o", 1 },*/
-
+                { "Region", "does not contain", "o", 1 },
         });
     }
 
