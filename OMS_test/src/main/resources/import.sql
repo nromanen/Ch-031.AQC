@@ -34,4 +34,5 @@ insert into Users(IsUserActive,Balance,Email,FirstName,LastName,Login,Password,C
 insert into Users(IsUserActive,Balance,Email,FirstName,LastName,Login,Password,CustomerTypeRef,RegionRef,RoleRef) values(true,0,'anntest','Ann','Lee','supervisor1','qwerty',1,3,3);
 
 insert into Users(IsUserActive,Balance,Email,FirstName,LastName,Login,Password,CustomerTypeRef,RegionRef,RoleRef) values(true,0,'nellytest','Nelly','Moore','admin1','qwerty',1,1,1);
+insert into Users(IsUserActive,Balance,Email,FirstName,LastName,Login,Password,CustomerTypeRef,RegionRef,RoleRef) values(true,0,'nellytest','Nelly','Moore','admin','pass',1,1,1);
 

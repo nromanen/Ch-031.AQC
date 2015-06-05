@@ -45,8 +45,6 @@ public class AddProductTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
-        beforeData = new IDataSet[]{initialData, userData};
-        super.setUp();
         driver = new FirefoxDriver();
         navigation = new Navigation(driver);
         LoginPage loginPage = new LoginPage(driver);

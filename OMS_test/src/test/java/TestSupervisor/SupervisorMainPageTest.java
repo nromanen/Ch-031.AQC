@@ -38,7 +38,7 @@ public class SupervisorMainPageTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
-        beforeData = new IDataSet[] {initialData, userData, productData};
+        beforeData = new IDataSet[] {getDataFromFile("productData.xml")};
         super.setUp();
         driver = new FirefoxDriver();
         navigation = new Navigation(driver);

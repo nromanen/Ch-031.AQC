@@ -39,9 +39,6 @@ public class UserFilterTest extends DBUnitConfig {
     @Before
     public void setUp() throws Exception {
         // DBUnit
-
-        beforeData = new IDataSet[]{initialData, userData};
-        super.setUp();
         // Selenium
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
@@ -65,7 +62,7 @@ public class UserFilterTest extends DBUnitConfig {
         return Arrays.asList(new Object[][] {
                 { "All Columns", "equals", "", 5 },
                 { "All Columns", "equals", "Alice", 1 },
-/*                { "All Columns", "not equals to", "Alice", 4 },
+                { "All Columns", "not equals to", "Alice", 4 },
                 { "All Columns", "starts with", "Ev", 2 },
                 { "All Columns", "contains", "A", 3 },
                 { "All Columns", "does not contain", "A", 2 },
@@ -99,27 +96,26 @@ public class UserFilterTest extends DBUnitConfig {
                 { "Region", "starts with", "N", 2 },
                 { "Region", "contains", "o", 4 },
                 { "Region", "does not contain", "o", 1 },
-*/
         });
     }
 
 
-//    @Test
-//    public void testUserFilter() {
-//        // login and goto page we need
-//        LoginPage lp = new LoginPage(driver);
-//        UserInfoPage uip = lp.login(ADMIN_NAME,ADMIN_PASS);
-//        UsersPage up = uip.gotoUsers();
-//
-//        up.setFilter(this.column, this.match, this.value);
-//
-//        int actual = up.getFoundUsers();
-//        assertEquals(expected, actual);
-//    }
-//
-//    @After
-//    public void tearDown() throws Exception {
-//        super.tearDown();
-//        driver.quit();
-//    }
+    @Test
+    public void testUserFilter() {
+        // login and goto page we need
+        LoginPage lp = new LoginPage(driver);
+        UserInfoPage uip = lp.login(ADMIN_NAME,ADMIN_PASS);
+        UsersPage up = uip.gotoUsers();
+
+        up.setFilter(this.column, this.match, this.value);
+
+        int actual = up.getFoundUsers();
+        assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        super.tearDown();
+        driver.quit();
+    }
 }

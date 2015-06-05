@@ -78,8 +78,6 @@ public class ItemManagementPage {
         return null;
     }
 
-
-
     public AddProductPage goToAddProduct() {
         browser.findElementByLinkText(addProductLinkTextLocator).click();
         return PageFactory.initElements(driver, AddProductPage.class);
