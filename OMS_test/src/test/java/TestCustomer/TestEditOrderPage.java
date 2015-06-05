@@ -1,4 +1,4 @@
-package TestCostumer;
+package TestCustomer;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.auth.LoginPage;
