@@ -1,10 +1,14 @@
+/**
+ * author: Alexander Melnychuk
+ */
+
 package pages.ordering;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import tools.Browser;
-import tools.CheckTableValue;
 
 public class EditOrderPage {
 
@@ -39,16 +43,30 @@ public class EditOrderPage {
         browser.findElementById("orderNum").sendKeys(orderNumQty);
     }
 
-    public void setPreferableDate(String day, String month, String year){
-        browser.findElementById("dateDays").clear();
-        browser.findElementById("dateDays").sendKeys(day+"/"+month+"/"+year);
+    public String checkOrderNumber(){
+        String value = browser.findElementById("orderNum").getAttribute("value");
+        return value;
+    }
 
+    public void setPreferableDate(String date){
+        browser.findElementById("dateDays").clear();
+        browser.findElementById("dateDays").sendKeys(date);
+    }
+
+    public String checkPreferableDate(){
+        String date = browser.findElementById("dateDays").getAttribute("value");
+        return date;
     }
 
     public void setAssignee(String assignee){
         WebElement e = browser.findElementById("assignee");
         browser.selectByVisibleText(e, assignee);
+    }
 
+    public String checkAssignee(){
+        Select select = new Select(driver.findElement(By.id("assignee")));
+        String option = select.getFirstSelectedOption().getText().replaceAll("\\s", "");
+        return option;
     }
 
     public void setCardType(String cardType){
@@ -73,9 +91,9 @@ public class EditOrderPage {
         browser.selectByVisibleText(e2, year);
     }
 
-    public void setMaestroDate(String day, String month, String year){
+    public void setMaestroDate(String date){
         browser.findElementById("startDate2").clear();
-        browser.findElementById("startDate2").sendKeys(day + "/" + month + "/" + year);
+        browser.findElementById("startDate2").sendKeys(date);
 
     }
 
@@ -94,9 +112,9 @@ public class EditOrderPage {
         return new EditOrderPage(driver) ;
     }
 
-    public EditOrderPage clickOrder(){
+    public OrderPage clickOrder(){
         browser.findElementByXpath("//form[@id='orderButton']/input[@value='Order']").click();
-        return new EditOrderPage(driver) ;
+        return new OrderPage(driver) ;
     }
 
 }

@@ -1,3 +1,10 @@
+/**
+ * author: Alexander Melnychuk
+ * This is a tool for checking a value of any table cell.
+ * To choose the right cell you must set id of a parent div, column's title and index of your cell
+ * (from up to down)
+ */
+
 package tools;
 
 import org.openqa.selenium.JavascriptExecutor;
