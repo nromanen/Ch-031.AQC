@@ -7,6 +7,7 @@ package ordering;
 
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.auth.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -34,13 +35,12 @@ public class TestEditOrderPage extends DBUnitConfig{
         beforeData = new IDataSet[] {productData};
         super.setUp();
 
-        System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         driver.get(BASE_URL);
     }
 
     @Test
-    public  void testEditOrderStatus() throws javax.script.ScriptException{
+    public  void testEditOrderStatus() throws Exception{
 
         LoginPage lp = new LoginPage(driver);
         UserInfoPage ui = lp.login(LOGIN, PASS);
