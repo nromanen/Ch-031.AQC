@@ -7,8 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import pages.ordering.CustomerCreateOrderPage;
 import tools.Browser;
+/**
+ * 
+ * @author Olesia
+ *
+ */
 
 public class CustomerOrderingPage {
 
@@ -32,16 +36,14 @@ public class CustomerOrderingPage {
 	
 	public CustomerCreateOrderPage switchToCreatingNewOrderPage() {
 		
-		Browser browser = new Browser(driver); 
-		browser.findElementByLinkText(LINK_FOR_CREATING_NEW_ORDER).click();
-		
+		browser.findElementByLinkText(LINK_FOR_CREATING_NEW_ORDER).click();		
 		return new CustomerCreateOrderPage(driver);
 	}
 	
-	public List<String> getHeadersFromTableWithOrders() {
+	public List<String> getValuesFromTableWithOrders(String tagName) {
 		
 		List<String> names = new ArrayList<String>();
-		List<WebElement> headers = browser.findElementById("list").findElements(By.tagName("th"));
+		List<WebElement> headers = browser.findElementById("list").findElements(By.tagName(tagName));
 		for (WebElement header : headers) {
 			names.add(header.getText());
 		}
