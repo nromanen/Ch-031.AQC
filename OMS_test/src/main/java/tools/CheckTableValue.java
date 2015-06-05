@@ -18,7 +18,7 @@ public class CheckTableValue {
         this.driver = driver;
     }
 
-    public String findValue(String id, String th,int tdId) throws javax.script.ScriptException{
+    public String findValue(String id, String th,int tdId) throws Exception{
 /*        String mas = (driver.findElement(By.xpath("//div[@id='"+id+"']//table//td["+td+"]//text()"))).toString();
         List<String> list = Arrays.asList(mas.split("\\s*,\\s*"));
         String[] value = new String[list.size()];
