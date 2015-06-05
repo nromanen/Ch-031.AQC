@@ -1,6 +1,7 @@
 package pages.ordering;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -9,12 +10,18 @@ import org.openqa.selenium.WebElement;
 
 import tools.Browser;
 
+/**
+ * 
+ * @author Olesia
+ *
+ */
+
 public class CustomerAddProductsToOrderPage {
 
 	private WebDriver driver;
 	private Browser browser;
-	
-	
+	private static final String VALUE_OF_DONE_BUTTON = "Done"; 
+
 	public CustomerAddProductsToOrderPage(WebDriver driver) {
 		this.driver = driver;
 		browser = new Browser(driver);
@@ -27,7 +34,7 @@ public class CustomerAddProductsToOrderPage {
 	public Browser getBrowser(){
 		return this.browser;
 	}
-	
+
     public List<String> getHeadersFromTableWithProducts() { 
 		
 		List<String> names = new ArrayList<String>();
@@ -37,11 +44,15 @@ public class CustomerAddProductsToOrderPage {
 		}
 		return names;
 	}
+    
+    public void selectProduct() {
 	
-    public void selectProduct() { 
-		
     	browser.findElementByCssSelector("#selectFrom1 > a").click();
 	}
-       
-
+    
+    public CustomerCreateOrderPage clickDoneButton() { 
+    	browser.findElementByXpath("//input[@type='submit'][@value = '"+VALUE_OF_DONE_BUTTON+"']").click();  
+    	return new CustomerCreateOrderPage(driver);  	
+    }
+    
 }
