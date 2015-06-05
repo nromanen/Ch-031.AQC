@@ -24,13 +24,12 @@ import java.util.List;
  * This test is designed for testing of the Item Management view
  */
 public class SupervisorMainPageTest extends DBUnitConfig {
-    private WebDriver driver;
+    private static WebDriver driver = new FirefoxDriver();
     private Navigation navigation;
     private ItemManagementPage itemManagementPage;
-    private static final String SUPERVISOR_LOGIN = "User3";
-    private static final String SUPERVISOR_PASSWORD = "pass";
+    private static final String SUPERVISOR_LOGIN = "supervisor1";
+    private static final String SUPERVISOR_PASSWORD = "qwerty";
     private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
-
 
     public SupervisorMainPageTest(String name) {
         super(name);
@@ -40,13 +39,10 @@ public class SupervisorMainPageTest extends DBUnitConfig {
     public void setUp() throws Exception {
         beforeData = new IDataSet[] {getDataFromFile("productData.xml")};
         super.setUp();
-        driver = new FirefoxDriver();
         navigation = new Navigation(driver);
         navigation.goToUrl(HOME_PAGE);
-        LoginPage loginPage = new LoginPage(driver);
         UserInfoPage userInfoPage = navigation.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
-        ItemManagementPage itemManagementPage = userInfoPage.selectItemManagementTab();
-
+        itemManagementPage = userInfoPage.selectItemManagementTab();
     }
 
 

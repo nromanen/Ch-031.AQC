@@ -15,7 +15,7 @@ public class TableRow {
     }
 
     public String getNthColumnValue(int columnIndex) {
-        String nthSelector = "td:nth-child(" + columnIndex +")";
-        return rowWebElement.findElement(By.cssSelector(nthSelector)).getText();
+        String nthSelector = "//td[" + columnIndex +"]";
+        return rowWebElement.findElement(By.xpath(nthSelector)).getText();
     }
 }

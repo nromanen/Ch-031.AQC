@@ -29,14 +29,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class AddProductTest extends DBUnitConfig {
-    private WebDriver driver;
+    private WebDriver driver = new FirefoxDriver();
     private Navigation navigation;
     private ItemManagementPage itemManagementPage;
-    private static final String SUPERVISOR_LOGIN = "User3";
-    private static final String SUPERVISOR_PASSWORD = "pass";
+    private static final String SUPERVISOR_LOGIN = "supervisor1";
+    private static final String SUPERVISOR_PASSWORD = "qwerty";
     private static final String PRODUCT_NAME = "Test Product";
     private static final String PRODUCT_DESCRIPTION = "Function test";
-    private static final String PRODUCT_PRICE = "65";
+    private static final String PRODUCT_PRICE = "65.0";
     private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
 
     public AddProductTest(String name) {
@@ -45,7 +45,6 @@ public class AddProductTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
         navigation = new Navigation(driver);
         LoginPage loginPage = new LoginPage(driver);
         navigation.goToUrl(HOME_PAGE);
