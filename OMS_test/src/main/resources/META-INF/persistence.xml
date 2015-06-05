@@ -9,7 +9,7 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>            
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="121314"/>
+            <property name="hibernate.connection.password" value="root"/>
         </properties>
 
     </persistence-unit>
