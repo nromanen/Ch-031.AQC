@@ -1,10 +1,12 @@
 package pages.ordering;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import tools.Browser;
+import tools.TableRow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,6 @@ public class ItemManagementPage {
         browser = new Browser(driver);
     }
 
-
     public List<String> getFilterValues() {
         List<String> values = new ArrayList<String>();
         Select select = new Select(browser.findElementById(filterBySelectBoxIdLocator));
@@ -37,8 +38,6 @@ public class ItemManagementPage {
         }
         return values;
     }
-
-
 
     public String getFilterCurrentValue() {
         Select select = new Select(browser.findElementById(filterBySelectBoxIdLocator));
@@ -57,18 +56,29 @@ public class ItemManagementPage {
 
     public Integer getProductTableElementSize() {
         List<WebElement> rows = browser.findElementsByTagName(tableRowTagNameLocator);
-        return  rows.size() - 1;
+        return rows.size() - 1;
     }
 
     public String getShowItemText() {
         return browser.findElementByXpath(showItemLinkXPathLocator).getText();
     }
 
-    public void clickShowItemLink(){
+    public void clickShowItemLink() {
         browser.findElementByXpath(showItemLinkXPathLocator).click();
     }
 
-      public AddProductPage goToAddProduct() {
+    public TableRow findProductByNameInTable(String productName) {
+        List<WebElement> rows = browser.findElementsByTagName(tableRowTagNameLocator);
+        for (WebElement webElement : rows) {
+            TableRow tableRow = new TableRow(webElement);
+            if (tableRow.getNthColumnValue(1).equals(productName)) {
+                return tableRow;
+            }
+        }
+        return null;
+    }
+
+    public AddProductPage goToAddProduct() {
         browser.findElementByLinkText(addProductLinkTextLocator).click();
         return PageFactory.initElements(driver, AddProductPage.class);
     }

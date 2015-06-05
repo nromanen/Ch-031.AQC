@@ -1,12 +1,12 @@
-package ordering;
+package TestCustomer;
 
+import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.auth.LoginPage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import tools.Browser;
 import tools.CheckTableValue;
 
@@ -19,10 +19,11 @@ public class TestEditOrderPage {
 
     @Before
     public  void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
-        driver = new ChromeDriver();
+//        System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
+//        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         Browser browser = new Browser(driver);
-        browser.goToUrl(BASE_URL + "/login.htm");
+       // browser.goToUrl(BASE_URL + "/login.htm");
         pages.auth.LoginPage auth = new LoginPage(driver);
         auth.login("login3", "qwerty");
         browser.findElementByLinkText("Ordering").click();

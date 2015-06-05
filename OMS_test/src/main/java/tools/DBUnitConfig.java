@@ -18,13 +18,12 @@ public class DBUnitConfig extends DBTestCase {
     protected IDataSet[] beforeData;
     protected EntityManager em = Persistence.createEntityManagerFactory("persistence").createEntityManager();
 
-    
     public DBUnitConfig(String name) {
         super(name);
-      prop = new Properties();
+        prop = new Properties();
         try {
             prop.load(Thread.currentThread()
-                      .getContextClassLoader().getResourceAsStream("db.config.properties"));
+                    .getContextClassLoader().getResourceAsStream("db.config.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,7 +46,7 @@ public class DBUnitConfig extends DBTestCase {
     protected IDataSet getDataSet() throws Exception {
         return new CompositeDataSet(beforeData);
     }
- 
+
     @Override
     protected DatabaseOperation getTearDownOperation() throws Exception {
         return DatabaseOperation.DELETE_ALL;
