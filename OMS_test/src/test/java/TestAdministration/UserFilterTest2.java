@@ -1,5 +1,6 @@
 package TestAdministration;
 
+import org.dbunit.dataset.IDataSet;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -22,8 +23,12 @@ public class UserFilterTest2 extends BaseDBTest {
     private static final String ADMIN_NAME = "admin";
     private static final String ADMIN_PASS = "pass";
 
+
+
     public UserFilterTest2(String column, String match, String value, int expected) throws Exception {
         super("UserFilterTest");
+
+        beforeData = new IDataSet[] {getDataFromFile("dataset.xml")};
 
         this.column = column;
         this.match = match;

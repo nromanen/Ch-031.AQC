@@ -14,7 +14,7 @@ public class StaticTest extends BaseTest {
   public void TestLogo() {
     // login and goto page we need
     UsersPage up = new UsersPage(driver);
-    up.goHere();
+//    up.goHere();
 
     assertEquals("Ordering Management System.", up.getLogoText());
   }

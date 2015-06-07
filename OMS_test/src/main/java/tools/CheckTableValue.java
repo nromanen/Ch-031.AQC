@@ -1,3 +1,10 @@
+/**
+ * author: Alexander Melnychuk
+ * This is a tool for checking a value of any table cell.
+ * To choose the right cell you must set id of a parent div, column's title and index of your cell
+ * (from up to down)
+ */
+
 package tools;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,7 +18,7 @@ public class CheckTableValue {
         this.driver = driver;
     }
 
-    public String findValue(String id, String th,int tdId) throws javax.script.ScriptException{
+    public String findValue(String id, String th,int tdId) throws Exception{
 /*        String mas = (driver.findElement(By.xpath("//div[@id='"+id+"']//table//td["+td+"]//text()"))).toString();
         List<String> list = Arrays.asList(mas.split("\\s*,\\s*"));
         String[] value = new String[list.size()];

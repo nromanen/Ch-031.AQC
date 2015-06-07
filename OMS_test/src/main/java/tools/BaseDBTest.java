@@ -1,6 +1,5 @@
 package tools;
 
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -19,12 +18,6 @@ public class BaseDBTest extends DBUnitConfig {
     public void initialize() throws Exception {
         // DBUnit
         super.setUp();
-        beforeData = new FlatXmlDataSetBuilder().build(
-                Thread.currentThread().getContextClassLoader()
-                        .getResourceAsStream("data.xml"));
-        tester.setDataSet(beforeData);
-        tester.onSetup();
-
         // Selenium
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);

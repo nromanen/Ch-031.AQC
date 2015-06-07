@@ -20,10 +20,6 @@ public class Browser {
         this.driver = driver;
     }
 
-    public void goToUrl(String url) {
-        driver.get(url);
-    }
-
     public String getCurrentUrl () {
     	return driver.getCurrentUrl();
     }
@@ -90,7 +86,5 @@ public class Browser {
     public void selectByVisibleText(WebElement e, String text) {
         new Select(e).selectByVisibleText(text);
     }
-
-
 
 }
