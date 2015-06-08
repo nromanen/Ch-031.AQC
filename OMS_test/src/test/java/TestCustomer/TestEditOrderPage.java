@@ -10,12 +10,10 @@ import org.junit.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.auth.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddItemPage;
 import pages.ordering.EditOrderPage;
 import pages.ordering.OrderPage;
-import tools.Browser;
 import tools.CheckTableValue;
 import tools.DBUnitConfig;
 
@@ -32,7 +30,7 @@ public class TestEditOrderPage extends DBUnitConfig{
 
     @Before
     public  void setUp() throws Exception {
-        IDataSet productData = getDataFromFile("dataset.xml");
+        IDataSet productData = getDataFromFile("data/dataset.xml");
         beforeData = new IDataSet[] {productData};
         super.setUp();
 

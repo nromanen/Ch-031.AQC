@@ -22,12 +22,6 @@ public class BaseTest {
         driver.get(BASEURL);
     }
 
-//    public BaseTest(String name) throws Exception {
-//        // DBUnit constructor
-//        //super("UserFilterTest");
-//        //super(name);
-//    }
-
     @After
     public void tearDown() throws Exception {
         driver.quit();

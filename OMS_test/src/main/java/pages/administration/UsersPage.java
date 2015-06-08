@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
-
+import pages.auth.UserInfoPage;
 
 
 public class UsersPage extends BasePage{
@@ -50,16 +50,18 @@ public class UsersPage extends BasePage{
     browser.findElementByName("search").click();
   }
 
-//    public UsersPage goHere() {
-//        UserInfoPage user_info_page = gotoRoot();
-//        UsersPage users_page = user_info_page.gotoUsers();
-//        return users_page;
-//    }
+    public UsersPage goHere() {
+        UserInfoPage user_info_page = gotoRoot();
+        UsersPage users_page = user_info_page.gotoUsers();
+        return users_page;
+    }
 
     public String getLogoText() {
         return browser.findElementByXpath("//div[@id='logo']/h1").getText();
     }
 
-
+    public String getDescriptionText() {
+        return browser.findElementByXpath("//div[@id='list']/h2").getText();
+    }
 
 }

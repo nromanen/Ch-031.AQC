@@ -39,6 +39,10 @@ public class BasePage {
         return new UserInfoPage(driver);
     }
 
+    /**
+     * hint: it's not necessary to return UserInfoPage
+     * You may use just any_page.login(name, pass)
+     */
     public UserInfoPage login(String userName, String password) {
         browser.findElementByName(loginInputNameLocator).sendKeys(userName);
         browser.findElementByName(passwordInputNameLocator).sendKeys(password);

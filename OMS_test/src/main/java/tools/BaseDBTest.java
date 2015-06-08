@@ -26,7 +26,6 @@ public class BaseDBTest extends DBUnitConfig {
 
     public BaseDBTest(String name) throws Exception {
         // DBUnit constructor
-        //super("UserFilterTest");
         super(name);
     }
 

@@ -37,7 +37,7 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
-        beforeData = new IDataSet[] {getDataFromFile("productData.xml")};
+        beforeData = new IDataSet[] {getDataFromFile("data/productData.xml")};
         super.setUp();
         navigation = new Navigation(driver);
         navigation.goToUrl(HOME_PAGE);
