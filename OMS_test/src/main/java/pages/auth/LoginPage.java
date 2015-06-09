@@ -25,17 +25,17 @@ public class LoginPage extends BasePage{
         browser.findElementByName(PASSWORD_FIELD_NAME).clear();
         browser.findElementByName(PASSWORD_FIELD_NAME).sendKeys(password);
         browser.findElementByName(LOGIN_BUTTON_NAME).click();
-        return new UserInfoPage(driver);
+        return new UserInfoPage(browser.getDriver());
     }
 
     public UserInfoPage logout() {
         browser.findElementById(LOGOUT_ID).click();
         browser.alertAccept();
-        return new UserInfoPage(driver);
+        return new UserInfoPage(browser.getDriver());
     }
 
     public UserInfoPage loginEmpty() {
         browser.findElementByName(LOGIN_BUTTON_NAME).click();
-        return new UserInfoPage(driver);
+        return new UserInfoPage(browser.getDriver());
     }
 }

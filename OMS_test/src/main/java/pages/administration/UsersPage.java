@@ -1,6 +1,5 @@
 package pages.administration;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.BasePage;
@@ -39,7 +38,7 @@ public class UsersPage extends BasePage{
     int pageCount = Integer.parseInt(e.getText());
     browser.findElementById("last").click();
     // get count of rows
-    int lastPageCount = driver.findElements(By.xpath("//table[@id='table']/tbody/tr")).size();
+    int lastPageCount = browser.findElementsByXpath("//table[@id='table']/tbody/tr").size();
     return (pageCount - 1) * USERS_PER_PAGE + lastPageCount;
   }
 

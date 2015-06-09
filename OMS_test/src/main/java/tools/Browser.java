@@ -15,9 +15,12 @@ public class Browser {
 
     private static final int TIME_OUT_SECONDS = 10;
 
-
     public Browser(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
     public String getCurrentUrl () {
@@ -75,6 +78,12 @@ public class Browser {
     public List<WebElement> findElementsByTagName(String locator) {
         List<WebElement> element = (new WebDriverWait(driver, this.TIME_OUT_SECONDS))
                 .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName(locator)));
+        return element;
+    }
+
+    public List<WebElement> findElementsByXpath(String locator) {
+        List<WebElement> element = (new WebDriverWait(driver, this.TIME_OUT_SECONDS))
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(locator)));
         return element;
     }
 

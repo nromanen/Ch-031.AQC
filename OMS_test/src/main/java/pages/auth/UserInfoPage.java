@@ -4,10 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
 import pages.administration.UsersPage;
-import pages.ordering.ItemManagementPage;
 import pages.ordering.CustomerOrderingPage;
+import pages.ordering.ItemManagementPage;
 import pages.ordering.OrderPage;
-import tools.Browser;
 
 public class UserInfoPage extends BasePage{
 
@@ -24,24 +23,24 @@ public class UserInfoPage extends BasePage{
 
     public ItemManagementPage selectItemManagementTab() {
         browser.findElementByLinkText(itemManagementTabLinkTextLocator).click();
-        return PageFactory.initElements(driver, ItemManagementPage.class);
+        return PageFactory.initElements(browser.getDriver(), ItemManagementPage.class);
     }
     
     public CustomerOrderingPage switchToOrderingPage() {
-        Browser browser = new Browser(driver);
+//        Browser browser = new Browser(driver);
 		browser.findElementByLinkText(LINK_FOR_ORDERING).click();
-		return new CustomerOrderingPage(driver);
+		return new CustomerOrderingPage(browser.getDriver());
 	}
 
     public UsersPage gotoUsers() {
         browser.findElementByLinkText(USERS_LOCATOR).click();
 
-        return new UsersPage(driver);
+        return new UsersPage(browser.getDriver());
     }
 
     public OrderPage goToOrderingTab(){
         browser.findElementByLinkText(ORDERING).click();
-        return new OrderPage(driver);
+        return new OrderPage(browser.getDriver());
     }
 
 

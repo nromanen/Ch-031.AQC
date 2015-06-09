@@ -7,6 +7,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * It's necessary for DBUnit test to have beforeData
+ * If you dont need one use emptyset
+ */
 public class BaseDBTest extends DBUnitConfig {
 
     private static final String BASEURL = "http://localhost:8080/OMS/";

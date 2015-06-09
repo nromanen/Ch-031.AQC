@@ -7,7 +7,7 @@ import tools.Browser;
 
 public class BasePage {
 
-    protected WebDriver driver;
+//    protected WebDriver driver;
     protected Browser browser;
 
     private static final String BASEURL = "http://localhost:8080/OMS/";
@@ -16,7 +16,6 @@ public class BasePage {
     private static String submitButtonNameLocator = "submit";
 
     public BasePage(WebDriver driver) {
-        this.driver = driver;
         browser = new Browser(driver);
     }
 
@@ -25,18 +24,18 @@ public class BasePage {
     }
 
     public UserInfoPage gotoRoot() {
-        driver.get(BASEURL);
-        return new UserInfoPage(driver);
+        browser.getDriver().get(BASEURL);
+        return new UserInfoPage(browser.getDriver());
     }
 
     public void goToUrl(String url) {
-        driver.get(url);
+        browser.getDriver().get(url);
     }
 
     public UserInfoPage logout() {
         browser.findElementById("logout").click();
         browser.alertAccept();
-        return new UserInfoPage(driver);
+        return new UserInfoPage(browser.getDriver());
     }
 
     /**
@@ -47,7 +46,7 @@ public class BasePage {
         browser.findElementByName(loginInputNameLocator).sendKeys(userName);
         browser.findElementByName(passwordInputNameLocator).sendKeys(password);
         browser.findElementByName(submitButtonNameLocator).click();
-        return new UserInfoPage(driver);
+        return new UserInfoPage(browser.getDriver());
     }
    }
 
