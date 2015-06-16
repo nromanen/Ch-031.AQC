@@ -11,6 +11,10 @@ import tools.TableRow;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class describe Item Management Page functionality and provides a way to use it.
+ * @author Olya.
+ */
 public class ItemManagementPage {
     private WebDriver driver;
     private Browser browser;
@@ -30,6 +34,10 @@ public class ItemManagementPage {
         browser = new Browser(driver);
     }
 
+    /**
+     * This method returns the values from drop down list in "Search by" section.
+     * @return list which contains the values from drop down list in "Search by" section.
+     */
     public List<String> getFilterValues() {
         List<String> values = new ArrayList<String>();
         Select select = new Select(browser.findElementById(filterBySelectBoxIdLocator));
@@ -39,12 +47,20 @@ public class ItemManagementPage {
         return values;
     }
 
+    /**
+     * This method returns the currently selected value from drop down list in "Search by" section.
+     * @return the currently selected value from drop down list in "Search by" section.
+     */
     public String getFilterCurrentValue() {
         Select select = new Select(browser.findElementById(filterBySelectBoxIdLocator));
         return select.getFirstSelectedOption().getText();
 
     }
 
+    /**
+     * This method returns names of "Products" table columns.
+     * @return list which contains the names of table columns.
+     */
     public List<String> getProductTableHeadersNames() {
         List<String> names = new ArrayList<String>();
         List<WebElement> headers = browser.findElementsByTagName(tableHeaderTagNameLocator);
@@ -54,19 +70,35 @@ public class ItemManagementPage {
         return names;
     }
 
+    /**
+     * This method returns the row count of "Products" table.
+     * @return the row count of "Products" table.
+     */
     public Integer getProductTableElementSize() {
         List<WebElement> rows = browser.findElementsByTagName(tableRowTagNameLocator);
         return rows.size() - 1;
     }
 
+    /**
+     * This method returns the text value of the show item link.
+     * @return the text value of the show item link.
+     */
     public String getShowItemText() {
         return browser.findElementByXpath(showItemLinkXPathLocator).getText();
     }
 
+    /**
+     * This method makes a click on the show item link.
+     */
     public void clickShowItemLink() {
         browser.findElementByXpath(showItemLinkXPathLocator).click();
     }
 
+    /**
+     * This method find and returns the row with given product name from "Product" table.
+     * @param productName the value you need to find.
+     * @return {@link tools.TableRow} when found and null if not found.
+     */
     public TableRow findProductByNameInTable(String productName) {
         List<WebElement> rows = browser.findElementsByTagName(tableRowTagNameLocator);
         for (WebElement webElement : rows) {
@@ -78,6 +110,10 @@ public class ItemManagementPage {
         return null;
     }
 
+    /**
+     * This method clicks on the Add product link.
+     * @return {@link pages.ordering.AddProductPage}.
+     */
     public AddProductPage goToAddProduct() {
         browser.findElementByLinkText(addProductLinkTextLocator).click();
         return PageFactory.initElements(driver, AddProductPage.class);

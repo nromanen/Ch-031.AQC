@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <products ID="1" IsProductActive="true" ProductDescription="ProductDescription0" ProductName="Product0" ProductPrice="757.2385003259761"/>
+  <products ID="2" IsProductActive="true" ProductDescription="ProductDescription1" ProductName="Product1" ProductPrice="260.94374368462593"/>
+  <products ID="3" IsProductActive="true" ProductDescription="ProductDescription2" ProductName="Product2" ProductPrice="290.90651038532866"/>
+  <products ID="4" IsProductActive="true" ProductDescription="ProductDescription3" ProductName="Product3" ProductPrice="399.91616927054275"/>
+  <products ID="5" IsProductActive="true" ProductDescription="ProductDescription4" ProductName="Product4" ProductPrice="826.9069765190875"/>
+  <products ID="6" IsProductActive="true" ProductDescription="ProductDescription5" ProductName="Product5" ProductPrice="555.623454388595"/>
+  <products ID="7" IsProductActive="true" ProductDescription="ProductDescription6" ProductName="Product6" ProductPrice="976.0783220677092"/>
+  <products ID="8" IsProductActive="true" ProductDescription="ProductDescription7" ProductName="Product7" ProductPrice="935.0131784136422"/>
+  <products ID="9" IsProductActive="true" ProductDescription="ProductDescription8" ProductName="Product8" ProductPrice="640.4777550829938"/>
+  <products ID="10" IsProductActive="true" ProductDescription="ProductDescription9" ProductName="Product9" ProductPrice="512.2380918879874"/>
+</dataset>
