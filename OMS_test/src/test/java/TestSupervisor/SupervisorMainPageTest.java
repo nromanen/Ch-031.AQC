@@ -3,21 +3,17 @@ package TestSupervisor;
 import org.dbunit.dataset.IDataSet;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
-import tools.Browser;
-import tools.ColoredString;
 import tools.DBUnitConfig;
 import tools.Navigation;
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +38,7 @@ public class SupervisorMainPageTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
-        beforeData = new IDataSet[] {getDataFromFile("productData.xml")};
+        beforeData = new IDataSet[] {getDataFromFile("data/productData.xml")};
         super.setUp();
         navigation = new Navigation(driver);
         navigation.goToUrl(HOME_PAGE);

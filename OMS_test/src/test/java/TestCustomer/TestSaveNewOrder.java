@@ -1,9 +1,5 @@
 package TestCustomer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
@@ -12,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.CustomerAddProductsToOrderPage;
@@ -20,6 +15,10 @@ import pages.ordering.CustomerCreateOrderPage;
 import pages.ordering.CustomerOrderingPage;
 import tools.Browser;
 import tools.DBUnitConfig;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -48,7 +47,7 @@ public class TestSaveNewOrder extends DBUnitConfig {
 	@Before
 	public void setUp() throws Exception {
 
-		IDataSet productData = getDataFromFile("products.xml");
+		IDataSet productData = getDataFromFile("data/products.xml");
 		beforeData = new IDataSet[] { productData };
 		
 		DatabaseOperation.REFRESH.execute(getConnection(), getDataSet());

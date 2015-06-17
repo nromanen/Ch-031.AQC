@@ -1,25 +1,17 @@
 package TestAdministration;
 
-import static org.junit.Assert.*;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
-import pages.ordering.CustomerOrderingPage;
 import tools.Browser;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * 
