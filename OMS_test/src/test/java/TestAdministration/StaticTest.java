@@ -27,4 +27,13 @@ public class StaticTest extends BaseTest {
 
         assertEquals("This page is appointed for creating new and managing existing users", userspage.getDescriptionText());
     }
+
+    @Test
+    public void TestFoundUsersText() {
+        UsersPage userspage = new UsersPage(driver);
+        userspage.login(ADMIN_NAME, ADMIN_PASS);
+        userspage.goHere();
+        System.out.println(userspage.getFoundUsersText());
+        assertEquals("Found users:", userspage.getFoundUsersText());
+    }
 }

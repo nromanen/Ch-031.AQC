@@ -3,7 +3,7 @@
  * This is the test class for testing Edit Order's Save and Order functions.
  */
 
-package ordering;
+package TestCustomer;
 
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;

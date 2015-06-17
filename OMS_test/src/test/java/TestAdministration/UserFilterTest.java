@@ -1,20 +1,21 @@
 package TestAdministration;
 
-import org.dbunit.dataset.IDataSet;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import pages.administration.UsersPage;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
-import tools.BaseDBTest;
+import tools.BaseTest;
 
 import java.util.Arrays;
 import java.util.Collection;
 
+import static org.junit.Assert.assertEquals;
+
 
 @RunWith(Parameterized.class)
-public class UserFilterTest extends BaseDBTest {
+public class UserFilterTest extends BaseTest {
     private String column;
     private String match;
     private String value;
@@ -26,9 +27,8 @@ public class UserFilterTest extends BaseDBTest {
 
 
     public UserFilterTest(String column, String match, String value, int expected) throws Exception {
-        super("UserFilterTest");
-
-        beforeData = new IDataSet[] {getDataFromFile("data/emptyset.xml")};
+//        super("UserFilterTest");
+//        beforeData = new IDataSet[] {getDataFromFile("data/emptyset.xml")};
 
         this.column = column;
         this.match = match;
@@ -85,9 +85,13 @@ public class UserFilterTest extends BaseDBTest {
     }
 
 
+    /**
+     * login, goto Users Page
+     *
+     * Then matching count of users from "Found Users" with expected value
+     */
     @Test
     public void testUserFilter() {
-        // login and goto page we need
         LoginPage loginpage = new LoginPage(driver);
         UserInfoPage userinfopage = loginpage.login(ADMIN_NAME,ADMIN_PASS);
         UsersPage userpage = userinfopage.gotoUsers();
