@@ -1,10 +1,6 @@
 package TestSupervisor;
 
-import org.dbunit.Assertion;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.ITable;
-import org.dbunit.dataset.filter.DefaultColumnFilter;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,9 +13,10 @@ import pages.ordering.ItemManagementPage;
 import tools.DBUnitConfig;
 import tools.Navigation;
 import tools.TableRow;
-
-import java.io.File;
-
+/**
+ * This test case is designed for testing the Add Product functionality.
+ * @author Olya.
+ */
 public class AddProductTest extends DBUnitConfig {
     private WebDriver driver = new FirefoxDriver();
     private Navigation navigation;
@@ -45,32 +42,29 @@ public class AddProductTest extends DBUnitConfig {
     }
 
     @Test
+    /**
+     * This test verify that new product with name PRODUCT_NAME, description PRODUCT_DESCRIPTION
+     * and price PRODUCT_PRICE is created and is visible in product table on Item Management page.
+     */
     public void testAddProducts() throws Exception {
         AddProductPage addProductPage = new ItemManagementPage(driver).goToAddProduct();
         addProductPage.setProductNameValue(PRODUCT_NAME);
+        assertEquals(PRODUCT_NAME,addProductPage.getProductNameValue());
         addProductPage.setProductDescriptionValue(PRODUCT_DESCRIPTION);
+        assertEquals(PRODUCT_DESCRIPTION,addProductPage.getProductDescriptionValue());
         addProductPage.setProductPriceValue(PRODUCT_PRICE);
+        assertEquals(PRODUCT_PRICE,addProductPage.getProductPriceValue());
         addProductPage.clickOkButton();
         ItemManagementPage itemManagementPage = new ItemManagementPage(driver);
         TableRow row = itemManagementPage.findProductByNameInTable(PRODUCT_NAME);
         assertEquals(PRODUCT_DESCRIPTION, row.getNthColumnValue(2));
         assertEquals(PRODUCT_PRICE, row.getNthColumnValue(3));
-        // Fetch database data after executing your code
-        IDataSet databaseDataSet = getConnection().createDataSet();
-        ITable actualTable = databaseDataSet.getTable("products");
-        // Load expected data from an XML dataset
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("src/main/resources/expectedDataProduct.xml"));
-        ITable expectedTable = expectedDataSet.getTable("products");
-        ITable filteredTable = DefaultColumnFilter.includedColumnsTable(actualTable,
-                expectedTable.getTableMetaData().getColumns());
-        // Assert actual database table match expected table
-        Assertion.assertEquals(expectedTable, filteredTable);
     }
 
     @After
     public void tearDown() throws Exception {
         navigation.logout();
-        //DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
+        DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
     }
 }
 

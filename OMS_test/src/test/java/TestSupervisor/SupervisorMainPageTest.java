@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
@@ -17,7 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This test is designed for testing of the Item Management view
+ * This test case is designed for testing of the Item Management view.
+ * @author Olya.
  */
 public class SupervisorMainPageTest extends DBUnitConfig {
     private static WebDriver driver = new FirefoxDriver();
@@ -31,6 +34,8 @@ public class SupervisorMainPageTest extends DBUnitConfig {
         super(name);
     }
 
+    static Logger log = LoggerFactory.getLogger(SupervisorMainPageTest.class);
+
     @Before
     public void setUp() throws Exception {
         beforeData = new IDataSet[] {getDataFromFile("data/productData.xml")};
@@ -41,9 +46,13 @@ public class SupervisorMainPageTest extends DBUnitConfig {
         itemManagementPage = userInfoPage.selectItemManagementTab();
     }
 
-
     @Test
+    /**
+     * This test verify that "Search by" drop-down list on ItemManagement page
+     * have two options – "Name" and "Description" (according to SRS).
+     */
     public void testFilterByValues() throws Exception {
+        log.info("------TestFilterByValues------");
         List<String> expectedValues = new ArrayList<String>();
         expectedValues.add("Name");
         expectedValues.add("Description");
@@ -52,9 +61,14 @@ public class SupervisorMainPageTest extends DBUnitConfig {
         for (String actualValue : actualValues) {
             assertTrue(expectedValues.contains(actualValue));
         }
+        log.info("----TestFilterByValues pass----");
     }
 
     @Test
+    /**
+     * This test verify that in "Search by" drop-down list on ItemManagement page
+     * by default set value to "Name" (according to SRS).
+     */
     public void testFilterByDefaultValue() throws Exception {
         String expected = "Name";
         String actual = itemManagementPage.getFilterCurrentValue();
@@ -62,6 +76,10 @@ public class SupervisorMainPageTest extends DBUnitConfig {
     }
 
     @Test
+    /**
+     * This test verify that columns of product table on Item Management page have
+     * such labels: "Name", "Description", "Price", "Edit" and "Delete" (according to SRS).
+     */
     public void testProductTableHeaders() throws Exception {
         List<String> expected = Arrays.asList("Name", "Description", "Price", "Edit", "Delete");
         List<String> actual = itemManagementPage.getProductTableHeadersNames();
@@ -72,6 +90,9 @@ public class SupervisorMainPageTest extends DBUnitConfig {
     }
 
     @Test
+    /**
+     * This test verify a correct work of "Show 10 items/Show 5 items" links (according to SRS).
+     */
     public void testClickShowItems() throws Exception {
         String expectedShowItemsLabel = "Show 10 items";
         int expectedNumberOfProducts = 5;
@@ -98,6 +119,9 @@ public class SupervisorMainPageTest extends DBUnitConfig {
     }
 
     @Test
+    /**
+     * This test verify that after clicking on AddProduct link Supervisor can access "Add Product" page.
+     */
     public void testClickAddProduct() throws Exception {
         AddProductPage addProductPage = itemManagementPage.goToAddProduct();
         assertNotNull(addProductPage);
