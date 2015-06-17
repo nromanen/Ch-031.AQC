@@ -15,9 +15,8 @@ public class UserInfoPage {
     private static final String USERS_LOCATOR = "Administration";
     private static final String LINK_FOR_ORDERING = "Ordering";  
 
-    public UserInfoPage(WebDriver driver) {
-        this.driver = driver;
-        browser = new Browser(driver);
+    public UserInfoPage() {
+
     }
     
     public WebDriver getDriver() {

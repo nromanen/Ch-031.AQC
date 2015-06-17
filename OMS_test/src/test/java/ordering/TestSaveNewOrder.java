@@ -31,7 +31,7 @@ import pages.ordering.CustomerOrderingPage;
 import tools.Browser;
 import tools.DBUnitConfig;
 
-public class BranchTestSaveNewOrder extends DBUnitConfig {
+public class TestSaveNewOrder extends DBUnitConfig {
 
 	private static WebDriver driver;
 	private static Browser browser;
@@ -44,7 +44,7 @@ public class BranchTestSaveNewOrder extends DBUnitConfig {
 	private static final String WRONG_USER_NAME_FOR_CUSTOMER = "lohghgbh";
 	private static final String WRONG_PASSWORD_FOR_CUSTOMER = "qwerty4544";
 		
-	public BranchTestSaveNewOrder(String name) {
+	public TestSaveNewOrder(String name) {
 		super(name);
 	}
 

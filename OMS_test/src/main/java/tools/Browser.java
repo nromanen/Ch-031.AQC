@@ -16,13 +16,20 @@ public class Browser {
 
     private static final int TIME_OUT_SECONDS = 10;
 
+    public Browser(){
+    	
+    }
 
     public Browser(WebDriver driver) {
         this.driver = driver;
     }
+    
+    public void setDriver(WebDriver driver){
+    	this.driver = driver;
+    }
 
-    public void goToUrl(String url) {
-        driver.get(url);
+    public WebDriver getDriver() {
+        return driver;
     }
 
     public String getCurrentUrl () {
@@ -91,7 +98,5 @@ public class Browser {
     public void selectByVisibleText(WebElement e, String text) {
         new Select(e).selectByVisibleText(text);
     }
-
-
 
 }

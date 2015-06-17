@@ -1,5 +1,6 @@
 package TestAdministration;
 
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.junit.After;
 import org.junit.Before;
@@ -36,15 +37,8 @@ public class UserFilterTest extends DBUnitConfig {
     WebDriver driver;
 
     @Before
-    public void initialize() throws Exception {
+    public void setUp() throws Exception {
         // DBUnit
-        super.setUp();
-        beforeData = new FlatXmlDataSetBuilder().build(
-                Thread.currentThread().getContextClassLoader()
-                        .getResourceAsStream("data.xml"));
-        tester.setDataSet(beforeData);
-        tester.onSetup();
-
         // Selenium
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
@@ -67,7 +61,6 @@ public class UserFilterTest extends DBUnitConfig {
     public static Collection Filters() {
         return Arrays.asList(new Object[][] {
                 { "All Columns", "equals", "", 5 },
-                
                 { "All Columns", "equals", "Alice", 1 },
                 { "All Columns", "not equals to", "Alice", 4 },
                 { "All Columns", "starts with", "Ev", 2 },
@@ -103,7 +96,6 @@ public class UserFilterTest extends DBUnitConfig {
                 { "Region", "starts with", "N", 2 },
                 { "Region", "contains", "o", 4 },
                 { "Region", "does not contain", "o", 1 },
-
         });
     }
 
@@ -123,6 +115,7 @@ public class UserFilterTest extends DBUnitConfig {
 
     @After
     public void tearDown() throws Exception {
+        super.tearDown();
         driver.quit();
     }
 }
