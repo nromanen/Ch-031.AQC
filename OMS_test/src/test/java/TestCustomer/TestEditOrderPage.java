@@ -7,7 +7,7 @@ package TestCustomer;
 
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import pages.auth.LoginPage;
 import org.openqa.selenium.WebDriver;
 import pages.auth.UserInfoPage;
@@ -27,18 +27,33 @@ public class TestEditOrderPage extends DBUnitConfig{
         super(name);
     }
 
-
     @Before
+
+/*
+public  void initP() throws Exception {
+    InitDataClicker initDataClicker = new InitDataClicker();
+    System.out.print("123");
+    initDataClicker.init();
+    System.out.print("456");
+
+
+}
+*/
+
     public  void setUp() throws Exception {
-        IDataSet productData = getDataFromFile("data/dataset.xml");
+
+
+        IDataSet productData = getDataFromFile("data/partial.xml");
         beforeData = new IDataSet[] {productData};
         super.setUp();
 
-        /*System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
-        driver = new ChromeDriver();*/
-        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/IdeaProjects/Ch-031.AQC/OMS_test/chromedriver");
+        driver = new ChromeDriver();
+        //driver = new FirefoxDriver();
         driver.get(BASE_URL);
     }
+
+
 
     @Test
     public  void testEditOrderStatus() throws javax.script.ScriptException{
@@ -79,7 +94,6 @@ public class TestEditOrderPage extends DBUnitConfig{
         String expectedAssignee = "merch1";
         editOrderPage.setAssignee(expectedAssignee);
         editOrderPage.clickSave();
-
         assertEquals("Order number is wrong", expectedOrderNumber, editOrderPage.checkOrderNumber());
         assertEquals("Preferable date is wrong", expectedPreferableDate, editOrderPage.checkPreferableDate());
         assertEquals("Assignee value is wrong", expectedAssignee, editOrderPage.checkAssignee());
@@ -91,12 +105,10 @@ public class TestEditOrderPage extends DBUnitConfig{
         UserInfoPage userInfoPage = loginPage.login(LOGIN, PASS);
         OrderPage orderPage = userInfoPage.goToOrderingTab();
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
-
         editOrderPage.setOrderNumber("100");
         editOrderPage.setPreferableDate("10/05/2015");
         editOrderPage.setAssignee("merch1");
         editOrderPage.clickSave();
-
         editOrderPage.setCardType("Visa");
         editOrderPage.setCardNumber("4323355300847977");
         editOrderPage.setCVV2("111");
@@ -112,12 +124,10 @@ public class TestEditOrderPage extends DBUnitConfig{
         UserInfoPage userInfoPage = loginPage.login(LOGIN, PASS);
         OrderPage orderPage = userInfoPage.goToOrderingTab();
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
-
         editOrderPage.setOrderNumber("101");
         editOrderPage.setPreferableDate("10/05/2015");
         editOrderPage.setAssignee("merch1");
         editOrderPage.clickSave();
-
         editOrderPage.setCardType("MasterCard");
         editOrderPage.setCardNumber("4323355300847977");
         editOrderPage.setCVV2("111");
@@ -133,12 +143,10 @@ public class TestEditOrderPage extends DBUnitConfig{
         UserInfoPage userInfoPage = loginPage.login(LOGIN, PASS);
         OrderPage orderPage = userInfoPage.goToOrderingTab();
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
-
         editOrderPage.setOrderNumber("102");
         editOrderPage.setPreferableDate("10/05/2015");
         editOrderPage.setAssignee("merch1");
         editOrderPage.clickSave();
-
         editOrderPage.setCardType("American Express");
         editOrderPage.setCardNumber("4323355300847977");
         editOrderPage.setCVV2("111");
@@ -159,7 +167,6 @@ public class TestEditOrderPage extends DBUnitConfig{
         editOrderPage.setPreferableDate("10/05/2015");
         editOrderPage.setAssignee("merch1");
         editOrderPage.clickSave();
-
         editOrderPage.setCardType("Maestro");
         editOrderPage.setCardNumber("4323355300847977");
         editOrderPage.setCVV2("111");
@@ -170,7 +177,6 @@ public class TestEditOrderPage extends DBUnitConfig{
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
     }
-
 
 
     @After
