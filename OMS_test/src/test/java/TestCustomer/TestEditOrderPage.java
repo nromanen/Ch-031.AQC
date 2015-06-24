@@ -15,6 +15,8 @@ import pages.ordering.*;
 import tools.CheckTableValue;
 import tools.DBUnitConfig;
 
+import java.io.File;
+
 
 public class TestEditOrderPage extends DBUnitConfig{
     private static WebDriver driver;
@@ -28,14 +30,13 @@ public class TestEditOrderPage extends DBUnitConfig{
 
     @Before
     public  void setUp() throws Exception {
-        Thread.sleep(1000);
 
         System.out.println("dbunt begins");
         IDataSet productData = getDataFromFile("data/partial.xml");
         beforeData = new IDataSet[] {productData};
         super.setUp();
 
-        System.setProperty("webdriver.chrome.driver", "./OMS_test/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
         //driver = new FirefoxDriver();
         driver.get(HOME_PAGE);
@@ -176,6 +177,12 @@ public class TestEditOrderPage extends DBUnitConfig{
     public  void tearDown() throws Exception{
         super.tearDown();
         driver.quit();
+    }
+
+    @AfterClass
+    public static void deleteInitFile(){
+        File file = new File("data/partial.xml");
+        file.delete();
     }
 
 }
