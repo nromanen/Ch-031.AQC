@@ -73,4 +73,8 @@ public class UsersPage extends BasePage{
         return browser.findElementsByXpath("//div[@id='list']//h4[1]").get(0).getText().substring(0,12);
     }
 
+    public String getFoundUsersTextUA() {
+        return browser.findElementsByXpath("//div[@id='list']//h4[1]").get(0).getText().substring(0,21);
+    }
+
 }

@@ -1,5 +1,6 @@
 package TestAdministration;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -90,6 +91,8 @@ public class UserFilterTest extends BaseTest {
      *
      * Then matching count of users from "Found Users" with expected value
      */
+
+    @Ignore
     @Test
     public void testUserFilter() {
         LoginPage loginpage = new LoginPage(driver);
