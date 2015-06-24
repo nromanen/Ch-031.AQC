@@ -27,7 +27,6 @@ public class UserInfoPage extends BasePage{
     }
     
     public CustomerOrderingPage switchToOrderingPage() {
-//        Browser browser = new Browser(driver);
 		browser.findElementByLinkText(LINK_FOR_ORDERING).click();
 		return new CustomerOrderingPage(browser.getDriver());
 	}

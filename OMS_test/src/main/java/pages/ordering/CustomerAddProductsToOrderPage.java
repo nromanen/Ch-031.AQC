@@ -49,6 +49,10 @@ public class CustomerAddProductsToOrderPage {
 	
     	browser.findElementByCssSelector("#selectFrom1 > a").click();
 	}
+
+	public void selectInitProduct() {
+		browser.findElementByLinkText("Select").click();
+	}
     
     public CustomerCreateOrderPage clickDoneButton() { 
     	browser.findElementByXpath("//input[@type='submit'][@value = '"+VALUE_OF_DONE_BUTTON+"']").click();  

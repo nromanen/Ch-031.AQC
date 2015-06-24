@@ -11,15 +11,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.auth.LoginPage;
 import org.openqa.selenium.WebDriver;
 import pages.auth.UserInfoPage;
-import pages.ordering.AddItemPage;
-import pages.ordering.EditOrderPage;
-import pages.ordering.OrderPage;
+import pages.ordering.*;
 import tools.CheckTableValue;
 import tools.DBUnitConfig;
 
+
 public class TestEditOrderPage extends DBUnitConfig{
     private static WebDriver driver;
-    private static String BASE_URL = "http://localhost:8080/OMS";
+    private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
     String LOGIN = "customer1";
     String PASS = "qwerty";
 
@@ -28,29 +27,18 @@ public class TestEditOrderPage extends DBUnitConfig{
     }
 
     @Before
-
-/*
-public  void initP() throws Exception {
-    InitDataClicker initDataClicker = new InitDataClicker();
-    System.out.print("123");
-    initDataClicker.init();
-    System.out.print("456");
-
-
-}
-*/
-
     public  void setUp() throws Exception {
+        Thread.sleep(1000);
 
-
+        System.out.println("dbunt begins");
         IDataSet productData = getDataFromFile("data/partial.xml");
         beforeData = new IDataSet[] {productData};
         super.setUp();
 
-        System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/IdeaProjects/Ch-031.AQC/OMS_test/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "./OMS_test/chromedriver");
         driver = new ChromeDriver();
         //driver = new FirefoxDriver();
-        driver.get(BASE_URL);
+        driver.get(HOME_PAGE);
     }
 
 
@@ -94,6 +82,7 @@ public  void initP() throws Exception {
         String expectedAssignee = "merch1";
         editOrderPage.setAssignee(expectedAssignee);
         editOrderPage.clickSave();
+
         assertEquals("Order number is wrong", expectedOrderNumber, editOrderPage.checkOrderNumber());
         assertEquals("Preferable date is wrong", expectedPreferableDate, editOrderPage.checkPreferableDate());
         assertEquals("Assignee value is wrong", expectedAssignee, editOrderPage.checkAssignee());
@@ -114,6 +103,7 @@ public  void initP() throws Exception {
         editOrderPage.setCVV2("111");
         editOrderPage.setExpiryDate("02", "2017");
         editOrderPage.clickOrder();
+
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
     }
@@ -133,6 +123,7 @@ public  void initP() throws Exception {
         editOrderPage.setCVV2("111");
         editOrderPage.setExpiryDate("02", "2017");
         editOrderPage.clickOrder();
+
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
     }
@@ -152,6 +143,7 @@ public  void initP() throws Exception {
         editOrderPage.setCVV2("111");
         editOrderPage.setExpiryDate("02", "2017");
         editOrderPage.clickOrder();
+
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
     }
@@ -174,6 +166,7 @@ public  void initP() throws Exception {
         editOrderPage.setMaestroDate("10/05/2015");
         editOrderPage.setMaestroIssue("2");
         editOrderPage.clickOrder();
+
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
     }

@@ -4,13 +4,10 @@ import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
-import pages.ordering.AddProductPage;
-import pages.ordering.ItemManagementPage;
+import pages.ordering.*;
 import tools.Navigation;
 
 import java.io.FileOutputStream;
@@ -19,36 +16,17 @@ import java.sql.DriverManager;
 
 /**
  * Created by lumberjack85 on 6/21/15.
+ * Used for creating an initial data xml
  */
 public class InitDataClicker {
     private static WebDriver driver;
     private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
     String LOGIN = "supervisor1";
     String PASS = "qwerty";
+    String LOGIN2 = "customer1";
     private Navigation navigation;
 
 
-    public  void initProduct(){
-        System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/IdeaProjects/Ch-031.AQC/OMS_test/chromedriver");
-        driver = new ChromeDriver();
-        //driver = new FirefoxDriver();
-
-        navigation = new Navigation(driver);
-        LoginPage loginPage = new LoginPage(driver);
-        navigation.goToUrl(HOME_PAGE);
-        UserInfoPage userInfoPage = navigation.login(LOGIN, PASS);
-        ItemManagementPage itemManagementPage = userInfoPage.selectItemManagementTab();
-
-        AddProductPage addProductPage = new ItemManagementPage(driver).goToAddProduct();
-        addProductPage.setProductNameValue("product1");
-        addProductPage.setProductDescriptionValue("product description");
-        addProductPage.setProductPriceValue("100");
-        addProductPage.clickOkButton();
-        driver.quit();
-
-    }
-
-    @Test
     public void initTest() throws Exception{
         InitDataClicker init = new InitDataClicker();
         init.initProduct();
@@ -62,9 +40,52 @@ public class InitDataClicker {
 
         // partial database export
         QueryDataSet partialDataSet = new QueryDataSet(connection);
+        System.out.println("query");
         partialDataSet.addTable("Products");
-        FlatXmlDataSet.write(partialDataSet, new FileOutputStream("/data/partial.xml"));
-        System.out.println("created");
+        System.out.println("add1");
+        partialDataSet.addTable("Orders");
+        partialDataSet.addTable("OrderItems");
+        System.out.println("add3");
+        FlatXmlDataSet.write(partialDataSet, new FileOutputStream("./OMS_test/src/main/resources/data/partial.xml"));
+        System.out.println(System.getProperty("user.dir"));
+    }
+
+
+    public  void initProduct() throws Exception{
+        System.setProperty("webdriver.chrome.driver", "./OMS_test/chromedriver");
+        driver = new ChromeDriver();
+        //driver = new FirefoxDriver();
+
+        navigation = new Navigation(driver);
+        navigation.goToUrl(HOME_PAGE);
+        UserInfoPage userInfoPage = navigation.login(LOGIN, PASS);
+        ItemManagementPage itemManagementPage = userInfoPage.selectItemManagementTab();
+
+        AddProductPage addProductPage = new ItemManagementPage(driver).goToAddProduct();
+        addProductPage.setProductNameValue("product1");
+        addProductPage.setProductDescriptionValue("product description");
+        addProductPage.setProductPriceValue("100");
+        addProductPage.clickOkButton();
+        navigation.logout();
+
+        UserInfoPage userInfoPage2 = navigation.login(LOGIN2, PASS);
+        CustomerOrderingPage  customerOrderingPage = userInfoPage2.switchToOrderingPage();
+        CustomerCreateOrderPage customerCreateOrderPage = customerOrderingPage.switchToCreatingNewOrderPage();
+        CustomerAddProductsToOrderPage customerAddProductsToOrderPage = customerCreateOrderPage.clickAddItemButton();
+        customerAddProductsToOrderPage.selectInitProduct();
+        CustomerCreateOrderPage customerCreateOrderPage2 = customerAddProductsToOrderPage.clickDoneButton();
+        customerCreateOrderPage2.enterPreferableDeliveryDate("28/07/2015");
+        customerCreateOrderPage2.selectAssignee("merch1");
+        customerCreateOrderPage2.clickSaveButton();
+        navigation.logout();
+
+        driver.quit();
+
+    }
+
+    public static void main(String[] args) throws Exception{
+        InitDataClicker initDataClicker = new InitDataClicker();
+        initDataClicker.initTest();
     }
 
 
