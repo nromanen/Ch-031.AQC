@@ -1,62 +1,87 @@
 package TestCustomer;
 
+import static org.junit.Assert.*;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
+import org.dbunit.DatabaseUnitException;
+import org.dbunit.dataset.DataSetException;
+import org.dbunit.dataset.FilteredDataSet;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import entity.OrderItem;
+import pages.BasePage;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.CustomerAddProductsToOrderPage;
 import pages.ordering.CustomerCreateOrderPage;
 import pages.ordering.CustomerOrderingPage;
+import tools.BaseDBTest;
+import tools.BaseTest;
 import tools.Browser;
 import tools.DBUnitConfig;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import tools.OrderItemService;
 
 /**
- * 
+ * This test case is designed for testing (step by step) the Save Order functionality.
  * @author Olesia
  *
  */
-public class TestSaveNewOrder extends DBUnitConfig {
-
-	private static WebDriver driver;
-	private static Browser browser;
-	private static final String HOME_URL = "http://localhost:8080/OMS/";
-	private static final int TIMEOUT = 2;
+public class TestSaveNewOrder extends BaseDBTest {
 	
+	private static Browser browser;
+
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
 
 	private static final String SELECTED_ASSIGNEE = "merch1";
-	private static final String ENTERED_PREFERABLE_DELIVERY_DATE = "07/06/2015";
+	private static final String ENTERED_PREFERABLE_DELIVERY_DATE = "10/07/2015";
+	String productName = "product1";
+	String productDescription = "product description";
+	String productPrice = "100.0";
+	
+	static Logger log = LoggerFactory.getLogger(TestSaveNewOrder.class);
 
 	CustomerOrderingPage ordering;
+	
+	public Browser getBrowser(){
+		return TestSaveNewOrder.browser;
+	}
 		
 	public TestSaveNewOrder(String name) throws Exception {
 		super(name);
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception {	
 
-		IDataSet productData = getDataFromFile("data/products.xml");
-		beforeData = new IDataSet[] { productData };
+		IDataSet productData = getDataFromFile("data/initProduct.xml");  
+        beforeData = new IDataSet[] {productData}; 
+        
+		super.setUp();	
 		
-		DatabaseOperation.REFRESH.execute(getConnection(), getDataSet());
-
-		driver = new FirefoxDriver();
-		browser = new Browser(driver);
-		driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-		driver.get(HOME_URL);
-
 		LoginPage loginPage = new LoginPage(driver);
 		UserInfoPage userInfo = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
 		ordering = userInfo.switchToOrderingPage();
@@ -65,7 +90,8 @@ public class TestSaveNewOrder extends DBUnitConfig {
 
 	@Test
 	public void testSwitchToOrderingPage(){
-					
+		
+		log.info("------testSwitchToOrderingPage------");					
 		List <String> expectedValues = new ArrayList<String>();
 		expectedValues.add("Order Name");
 		expectedValues.add("Total price");
@@ -77,11 +103,13 @@ public class TestSaveNewOrder extends DBUnitConfig {
 		expectedValues.add("Delete");				
 		List <String> actualValues =  ordering.getValuesFromTableWithOrders("th");
 	    assertEquals(expectedValues, actualValues);
+	    log.info("----testSwitchToOrderingPage pass----");	
 	}
 	
 	@Test
 	public void testSwitchToCreatingNewOrderPage(){
 		
+		log.info("------testSwitchToCreatingNewOrderPage------");		
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		List<String> expectedValues = new ArrayList<String>();
 		expectedValues.add("Item Number");
@@ -95,11 +123,13 @@ public class TestSaveNewOrder extends DBUnitConfig {
 		expectedValues.add("Delete");
 		List <String> actualValues =  createNewOrderPage.getItemFromTableInItemSelection("th");
 		assertEquals(expectedValues, actualValues);
+		log.info("----testSwitchToCreatingNewOrderPage pass----");	
 	}
 
 	@Test
 	public void testClickAddItemButton(){
 		
+		log.info("------testClickAddItemButton------");	
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		List<String> expectedValues = new ArrayList<String>();
@@ -108,85 +138,106 @@ public class TestSaveNewOrder extends DBUnitConfig {
 		expectedValues.add("Add");	
 		List <String> actualValues =  addProductsPage.getHeadersFromTableWithProducts();
 	    assertEquals(expectedValues, actualValues);
+	    log.info("----testClickAddItemButton pass----");
 	}
 	
-	@Test
+  @Test   
 	public void testSelectProduct() throws Exception{
-
+	  
+	    log.info("------testSelectProduct------");	
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
-		addProductsPage.selectProduct();
-		assertEquals("table", browser.findElementByXpath("//form[@id = 'doneForm']/table/tbody/tr[1]/td[2]").getText());
-		assertEquals("800.0", browser.findElementByXpath("//form[@id = 'doneForm']/table/tbody/tr[3]/td[2]").getText());
+		addProductsPage.selectInitProduct();
+		String actualName = addProductsPage.findNameOfSelectedProduct();
+		assertEquals(productName, actualName  );
+		String actualPrice = addProductsPage.findPriceOfSelectedProduct();		
+		assertEquals(productPrice, actualPrice);
+		log.info("----testSelectProduct pass----");
 	}
 
 	@Test
 	public void testClickDoneButton() throws Exception{ 
-				
+		
+		log.info("------testClickDoneButton------");				
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
-		addProductsPage.selectProduct();
+		addProductsPage.selectInitProduct();
 		CustomerCreateOrderPage result = addProductsPage.clickDoneButton();
 		List<String> expectedValues = new ArrayList<String>();
 		expectedValues.add("1");
-		expectedValues.add("table");
-		expectedValues.add("brown");
+		expectedValues.add(productName);
+		expectedValues.add(productDescription);
 		expectedValues.add("Item");
-		expectedValues.add("800.0");
+		expectedValues.add(productPrice);
 		expectedValues.add("1");
-		expectedValues.add("800.0");
+		expectedValues.add("100.0");
 		expectedValues.add("Edit");
 		expectedValues.add("Delete");	
 		List <String> actualValues =  result.getItemFromTableInItemSelection("td");				
-	   	assertEquals(expectedValues, actualValues);
-	}
+	   	assertEquals(expectedValues, actualValues);	   	
+	    log.info("----testClickDoneButton pass----");	
+	   	
+	   	}
 	
 	@Test
 	public void testSelectAssignee() throws Exception{ 
 		
+		log.info("------testSelectAssignee------");
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
-		addProductsPage.selectProduct();
+		addProductsPage.selectInitProduct();
 		addProductsPage.clickDoneButton();
 		String result = createNewOrderPage.selectAssignee(SELECTED_ASSIGNEE);
 		assertEquals("merch1",result);
+		log.info("----testSelectAssignee pass----");
 	}
 	
 	@Test
 	public void testClickSaveButton() throws Exception{ 
-			
-		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
+
+		log.info("------TestClickSaveButton------");
+    	CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
-		addProductsPage.selectProduct();
+		addProductsPage.selectInitProduct();
 		addProductsPage.clickDoneButton();
 		createNewOrderPage.enterPreferableDeliveryDate(ENTERED_PREFERABLE_DELIVERY_DATE);
 		createNewOrderPage.selectAssignee(SELECTED_ASSIGNEE);
 		createNewOrderPage.clickSaveButton();
 		createNewOrderPage.switchToOrderingPage();
+	
 		List<String> expectedValues = new ArrayList<String>();
 		expectedValues.add("OrderName1");
-		expectedValues.add("800.0");
+		expectedValues.add("100.0");
 		expectedValues.add("0");
 		expectedValues.add("");
-		expectedValues.add("Created");
-		expectedValues.add("merch1");
+		expectedValues.add("Created");  
+		expectedValues.add("merch1"); 
 		expectedValues.add("Edit");
 		expectedValues.add("Delete");
 		List <String> actualValues =  ordering.getValuesFromTableWithOrders("td");
-	    assertEquals(expectedValues, actualValues);				
+	    assertEquals(expectedValues, actualValues);	
+	    
+	    log.info("----TestClickSaveButton pass----");	   
 	}
 	
 	@After
 	public void tearDown() throws Exception {
+		 
+		driver.quit();		
+		try{
 
-		driver.quit(); 
+			List<OrderItem>  orderItems = OrderItemService.getAll(); 
+					
+		  		for(OrderItem orderItem : orderItems){ 
+				OrderItemService.delete(orderItem);			    	
+			}
+		    }
+			catch (Exception e ){	
+				System.out.println(e.getMessage());
+			}
+		
+		DatabaseOperation.DELETE.execute(getConnection(), getDataSet());
+		
 	}
 	
-	@AfterClass
-	public void tearDownAfterClass() throws Exception  {
-		super.tearDown();
-		DatabaseOperation.DELETE_ALL.execute(getConnection(), getDataSet());
-	}
 }
-
-
