@@ -24,7 +24,7 @@ import java.util.List;
  * @author Olya.
  */
 public class SupervisorMainPageTest extends DBUnitConfig {
-    private static WebDriver driver = new FirefoxDriver();
+    private static WebDriver driver;
     private Navigation navigation;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
@@ -39,6 +39,7 @@ public class SupervisorMainPageTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
+        driver = new FirefoxDriver();
         beforeData = new IDataSet[] {getDataFromFile("data/productData.xml")};
         super.setUp();
         navigation = new Navigation(driver);

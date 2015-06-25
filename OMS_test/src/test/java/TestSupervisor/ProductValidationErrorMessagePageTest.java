@@ -132,6 +132,5 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
         super.tearDown();
         navigation.logout();
         driver.quit();
-        DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
     }
 }

@@ -36,7 +36,7 @@ public class TestEditOrderPage extends DBUnitConfig{
         beforeData = new IDataSet[] {productData};
         super.setUp();
 
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         //driver = new FirefoxDriver();
         driver.get(HOME_PAGE);
