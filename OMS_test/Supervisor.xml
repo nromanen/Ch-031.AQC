@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <cardtype/>
+  <customertypes ID="1" Discount="0.0" MaxRange="1000.0" MinRange="0.0" TypeName="Standart"/>
+  <customertypes ID="2" Discount="0.0" MaxRange="3000.0" MinRange="1000.0" TypeName="Silver"/>
+  <customertypes ID="3" Discount="0.0" MaxRange="10000.0" MinRange="3000.0" TypeName="Gold"/>
+  <customertypes ID="4" Discount="0.0" MinRange="10000.0" TypeName="Platinum"/>
+  <dimensions ID="1" DimensionName="Item" NumberOfProducts="1"/>
+  <dimensions ID="2" DimensionName="Box" NumberOfProducts="5"/>
+  <dimensions ID="3" DimensionName="Package" NumberOfProducts="10"/>
+  <orderitems/>
+  <orders/>
+  <orderstatuses ID="1" OrederStatusName="Created"/>
+  <orderstatuses ID="2" OrederStatusName="Pending"/>
+  <orderstatuses ID="3" OrederStatusName="Ordered"/>
+  <orderstatuses ID="4" OrederStatusName="Delivered"/>
+  <products ID="11" IsProductActive="true" ProductDescription="Very big" ProductName="potato" ProductPrice="34.0"/>
+  <products ID="12" IsProductActive="true" ProductDescription="Very yellow" ProductName="lemon" ProductPrice="14.0"/>
+  <products ID="13" IsProductActive="true" ProductDescription="Very sweet" ProductName="orange" ProductPrice="9.5"/>
+  <products ID="14" IsProductActive="true" ProductDescription="Very red" ProductName="tomato" ProductPrice="12.75"/>
+  <products ID="15" IsProductActive="true" ProductDescription="Very fresh" ProductName="banana" ProductPrice="42.95"/>
+  <products ID="16" IsProductActive="true" ProductDescription="Very fresh" ProductName="cabbage" ProductPrice="27.0"/>
+  <products ID="17" IsProductActive="true" ProductDescription="Very long" ProductName="carrot" ProductPrice="17.0"/>
+  <products ID="18" IsProductActive="true" ProductDescription="Very bitter" ProductName="onion" ProductPrice="10.0"/>
+  <products ID="19" IsProductActive="true" ProductDescription="Very sweet" ProductName="strawberry" ProductPrice="50.0"/>
+  <products ID="20" IsProductActive="true" ProductDescription="Very useful" ProductName="raspberries" ProductPrice="50.0"/>
+  <products ID="21" IsProductActive="true" ProductDescription="Description1" ProductName="Product1" ProductPrice="212.66887486372056"/>
+  <products ID="22" IsProductActive="true" ProductDescription="Description2" ProductName="Product2" ProductPrice="741.3880943322258"/>
+  <products ID="23" IsProductActive="true" ProductDescription="Description3" ProductName="Product3" ProductPrice="811.0336736004447"/>
+  <products ID="24" IsProductActive="true" ProductDescription="Description4" ProductName="Product4" ProductPrice="2.4517735903207827"/>
+  <products ID="25" IsProductActive="true" ProductDescription="Description5" ProductName="Product5" ProductPrice="662.6468920528423"/>
+  <products ID="26" IsProductActive="true" ProductDescription="Description6" ProductName="Product6" ProductPrice="424.7351473216709"/>
+  <products ID="27" IsProductActive="true" ProductDescription="Description7" ProductName="Product7" ProductPrice="596.2727992458833"/>
+  <products ID="28" IsProductActive="true" ProductDescription="Description8" ProductName="Product8" ProductPrice="396.3875916832588"/>
+  <products ID="29" IsProductActive="true" ProductDescription="Description9" ProductName="Product9" ProductPrice="986.046580113618"/>
+  <products ID="30" IsProductActive="true" ProductDescription="Description10" ProductName="Product10" ProductPrice="15.636715978073369"/>
+  <regions ID="1" RegionName="North"/>
+  <regions ID="2" RegionName="East"/>
+  <regions ID="3" RegionName="South"/>
+  <regions ID="4" RegionName="West"/>
+  <regions ID="5" RegionName="Center"/>
+  <roles ID="1" RoleName="Administrator"/>
+  <roles ID="2" RoleName="Merchandiser"/>
+  <roles ID="3" RoleName="Supervisor"/>
+  <roles ID="4" RoleName="Customer"/>
+  <users ID="1" IsUserActive="true" Balance="0.0" Email="nellytest" FirstName="Nelly" LastName="Moore" Login="admin1" Password="qwerty" CustomerTypeRef="1" RegionRef="1" RoleRef="1"/>
+  <users ID="2" IsUserActive="true" Balance="0.0" Email="bobtest" FirstName="Bob" LastName="B." Login="merch1" Password="qwerty" CustomerTypeRef="2" RegionRef="2" RoleRef="2"/>
+  <users ID="3" IsUserActive="true" Balance="0.0" Email="anntest" FirstName="Ann" LastName="Lee" Login="supervisor1" Password="qwerty" CustomerTypeRef="1" RegionRef="3" RoleRef="3"/>
+  <users ID="4" IsUserActive="true" Balance="0.0" Email="marytest" FirstName="Mary" LastName="S." Login="customer1" Password="qwerty" CustomerTypeRef="1" RegionRef="1" RoleRef="4"/>
+  <users ID="5" IsUserActive="true" Balance="0.0" Email="nellytest" FirstName="Nelly" LastName="Moore" Login="admin" Password="pass" CustomerTypeRef="1" RegionRef="1" RoleRef="1"/>
+</dataset>

@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import pages.auth.UserInfoPage;
 import tools.Browser;
 
+import java.io.IOException;
+
 
 public class BasePage {
 
@@ -47,6 +49,13 @@ public class BasePage {
         browser.findElementByName(passwordInputNameLocator).sendKeys(password);
         browser.findElementByName(submitButtonNameLocator).click();
         return new UserInfoPage(browser.getDriver());
+    }
+    public void screenShot(String fileName) {
+        try {
+            browser.screenShot(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
    }
 

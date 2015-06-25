@@ -1,12 +1,12 @@
 package TestSupervisor;
 
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
@@ -24,6 +24,7 @@ public class AddProductTest extends DBUnitConfig {
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
     private static final String PRODUCT_NAME = "Test Product";
+    private static final String PRODUCT_NAME_DELETE = "lemon";
     private static final String PRODUCT_DESCRIPTION = "Function test";
     private static final String PRODUCT_PRICE = "65.0";
     private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
@@ -35,10 +36,9 @@ public class AddProductTest extends DBUnitConfig {
     @Before
     public void setUp() throws Exception {
         navigation = new Navigation(driver);
-        LoginPage loginPage = new LoginPage(driver);
         navigation.goToUrl(HOME_PAGE);
         UserInfoPage userInfoPage = navigation.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
-        ItemManagementPage itemManagementPage = userInfoPage.selectItemManagementTab();
+        itemManagementPage = userInfoPage.selectItemManagementTab();
     }
 
     @Test
@@ -47,7 +47,7 @@ public class AddProductTest extends DBUnitConfig {
      * and price PRODUCT_PRICE is created and is visible in product table on Item Management page.
      */
     public void testAddProducts() throws Exception {
-        AddProductPage addProductPage = new ItemManagementPage(driver).goToAddProduct();
+        AddProductPage addProductPage = itemManagementPage.goToAddProduct();
         addProductPage.setProductNameValue(PRODUCT_NAME);
         assertEquals(PRODUCT_NAME,addProductPage.getProductNameValue());
         addProductPage.setProductDescriptionValue(PRODUCT_DESCRIPTION);
@@ -55,16 +55,14 @@ public class AddProductTest extends DBUnitConfig {
         addProductPage.setProductPriceValue(PRODUCT_PRICE);
         assertEquals(PRODUCT_PRICE,addProductPage.getProductPriceValue());
         addProductPage.clickOkButton();
-        ItemManagementPage itemManagementPage = new ItemManagementPage(driver);
         TableRow row = itemManagementPage.findProductByNameInTable(PRODUCT_NAME);
-        assertEquals(PRODUCT_DESCRIPTION, row.getNthColumnValue(2));
-        assertEquals(PRODUCT_PRICE, row.getNthColumnValue(3));
+        assertEquals(PRODUCT_DESCRIPTION, row.getNthColumnValue(1));
+        assertEquals(PRODUCT_PRICE, row.getNthColumnValue(2));
     }
 
     @After
     public void tearDown() throws Exception {
         navigation.logout();
-        DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
     }
 }
 

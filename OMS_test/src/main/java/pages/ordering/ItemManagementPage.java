@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import pages.BasePage;
 import tools.Browser;
 import tools.TableRow;
 
@@ -15,9 +16,7 @@ import java.util.List;
  * This class describe Item Management Page functionality and provides a way to use it.
  * @author Olya.
  */
-public class ItemManagementPage {
-    private WebDriver driver;
-    private Browser browser;
+public class ItemManagementPage extends BasePage {
 
     private static String filterBySelectBoxIdLocator = "field";
     private static String productTableIdLocator = "table";
@@ -29,13 +28,13 @@ public class ItemManagementPage {
 
 
     public ItemManagementPage(WebDriver driver) {
+        super(driver);
 
-        this.driver = driver;
-        browser = new Browser(driver);
     }
 
     /**
      * This method returns the values from drop down list in "Search by" section.
+     *
      * @return list which contains the values from drop down list in "Search by" section.
      */
     public List<String> getFilterValues() {
@@ -49,6 +48,7 @@ public class ItemManagementPage {
 
     /**
      * This method returns the currently selected value from drop down list in "Search by" section.
+     *
      * @return the currently selected value from drop down list in "Search by" section.
      */
     public String getFilterCurrentValue() {
@@ -59,6 +59,7 @@ public class ItemManagementPage {
 
     /**
      * This method returns names of "Products" table columns.
+     *
      * @return list which contains the names of table columns.
      */
     public List<String> getProductTableHeadersNames() {
@@ -72,6 +73,7 @@ public class ItemManagementPage {
 
     /**
      * This method returns the row count of "Products" table.
+     *
      * @return the row count of "Products" table.
      */
     public Integer getProductTableElementSize() {
@@ -81,6 +83,7 @@ public class ItemManagementPage {
 
     /**
      * This method returns the text value of the show item link.
+     *
      * @return the text value of the show item link.
      */
     public String getShowItemText() {
@@ -96,14 +99,16 @@ public class ItemManagementPage {
 
     /**
      * This method find and returns the row with given product name from "Product" table.
+     *
      * @param productName the value you need to find.
      * @return {@link tools.TableRow} when found and null if not found.
      */
     public TableRow findProductByNameInTable(String productName) {
         List<WebElement> rows = browser.findElementsByTagName(tableRowTagNameLocator);
-        for (WebElement webElement : rows) {
+        for (int i = 1; i< rows.size(); i++) {
+            WebElement webElement = rows.get(i);
             TableRow tableRow = new TableRow(webElement);
-            if (tableRow.getNthColumnValue(1).equals(productName)) {
+            if (tableRow.getNthColumnValue(0).equals(productName)) {
                 return tableRow;
             }
         }
@@ -112,11 +117,31 @@ public class ItemManagementPage {
 
     /**
      * This method clicks on the Add product link.
+     *
      * @return {@link pages.ordering.AddProductPage}.
      */
     public AddProductPage goToAddProduct() {
         browser.findElementByLinkText(addProductLinkTextLocator).click();
-        return PageFactory.initElements(driver, AddProductPage.class);
+        return PageFactory.initElements(browser.getDriver(), AddProductPage.class);
+    }
+
+    public AddProductPage clickEditLinkOnProduct(String productName) {
+        findProductByNameInTable(productName).getNthColumnElement(3).findElement(By.tagName("a")).click();
+        return PageFactory.initElements(browser.getDriver(), AddProductPage.class);
+    }
+
+    public void clickDeleteLinkOnProductAndAccept(String productName) {
+        findProductByNameInTable(productName).getNthColumnElement(4).findElement(By.tagName("a")).click();
+        browser.alertAccept();
+
+    }
+
+    public void clickDeleteLinkOnProductAndDismiss(String productName) {
+        findProductByNameInTable(productName)
+                .getNthColumnElement(4)
+                .findElement(By.tagName("a"))
+                .click();
+        browser.alertDismiss();
     }
 }
 

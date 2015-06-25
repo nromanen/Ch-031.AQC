@@ -45,7 +45,6 @@ public class SupervisorMainPageTest extends DBUnitConfig {
         UserInfoPage userInfoPage = navigation.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
         itemManagementPage = userInfoPage.selectItemManagementTab();
     }
-
     @Test
     /**
      * This test verify that "Search by" drop-down list on ItemManagement page
@@ -61,6 +60,7 @@ public class SupervisorMainPageTest extends DBUnitConfig {
         for (String actualValue : actualValues) {
             assertTrue(expectedValues.contains(actualValue));
         }
+
         log.info("----TestFilterByValues pass----");
     }
 

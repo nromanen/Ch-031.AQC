@@ -21,7 +21,10 @@ public class TableRow {
      * @return n-th column text date.
      */
     public String getNthColumnValue(int columnIndex) {
-        String nthSelector = "//td[" + columnIndex +"]";
-        return rowWebElement.findElement(By.xpath(nthSelector)).getText();
+        return getNthColumnElement(columnIndex).getText();
+    }
+
+    public WebElement getNthColumnElement(int columnIndex) {
+        return rowWebElement.findElements(By.tagName("td")).get(columnIndex);
     }
 }

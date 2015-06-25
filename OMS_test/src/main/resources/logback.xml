@@ -6,7 +6,7 @@
     </logger>
 
     <appender name="StdoutFile" class="ch.qos.logback.core.FileAppender">
-        <file>stdout.log</file>
+        <file>logs/stdout.log</file>
         <encoder>
             <Pattern>%d [%thread] %level %logger - %m%n</Pattern>
         </encoder>

@@ -7,6 +7,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
@@ -31,6 +33,8 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
     private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
     private static final String PRODUCT_PRICE_RANGE_VALUE = "1765";
     private static final String PRODUCT_PRICE_CHARACTERS_VALUE ="#4rr";
+    static Logger log = LoggerFactory.getLogger(ProductValidationErrorMessagePageTest.class);
+
 
     public ProductValidationErrorMessagePageTest(String name) {
         super(name);
@@ -82,15 +86,21 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
      * When entered invalid characters (symbols) on product price field, , then after clicking on OK button
      * the following error message will appear in red color "Please enter only numbers".
      */
-    public void testProductPriceCharactersErrorMessage() {
-        AddProductPage addProductPage = itemManagementPage.goToAddProduct();
-        addProductPage.setProductPriceValue(PRODUCT_PRICE_CHARACTERS_VALUE);
-        addProductPage.clickOkButton();
-        ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
-        String expectedMessage = "Please enter only numbers!"; //the following error message is appear: "Please enter double value!"
-        Color expectedColor = Color.red;
-        assertEquals(expectedMessage, actualColoredString.getString());
-        assertEquals(expectedColor, actualColoredString.getColor());
+    public void testProductPriceCharactersErrorMessage() throws Throwable {
+        try {
+            AddProductPage addProductPage = itemManagementPage.goToAddProduct();
+            addProductPage.setProductPriceValue(PRODUCT_PRICE_CHARACTERS_VALUE);
+            addProductPage.clickOkButton();
+            ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
+            String expectedMessage = "Please enter only numbers!"; //the following error message is appear: "Please enter double value!"
+            Color expectedColor = Color.red;
+            assertEquals(expectedMessage, actualColoredString.getString());
+            assertEquals(expectedColor, actualColoredString.getColor());
+        } catch (Throwable e){
+            log.error("test failed. Taking  a screenshot");
+            itemManagementPage.screenShot("logs/ProductPriceCharactersErrorMessage.png");
+            throw e;
+        }
     }
 
     @Test // A test fails!
@@ -98,18 +108,23 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
      * This test verify that when entered text is >999 or <1 on product price field, then after clicking on OK button
      * the following error message will appear in red color "Please enter price in range of 1-999".
      */
-    public void testProductPriceRangeErrorMessage() {
-        AddProductPage addProductPage = itemManagementPage.goToAddProduct();
-        addProductPage.setProductNameValue("checking");
-        addProductPage.setProductPriceValue(PRODUCT_PRICE_RANGE_VALUE);
-        addProductPage.clickOkButton();
-        ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
-        String expectedMessage = "Please enter price in range of 1-999!";    // No error message!
-        Color expectedColor = Color.red;
-        assertEquals(expectedMessage, actualColoredString.getString());
-        assertEquals(expectedColor, actualColoredString.getColor());
+    public void testProductPriceRangeErrorMessage() throws Exception {
+        try {
+            AddProductPage addProductPage = itemManagementPage.goToAddProduct();
+            addProductPage.setProductNameValue("checking");
+            addProductPage.setProductPriceValue(PRODUCT_PRICE_RANGE_VALUE);
+            addProductPage.clickOkButton();
+            ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
+            String expectedMessage = "Please enter price in range of 1-999!";    // No error message!
+            Color expectedColor = Color.red;
+            assertEquals(expectedMessage, actualColoredString.getString());
+            assertEquals(expectedColor, actualColoredString.getColor());
+        } catch (Exception e) {
+            log.error("test failed. Taking  a screenshot");
+            itemManagementPage.screenShot("logs/ProductPriceRangeErrorMessage.png");
+            throw e;
+        }
     }
-
     @After
     public void tearDown() throws Exception {
         super.tearDown();
