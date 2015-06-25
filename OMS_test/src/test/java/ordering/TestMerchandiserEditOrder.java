@@ -4,45 +4,51 @@ import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.junit.Before;
 import org.junit.Test;
-import baseTest.TestConfigWithDBUnit;
+
 import pages.auth.LoginPage;
 import pages.ordering.MerchandiserOrderingPage;
+import baseTest.TestConfigWithDBUnit;
 
-public class TestMerchandiserEditOrder extends TestConfigWithDBUnit{
-	
-	private String merchandiserLogin = "merch1";
-	private String merchandiserPassword = "qwerty";
+public class TestMerchandiserEditOrder extends TestConfigWithDBUnit {
+
+	private static String merchandiserLogin = "merch1";
+	private static String merchandiserPassword = "qwerty";
+	private static String testOrderName = "OrderName12";
+	private static String testDeliveryDate = "30/06/2015";
 
 	protected IDataSet orderData;
-	
+
 	public TestMerchandiserEditOrder(String name) {
 		super(name);
-		try {
-			orderData = getDataFromFile("ordersData.xml");
-			
-
-		} catch (DataSetException e) {
-			e.printStackTrace();
-		}
-	}	
+		
+	}
 	
 	 @Before
-	    public  void setUp() throws Exception {		
-		 super.initialize();
-			 beforeData = new IDataSet[] { orderData };
-			 super.setUp();		     
+	 public  void setUp() throws Exception {
+		 initialize();
+		 try {
+			 orderData = getDataFromFile("testOrdersDataForMerchTemp.xml");
+		 } catch (DataSetException e) {
+			 e.printStackTrace();
+		 }
+		 beforeData = new IDataSet[] { orderData };
+		 super.setUp();
+		 
+		 new LoginPage(browser.getDriver()).login(merchandiserLogin, merchandiserPassword);
+		 merchOrderingPage.findOrderingTabAndClick();
 	    }
+	 MerchandiserOrderingPage merchOrderingPage = new MerchandiserOrderingPage(browser.getDriver());
 	 
 	 @Test
-	 	public void testOrderingShowItems(){
-		 	MerchandiserOrderingPage merchOrderingPage = new MerchandiserOrderingPage(browser.getDriver());
-		 	new LoginPage(browser.getDriver()).login(merchandiserLogin, merchandiserPassword);
-		 	merchOrderingPage.findOrderingTabAndClick();
-		 	assertEquals("Show 10 items", merchOrderingPage.finnShow10ItemsLinkByXpathAndGetText());
-		 	merchOrderingPage.findShowItemsLinkByXPathAndClick();
-		 	assertEquals("2", merchOrderingPage.findPageCountLinkByXPathLocatorAndGetText());
-		 	merchOrderingPage.findShowItemsLinkByXPathAndClick();
-		 	assertEquals("3", merchOrderingPage.findPageCountLinkByXPathLocatorAndGetText());
-		}	 
-
+	 public void testEditOrderChangeDeliveryDate(){
+		 merchOrderingPage.findOrderingTabAndClick();
+		 merchOrderingPage.findSearchForOrderByValueLinkAndSenKey(testOrderName);
+		 merchOrderingPage.findApplyButtonByXPathLocatorAndClick();
+		 merchOrderingPage.findAndClickFirstEditOrder();
+		 merchOrderingPage.findDeliveryDateFieldInEditAndSendNewKey(testDeliveryDate);
+		 merchOrderingPage.findSaveButtonAndClick();
+		 assertEquals(testDeliveryDate, merchOrderingPage.findDeliveryDate1OrderAndGetText());
+		 
+	 }
+	 
 }

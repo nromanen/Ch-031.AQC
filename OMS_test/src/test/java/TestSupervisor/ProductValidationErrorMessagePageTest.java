@@ -13,7 +13,7 @@ import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
 import tools.ColoredString;
 import tools.DBUnitConfig;
-import tools.Navigation;
+//import tools.Navigation;
 
 import java.awt.*;
 
@@ -23,7 +23,7 @@ import java.awt.*;
 public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
 
     private static WebDriver driver = new FirefoxDriver();
-    private Navigation navigation;
+    //private Navigation navigation;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
@@ -35,7 +35,7 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
         super(name);
     }
 
-    @Before
+    /*@Before
     public void setUp() throws Exception {
         beforeData = new IDataSet[] {getDataFromFile("productData.xml")};
         super.setUp();
@@ -97,5 +97,5 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
     public void tearDown() throws Exception {
         super.tearDown();
         navigation.logout();
-    }
+    }*/
 }

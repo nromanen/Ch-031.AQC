@@ -30,7 +30,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class AddProductTest extends DBUnitConfig {
     private WebDriver driver = new FirefoxDriver();
-    private Navigation navigation;
+   // private Navigation navigation;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
@@ -43,7 +43,7 @@ public class AddProductTest extends DBUnitConfig {
         super(name);
     }
 
-    @Before
+   /* @Before
     public void setUp() throws Exception {
         navigation = new Navigation(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -79,6 +79,6 @@ public class AddProductTest extends DBUnitConfig {
     public void tearDown() throws Exception {
         navigation.logout();
         //DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
-    }
+    }*/
 }
 

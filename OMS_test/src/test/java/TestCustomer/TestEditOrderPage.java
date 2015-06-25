@@ -3,7 +3,7 @@
  * This is the test class for testing Edit Order's Save and Order functions.
  */
 
-package ordering;
+package TestCustomer;
 
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;
@@ -42,7 +42,7 @@ public class TestEditOrderPage extends DBUnitConfig{
         driver.get(BASE_URL);
     }
 
-    @Test
+  /*  @Test
     public  void testEditOrderStatus() throws javax.script.ScriptException{
 
         LoginPage lp = new LoginPage(driver);
@@ -171,7 +171,7 @@ public class TestEditOrderPage extends DBUnitConfig{
         editOrderPage.clickOrder();
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
-    }
+    }*/
 
 
 

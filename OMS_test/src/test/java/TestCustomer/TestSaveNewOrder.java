@@ -64,7 +64,7 @@ public class TestSaveNewOrder extends DBUnitConfig {
 	}
 
 
-	@Test
+	/*@Test
 	public void testSwitchToOrderingPage(){
 					
 		List <String> expectedValues = new ArrayList<String>();
@@ -175,7 +175,7 @@ public class TestSaveNewOrder extends DBUnitConfig {
 		expectedValues.add("Delete");
 		List <String> actualValues =  ordering.getValuesFromTableWithOrders("td");
 	    assertEquals(expectedValues, actualValues);				
-	}
+	}*/
 	
 	@After
 	public void tearDown() throws Exception {

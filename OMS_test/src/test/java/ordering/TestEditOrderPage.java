@@ -17,7 +17,7 @@ public class TestEditOrderPage {
     private static String BASE_URL = "http://localhost:8080/OMS";
 
 
-    @Before
+  /*  @Before
     public  void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver", "/home/lumberjack85/Desktop/oms_git/Ch-031.AQC/OMS_test/chromedriver");
         driver = new ChromeDriver();
@@ -37,7 +37,7 @@ public class TestEditOrderPage {
         }
         WebElement element = browser.findElementByCssSelector("input[value='Add Item']");
         assertTrue("Can edit order", element != null);
-    }
+    }*/
 
     @AfterClass
     public static void tearDown() {

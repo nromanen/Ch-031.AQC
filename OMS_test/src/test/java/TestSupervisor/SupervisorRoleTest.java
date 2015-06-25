@@ -27,7 +27,7 @@ public class SupervisorRoleTest {
     String supervisorPassword = "qwerty";
     ItemManagementPage itemManagementPage;
 
-    @Before
+   /* @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
         Browser browser = new Browser(driver);
@@ -155,7 +155,7 @@ public class SupervisorRoleTest {
         Color expectedColor = Color.red;
         assertEquals(expectedMessage, actualColoredString.getString());
         assertEquals(expectedColor, actualColoredString.getColor());
-    }
+    }*/
 
 
 }

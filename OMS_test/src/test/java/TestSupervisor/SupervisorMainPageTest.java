@@ -14,7 +14,7 @@ import pages.ordering.ItemManagementPage;
 import tools.Browser;
 import tools.ColoredString;
 import tools.DBUnitConfig;
-import tools.Navigation;
+//import tools.Navigation;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class SupervisorMainPageTest extends DBUnitConfig {
     private static WebDriver driver = new FirefoxDriver();
-    private Navigation navigation;
+    //private Navigation navigation;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
@@ -35,7 +35,7 @@ public class SupervisorMainPageTest extends DBUnitConfig {
         super(name);
     }
 
-    @Before
+    /*@Before
     public void setUp() throws Exception {
         beforeData = new IDataSet[] {getDataFromFile("productData.xml")};
         super.setUp();
@@ -112,5 +112,5 @@ public class SupervisorMainPageTest extends DBUnitConfig {
     public void tearDown() throws Exception {
         super.tearDown();
         navigation.logout();
-        }
+        }*/
 }

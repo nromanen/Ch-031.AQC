@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
 public class DBUnitConfig extends DBTestCase {
     private Properties prop;
     protected IDataSet[] beforeData;
-    protected EntityManager em = Persistence.createEntityManagerFactory("persistence").createEntityManager();
+    protected static EntityManager em = Persistence.createEntityManagerFactory("persistence").createEntityManager();
 
     public DBUnitConfig(String name) {
         super(name);
@@ -51,4 +51,6 @@ public class DBUnitConfig extends DBTestCase {
     protected DatabaseOperation getTearDownOperation() throws Exception {
         return DatabaseOperation.DELETE_ALL;
     }
+    
+       
 }
