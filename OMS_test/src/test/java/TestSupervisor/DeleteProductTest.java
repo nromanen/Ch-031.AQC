@@ -19,7 +19,7 @@ import tools.Navigation;
  */
 public class DeleteProductTest extends DBUnitConfig {
 
-    private WebDriver driver = new FirefoxDriver();
+    private WebDriver driver;
     private Navigation navigation;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
@@ -34,6 +34,7 @@ public class DeleteProductTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
+        driver = new FirefoxDriver();
         beforeData = new IDataSet[]{getDataFromFile("data/productData.xml")};
         super.setUp();
         navigation = new Navigation(driver);
@@ -54,6 +55,6 @@ public class DeleteProductTest extends DBUnitConfig {
     @After
     public void tearDown() throws Exception {
         navigation.logout();
-        //DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
+        DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
     }
 }

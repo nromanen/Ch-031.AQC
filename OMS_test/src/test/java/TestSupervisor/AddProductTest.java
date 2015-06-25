@@ -18,7 +18,7 @@ import tools.TableRow;
  * @author Olya.
  */
 public class AddProductTest extends DBUnitConfig {
-    private WebDriver driver = new FirefoxDriver();
+    private WebDriver driver;
     private Navigation navigation;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
@@ -35,6 +35,7 @@ public class AddProductTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
+        driver = new FirefoxDriver();
         navigation = new Navigation(driver);
         navigation.goToUrl(HOME_PAGE);
         UserInfoPage userInfoPage = navigation.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
@@ -49,7 +50,7 @@ public class AddProductTest extends DBUnitConfig {
     public void testAddProducts() throws Exception {
         AddProductPage addProductPage = itemManagementPage.goToAddProduct();
         addProductPage.setProductNameValue(PRODUCT_NAME);
-        assertEquals(PRODUCT_NAME,addProductPage.getProductNameValue());
+        assertEquals(PRODUCT_NAME, addProductPage.getProductNameValue());
         addProductPage.setProductDescriptionValue(PRODUCT_DESCRIPTION);
         assertEquals(PRODUCT_DESCRIPTION,addProductPage.getProductDescriptionValue());
         addProductPage.setProductPriceValue(PRODUCT_PRICE);
@@ -63,6 +64,8 @@ public class AddProductTest extends DBUnitConfig {
     @After
     public void tearDown() throws Exception {
         navigation.logout();
+        driver.quit();
+        DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
     }
 }
 

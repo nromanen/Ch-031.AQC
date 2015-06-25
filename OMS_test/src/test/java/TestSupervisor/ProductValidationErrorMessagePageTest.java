@@ -1,6 +1,7 @@
 package TestSupervisor;
 
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -25,7 +26,7 @@ import java.awt.*;
  */
 public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
 
-    private static WebDriver driver = new FirefoxDriver();
+    private static WebDriver driver;
     private Navigation navigation;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
@@ -42,6 +43,7 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
+        driver = new FirefoxDriver();
         beforeData = new IDataSet[] {getDataFromFile("data/productData.xml")};
         super.setUp();
         navigation = new Navigation(driver);
@@ -129,5 +131,7 @@ public class ProductValidationErrorMessagePageTest extends DBUnitConfig {
     public void tearDown() throws Exception {
         super.tearDown();
         navigation.logout();
+        driver.quit();
+        DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
     }
 }

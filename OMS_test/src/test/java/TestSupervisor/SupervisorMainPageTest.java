@@ -1,6 +1,7 @@
 package TestSupervisor;
 
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -132,5 +133,7 @@ public class SupervisorMainPageTest extends DBUnitConfig {
     public void tearDown() throws Exception {
         super.tearDown();
         navigation.logout();
+        driver.quit();
+        DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
         }
 }

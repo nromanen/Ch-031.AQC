@@ -22,7 +22,7 @@ public class EditProductTest extends DBUnitConfig {
 
     private static final String EDIT_PRODUCT_DESCRIPTION = "NoDescription";
     private static final String EDIT_PRODUCT_PRICE = "111.0";
-    private WebDriver driver = new FirefoxDriver();
+    private WebDriver driver;
     private Navigation navigation;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
@@ -40,9 +40,9 @@ public class EditProductTest extends DBUnitConfig {
 
     @Before
     public void setUp() throws Exception {
+        driver = new FirefoxDriver();
         beforeData = new IDataSet[]{getDataFromFile("data/productData.xml")};
         super.setUp();
-
         navigation = new Navigation(driver);
         navigation.goToUrl(HOME_PAGE);
         UserInfoPage userInfoPage = navigation.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
@@ -83,5 +83,7 @@ public class EditProductTest extends DBUnitConfig {
     @After
     public void tearDown() throws Exception {
         navigation.logout();
+        driver.quit();
+        super.tearDown();
     }
 }
