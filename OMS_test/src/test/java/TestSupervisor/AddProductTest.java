@@ -65,7 +65,6 @@ public class AddProductTest extends DBUnitConfig {
     public void tearDown() throws Exception {
         navigation.logout();
         driver.quit();
-        DatabaseOperation.DELETE_ALL.execute(getConnection(), getConnection().createDataSet());
     }
 }
 
