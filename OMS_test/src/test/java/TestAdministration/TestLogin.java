@@ -26,20 +26,17 @@ public class TestLogin  {
 	private static final int TIMEOUT = 2;
 	
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
-	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
+	private static final String PASSWORD = "qwerty";
 	private static final String USER_NAME_FOR_SUPERVISOR = "supervisor1";
-	private static final String PASSWORD_FOR_SUPERVISOR = "qwerty";
 	private static final String USER_NAME_FOR_ADMINISTRATOR = "admin1";
-	private static final String PASSWORD_FOR_ADMINISTRATOR = "qwerty";
 	private static final String USER_NAME_FOR_MERCHANDISER = "merch1";
-	private static final String PASSWORD_FOR_MERCHANDISER = "qwerty";
-
+	
 	private static final String WRONG_USER_NAME_FOR_CUSTOMER = "lohghgbh";
 	private static final String WRONG_PASSWORD_FOR_CUSTOMER = "qwerty4544";
 	
-    private static final String LINK_FOR_ORDERING = "Ordering";  
-    private static final String LINK_FOR_ADMINISTRATION = "Administration";
-    private static final String LINK_FOR_ITEM_MANAGEMENT = "Item Management";
+        private static final String LINK_FOR_ORDERING = "Ordering";  
+        private static final String LINK_FOR_ADMINISTRATION = "Administration";
+        private static final String LINK_FOR_ITEM_MANAGEMENT = "Item Management";
 		
 	@Before
 	public void setUp() throws Exception {
@@ -47,15 +44,14 @@ public class TestLogin  {
 		driver = new FirefoxDriver();
 		browser = new Browser(driver);
 		driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-		driver.get(HOME_URL);
-				
+		driver.get(HOME_URL);				
 	}
 	
 	@Test
 	public void testLoginAsCustomer() throws Exception { 
 
 		LoginPage loginPage = new LoginPage(driver);
-		UserInfoPage userInfoPage = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
+		UserInfoPage userInfoPage = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD);
 		
 		String elementInfoOnInfoPage = userInfoPage.getBrowser().findElementByTagName("legend").getText();
 		assertEquals(elementInfoOnInfoPage, "User Info");
@@ -68,7 +64,7 @@ public class TestLogin  {
 	public void testLoginAsSupervisor() throws Exception { 
 
 		LoginPage loginPage = new LoginPage(driver);
-		UserInfoPage userInfoPage = loginPage.login(USER_NAME_FOR_SUPERVISOR, PASSWORD_FOR_SUPERVISOR);
+		UserInfoPage userInfoPage = loginPage.login(USER_NAME_FOR_SUPERVISOR, PASSWORD);
 		
 		String elementInfoOnInfoPage = userInfoPage.getBrowser().findElementByTagName("legend").getText();
 		assertEquals(elementInfoOnInfoPage, "User Info");
@@ -81,7 +77,7 @@ public class TestLogin  {
 	public void testLoginAsAdministrator() throws Exception { 
 
 		LoginPage loginPage = new LoginPage(driver);
-		UserInfoPage userInfoPage = loginPage.login(USER_NAME_FOR_ADMINISTRATOR, PASSWORD_FOR_ADMINISTRATOR);
+		UserInfoPage userInfoPage = loginPage.login(USER_NAME_FOR_ADMINISTRATOR, PASSWORD);
 		
 		String elementInfoOnInfoPage = userInfoPage.getBrowser().findElementByTagName("legend").getText();
 		assertEquals(elementInfoOnInfoPage, "User Info");
@@ -94,7 +90,7 @@ public class TestLogin  {
 	public void testLoginAsMerchandiser() throws Exception { 
 
 		LoginPage loginPage = new LoginPage(driver);
-		UserInfoPage userInfoPage = loginPage.login(USER_NAME_FOR_MERCHANDISER, PASSWORD_FOR_MERCHANDISER);
+		UserInfoPage userInfoPage = loginPage.login(USER_NAME_FOR_MERCHANDISER, PASSWORD);
 		
 		String elementInfoOnInfoPage = userInfoPage.getBrowser().findElementByTagName("legend").getText();
 		assertEquals(elementInfoOnInfoPage, "User Info");
@@ -107,8 +103,8 @@ public class TestLogin  {
 	public void testWrongLogin() {
 		
 		LoginPage login = new LoginPage(driver); 
-		login.login(WRONG_USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
-	    assertEquals("Your login attempt was not successful, try again.\n\nReason: Bad credentials.", browser.findElementByCssSelector("font").getText());
+		login.login(WRONG_USER_NAME_FOR_CUSTOMER, PASSWORD);
+	    assertEquals("Such user does not exist in the system – please try again.", browser.findElementByCssSelector("font").getText());
 	}
 
 	@Test  
@@ -116,15 +112,15 @@ public class TestLogin  {
 		
 		LoginPage login = new LoginPage(driver); 
 		login.login(USER_NAME_FOR_CUSTOMER, WRONG_PASSWORD_FOR_CUSTOMER);
-		assertEquals("Your login attempt was not successful, try again.\n\nReason: Bad credentials.", browser.findElementByCssSelector("font").getText());	
+		assertEquals("Password is incorrect – please try again.", browser.findElementByCssSelector("font").getText());	
 	}
 
 	@Test
 	public void testEmptyLogin() {
 
 		LoginPage login = new LoginPage(driver);
-		login.login("", PASSWORD_FOR_CUSTOMER);
-		assertEquals("Your login attempt was not successful, try again.\n\nReason: Bad credentials.", browser.findElementByCssSelector("font").getText());
+		login.login("", PASSWORD);
+		assertEquals("Such user does not exist in the system – please try again.", browser.findElementByCssSelector("font").getText());
 	}	
 	
 	@Test  
@@ -132,13 +128,11 @@ public class TestLogin  {
 			
 		LoginPage login = new LoginPage(driver); 
 		login.login(USER_NAME_FOR_CUSTOMER, "");
-		assertEquals("Your login attempt was not successful, try again.\n\nReason: Bad credentials.", browser.findElementByCssSelector("font").getText());		
+		assertEquals("Password is incorrect – please try again.", browser.findElementByCssSelector("font").getText());		
 	}
 	
 	@After
 	public void tearDown() throws Exception {
-
 		driver.quit(); 
 	}
-
 }
