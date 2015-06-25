@@ -51,7 +51,7 @@ public class InitDataClicker extends DBUnitConfig{
         partialDataSet.addTable("Orders");
         partialDataSet.addTable("OrderItems");
         System.out.println("add3");
-        FlatXmlDataSet.write(partialDataSet, new FileOutputStream("./OMS_test/src/main/resources/data/partial.xml"));
+        FlatXmlDataSet.write(partialDataSet, new FileOutputStream("partial.xml"));
         System.out.println(System.getProperty("user.dir"));
     }
 
