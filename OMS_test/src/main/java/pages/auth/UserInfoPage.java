@@ -14,7 +14,9 @@ public class UserInfoPage extends BasePage{
     private static final String itemManagementTabLinkTextLocator = "Item Management";
     private static final String USERS_LOCATOR = "Administration";
     private static final String ORDERING = "Ordering";
-    private static final String LINK_FOR_ORDERING = "Ordering";  
+    private static final String LINK_FOR_ORDERING = "Ordering";
+    private static String ENGLISH_LOCATOR = "en_US";
+    private static String UKRAINIAN_LOCATOR = "uk_UA";
 
 
     public UserInfoPage(WebDriver driver) {
@@ -40,6 +42,15 @@ public class UserInfoPage extends BasePage{
     public OrderPage goToOrderingTab(){
         browser.findElementByLinkText(ORDERING).click();
         return new OrderPage(browser.getDriver());
+    }
+
+
+    public void setEnglish () {
+        browser.findElementById(ENGLISH_LOCATOR).click();
+    }
+
+    public void setUkrainian () {
+        browser.findElementById(UKRAINIAN_LOCATOR).click();
     }
 
 

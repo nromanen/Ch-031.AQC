@@ -13,7 +13,6 @@ public class BaseTest {
     private static final int TIMEOUT = 30;
 
     protected WebDriver driver;
-    protected static Browser browser;
 
     @Before
     public void initialize() throws Exception {

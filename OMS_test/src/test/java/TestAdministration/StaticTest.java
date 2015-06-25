@@ -2,6 +2,7 @@ package TestAdministration;
 
 import org.junit.Test;
 import pages.administration.UsersPage;
+import pages.auth.UserInfoPage;
 import tools.BaseTest;
 
 import static org.junit.Assert.assertEquals;
@@ -13,30 +14,36 @@ public class StaticTest extends BaseTest {
 
     @Test
     public void TestLogoEN() {
+        UserInfoPage userinfopage = new UserInfoPage(driver);
+        userinfopage.setEnglish();
+
         UsersPage userspage = new UsersPage(driver);
         userspage.login(ADMIN_NAME, ADMIN_PASS);
         userspage.goHere();
-        userspage.setEnglish();
 
         assertEquals("Ordering Management System.", userspage.getLogoText());
     }
 
     @Test
     public void TestPageDescriptionEN() {
+        UserInfoPage userinfopage = new UserInfoPage(driver);
+        userinfopage.setEnglish();
+
         UsersPage userspage = new UsersPage(driver);
         userspage.login(ADMIN_NAME, ADMIN_PASS);
         userspage.goHere();
-        userspage.setEnglish();
 
         assertEquals("This page is appointed for creating new and managing existing users", userspage.getDescriptionText());
     }
 
     @Test
     public void TestFoundUsersTextEN() {
+        UserInfoPage userinfopage = new UserInfoPage(driver);
+        userinfopage.setEnglish();
+
         UsersPage userspage = new UsersPage(driver);
         userspage.login(ADMIN_NAME, ADMIN_PASS);
         userspage.goHere();
-        userspage.setEnglish();
 
         assertEquals("Found users:", userspage.getFoundUsersText());
     }
@@ -47,30 +54,36 @@ public class StaticTest extends BaseTest {
 
     @Test
     public void TestLogoUA() {
+        UserInfoPage userinfopage = new UserInfoPage(driver);
+        userinfopage.setEnglish();
+
         UsersPage userspage = new UsersPage(driver);
         userspage.login(ADMIN_NAME, ADMIN_PASS);
         userspage.goHere();
-        userspage.setUkrainian();
 
         assertEquals("Ordering Management System.", userspage.getLogoText());
     }
 
     @Test
     public void TestPageDescriptionUA() {
+        UserInfoPage userinfopage = new UserInfoPage(driver);
+        userinfopage.setEnglish();
+
         UsersPage userspage = new UsersPage(driver);
         userspage.login(ADMIN_NAME, ADMIN_PASS);
         userspage.goHere();
-        userspage.setUkrainian();
 
         assertEquals("Дана сторінка призначена для створення та керування користувачами", userspage.getDescriptionText());
     }
 
     @Test
     public void TestFoundUsersTextUA() {
+        UserInfoPage userinfopage = new UserInfoPage(driver);
+        userinfopage.setEnglish();
+
         UsersPage userspage = new UsersPage(driver);
         userspage.login(ADMIN_NAME, ADMIN_PASS);
         userspage.goHere();
-        userspage.setUkrainian();
 
         assertEquals("Знайдено користувачів:", userspage.getFoundUsersTextUA());
     }

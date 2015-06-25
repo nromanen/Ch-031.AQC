@@ -15,9 +15,6 @@ public class BasePage {
     private static String passwordInputNameLocator = "j_password";
     private static String submitButtonNameLocator = "submit";
 
-    private static String ENGLISH_LOCATOR = "en_US";
-    private static String UKRAINIAN_LOCATOR = "uk_UA";
-
     public BasePage(WebDriver driver) {
         browser = new Browser(driver);
     }
@@ -50,14 +47,6 @@ public class BasePage {
         browser.findElementByName(passwordInputNameLocator).sendKeys(password);
         browser.findElementByName(submitButtonNameLocator).click();
         return new UserInfoPage(browser.getDriver());
-    }
-
-    public void setEnglish () {
-        browser.findElementById(ENGLISH_LOCATOR).click();
-    }
-
-    public void setUkrainian () {
-        browser.findElementById(UKRAINIAN_LOCATOR).click();
     }
 
    }
