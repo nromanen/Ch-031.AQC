@@ -19,7 +19,7 @@ public class BaseDBTest extends DBUnitConfig {
     protected WebDriver driver;
 
     @Before
-    public void initialize() throws Exception {
+    public void setUp() throws Exception {
         // DBUnit
         super.setUp();
         // Selenium
