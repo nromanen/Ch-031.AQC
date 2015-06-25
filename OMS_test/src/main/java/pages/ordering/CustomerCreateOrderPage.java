@@ -11,7 +11,8 @@ import org.openqa.selenium.support.ui.Select;
 import tools.Browser;
 
 /**
- * 
+ * This class describe 'Create new order' page (of 'Ordering' tab for Customer) functionality
+ * and provides a way to use it.
  * @author Olesia
  *
  */
@@ -64,11 +65,11 @@ public class CustomerCreateOrderPage {
 	/**
 	 * Selecting of Merchandiser who will be assigned to the order
 	 * @param selectedAssignee
-	 * @return 
+	 * @return value of option (with index = 1) in Assignee drop-down 
 	 */
 	public String selectAssignee(String selectedAssignee) {
 		int index=1;
-		WebElement dropDownListBox = driver.findElement(By.id(ID_OF_ASSIGNEE_DROPDOWN));
+		WebElement dropDownListBox = browser.findElementById(ID_OF_ASSIGNEE_DROPDOWN);
 		Select clickThis = new Select(dropDownListBox);
 		clickThis.selectByVisibleText(selectedAssignee);
 
@@ -89,5 +90,4 @@ public class CustomerCreateOrderPage {
 		browser.findElementByXpath("//input[@type='submit'][@value = '"+VALUE_OF_SAVE_BUTTON+"']").click(); 
 		return new CustomerCreateOrderPage(driver);
 	}
-	
 }
