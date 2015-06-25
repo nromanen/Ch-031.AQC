@@ -12,6 +12,7 @@ import pages.ordering.ItemManagementPage;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Locale;
 
 /**
  * @author Olya
@@ -44,13 +45,16 @@ public class XmlBuilder extends DBUnitConfig {
             AddProductPage addProductPage = itemManagementPage.goToAddProduct();
             addProductPage.setProductNameValue(productName + i);
             addProductPage.setProductDescriptionValue(productDescription + i);
-            addProductPage.setProductPriceValue(new Double(Math.random() * 1000).toString());
+            addProductPage.setProductPriceValue(String.format(Locale.ENGLISH, "%.2f", Math.random() * 1000));
             addProductPage.clickOkButton();
         }
         IDataSet databaseDataSet = getConnection().createDataSet();
         FilteredDataSet fds = new FilteredDataSet(new String[]{"products"}, databaseDataSet);
-        File file = new File("Products.xml");
+        File file = new File("src/main/resources/data/Products_init.xml");
         file.createNewFile();
-        FlatXmlDataSet.write(fds, new FileOutputStream(file));
+        FileOutputStream fos = new FileOutputStream(file);
+        FlatXmlDataSet.write(fds, fos);
+        fos.flush();
+        fos.close();
     }
 }
