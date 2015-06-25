@@ -15,7 +15,7 @@ public class BaseTest {
     protected WebDriver driver;
 
     @Before
-    public void initialize() throws Exception {
+    public void setUp() throws Exception {
         // Selenium
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
