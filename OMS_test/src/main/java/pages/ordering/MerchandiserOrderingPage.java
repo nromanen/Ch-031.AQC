@@ -33,7 +33,9 @@ public class MerchandiserOrderingPage extends BasePage {
 	private static String saveButtonXPathLocator = "//*[@id=\"edit\"]/div/form[1]/input";
 	private static String deliveryDateOfTestOrderXPathLocator = "//*[@id=\"list\"]/table/tbody/tr[2]/td[4]";
 	
-	
+	public void login(){
+		
+	}
 	public void findOrderingTabAndClick(){
 		browser.findElementByXpath(orderingTabXPathLocator).click();		
 	}

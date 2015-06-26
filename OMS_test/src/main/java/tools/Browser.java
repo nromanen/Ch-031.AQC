@@ -99,4 +99,11 @@ public class Browser {
         new Select(e).selectByVisibleText(text);
     }
 
+
+    public void alertDismiss(){
+        Alert alert = driver.switchTo().alert();
+        alert.dismiss();
+    }
+
+
 }
