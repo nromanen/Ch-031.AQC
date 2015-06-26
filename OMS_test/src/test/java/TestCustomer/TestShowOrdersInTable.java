@@ -28,7 +28,7 @@ import tools.OrderItemService;
 /**
  * This test case is designed for testing the Show 10 (or 5) items functionality.
  * It checks correct change of name of appropriate link and correct count of orders
- * in table after ckicking on this link
+ * in table after clicking on this link
  * @author Olesia
  *
  */
