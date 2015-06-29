@@ -1,11 +1,14 @@
-package TestCustomer;
+package customer;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import org.dbunit.DatabaseUnitException;
+import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
@@ -21,7 +24,6 @@ import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.CustomerOrderingPage;
 import tools.BaseDBTest;
-import tools.Browser;
 import tools.DBUnitConfig;
 import tools.OrderItemService;
 
@@ -41,17 +43,28 @@ public class TestShowOrdersInTable extends BaseDBTest {
 	
 	CustomerOrderingPage ordering;
 	
-	public TestShowOrdersInTable(String name) throws Exception {
-		super(name);
+	public TestShowOrdersInTable()  {
+		super();
 	}
 	
 	@Before
-	public void setUp() throws Exception {	
+	public void setUp()   {	 
 		 
-		IDataSet orderData = getDataFromFile("data/initOrders.xml");
-        beforeData = new IDataSet[] {orderData};
-		
-		super.setUp();
+		IDataSet orderData;
+		try {
+			orderData = getDataFromFile("data/initOrders.xml");
+			beforeData = new IDataSet[] {orderData};
+		} catch (DataSetException e) {
+			
+			e.printStackTrace();
+		}
+        		
+		try {
+			super.setUp();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 				
 		LoginPage loginPage = new LoginPage(driver);
 		UserInfoPage userInfo = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
@@ -70,6 +83,7 @@ public class TestShowOrdersInTable extends BaseDBTest {
 		boolean result2 = ordering.findShowTenItemsLink();
 		assertTrue(result2);
 		log.info("----testChangeShowTenOrFiveItemsLink pass----");
+        
 	}
 	
 	@Test
@@ -94,7 +108,7 @@ public class TestShowOrdersInTable extends BaseDBTest {
 	}
 	
 	@After  
-	public void tearDown() throws Exception {
+	public void tearDown() {
 
 		driver.quit();		
 		try{
@@ -106,8 +120,12 @@ public class TestShowOrdersInTable extends BaseDBTest {
 			}
 		    }
 			catch (Exception e ){	
-				System.out.println(e.getMessage());
+				log.debug(e.getMessage());
 			}
-		DatabaseOperation.DELETE.execute(getConnection(), getDataSet());				
+		try {
+			DatabaseOperation.DELETE.execute(getConnection(), getDataSet());
+		}  catch (Exception e) {
+			log.debug(e.getMessage());
+		}				
 	}
 }
