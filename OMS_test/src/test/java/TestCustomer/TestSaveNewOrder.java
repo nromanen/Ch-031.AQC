@@ -1,14 +1,17 @@
 package customer;
 
 import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.FilteredDataSet;
@@ -21,6 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import entity.OrderItem;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
@@ -59,14 +63,25 @@ public class TestSaveNewOrder extends BaseDBTest {
 	@Before
 	public void setUp() throws Exception {	
 
-		IDataSet productData = getDataFromFile("data/initProduct.xml");  
-        beforeData = new IDataSet[] {productData}; 
-        
-		super.setUp();	
-		
+		IDataSet orderData;
+		try {
+			orderData = getDataFromFile("data/initProduct.xml");
+			beforeData = new IDataSet[] {orderData};
+		} catch (DataSetException e) {
+			
+			e.printStackTrace();
+		}
+        		
+		try {
+			super.setUp();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+				
 		LoginPage loginPage = new LoginPage(driver);
 		UserInfoPage userInfo = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
-		ordering = userInfo.switchToOrderingPage();
+		ordering = userInfo.switchToOrderingPage();		
 	}
 
 	@Test
