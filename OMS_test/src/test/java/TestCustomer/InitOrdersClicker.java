@@ -1,4 +1,4 @@
-package TestCustomer;
+package customer;
 
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
@@ -10,42 +10,41 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.*;
+import tools.BaseDBTest;
 import tools.DBUnitConfig;
-import tools.Navigation;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.concurrent.TimeUnit;
 
 /**
  *  Used for creating an initial product, orders and orderItems in xml
  */
-public class InitOrdersClicker extends DBUnitConfig {
+public class InitOrdersClicker extends BaseDBTest {
 	private static WebDriver driver;
-	private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
+	//private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
 	private static final String USER_NAME_FOR_SUPERVISOR = "supervisor1";
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD = "qwerty";
 	private static final String SELECTED_ASSIGNEE = "merch1";
 	private static final String ENTERED_PREFERABLE_DELIVERY_DATE = "10/07/2015";
-	private Navigation navigation;
+	
 	CustomerOrderingPage ordering;
 
 	public InitOrdersClicker(String name) {
-		super(name);
+		super();
 	}
 
 	public void initProductAndOrders() throws Exception {
 		
-		driver = new FirefoxDriver();    		
-
-		navigation = new Navigation(driver);
-		navigation.goToUrl(HOME_PAGE);
-		UserInfoPage userInfoPage = navigation.login(USER_NAME_FOR_SUPERVISOR, PASSWORD);
-		userInfoPage.selectItemManagementTab();
+		LoginPage loginPage = new LoginPage(driver);
+		UserInfoPage userInfo = loginPage.login(USER_NAME_FOR_SUPERVISOR, PASSWORD);
+		userInfo.selectItemManagementTab();
 
 		AddProductPage addProductPage = new ItemManagementPage(driver)
 				.goToAddProduct();
@@ -53,14 +52,12 @@ public class InitOrdersClicker extends DBUnitConfig {
 		addProductPage.setProductDescriptionValue("product description");
 		addProductPage.setProductPriceValue("100");
 		addProductPage.clickOkButton();
-		navigation.logout();
+		
 
-		navigation = new Navigation(driver);
-		navigation.goToUrl(HOME_PAGE);
-		UserInfoPage customerInfoPage = navigation.login(USER_NAME_FOR_CUSTOMER, PASSWORD);
-		ordering = customerInfoPage.switchToOrderingPage();
-
-		int count = 11;
+		LoginPage loginPage1 = new LoginPage(driver);
+		UserInfoPage userInfo1 = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD);
+		ordering = userInfo1.switchToOrderingPage();
+		int count = 1;
 
 		CustomerAddProductsToOrderPage addProductsPage;
 		CustomerCreateOrderPage createNewOrderPage;
@@ -93,7 +90,9 @@ public class InitOrdersClicker extends DBUnitConfig {
 	        QueryDataSet partialDataSet2 = new QueryDataSet(connection);
 	        partialDataSet2.addTable("Products");
 	        FlatXmlDataSet.write(partialDataSet2, new FileOutputStream("src/main/resources/data/initProduct.xml"));	
+	        
 		}
+
 	        catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
