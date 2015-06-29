@@ -1,20 +1,15 @@
-package TestSupervisor;
+package supervisor;
 
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
-import tools.DBUnitConfig;
-import tools.Navigation;
-
+import tools.BaseDBTest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,28 +18,22 @@ import java.util.List;
  * This test case is designed for testing of the Item Management view.
  * @author Olya.
  */
-public class SupervisorMainPageTest extends DBUnitConfig {
-    private static WebDriver driver;
-    private Navigation navigation;
+public class SupervisorMainPageTest extends BaseDBTest {
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
-    private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
+    static Logger log = LoggerFactory.getLogger(SupervisorMainPageTest.class);
 
-    public SupervisorMainPageTest(String name) {
+    public SupervisorMainPageTest(String name) throws Exception {
         super(name);
     }
 
-    static Logger log = LoggerFactory.getLogger(SupervisorMainPageTest.class);
-
     @Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
         beforeData = new IDataSet[] {getDataFromFile("data/productData.xml")};
         super.setUp();
-        navigation = new Navigation(driver);
-        navigation.goToUrl(HOME_PAGE);
-        UserInfoPage userInfoPage = navigation.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
+        UserInfoPage userInfoPage = new UserInfoPage(driver);
+        userInfoPage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
         itemManagementPage = userInfoPage.selectItemManagementTab();
     }
     @Test
@@ -132,8 +121,7 @@ public class SupervisorMainPageTest extends DBUnitConfig {
 
     @After
     public void tearDown() throws Exception {
+        itemManagementPage.logout();
         super.tearDown();
-        navigation.logout();
-        driver.quit();
         }
 }
