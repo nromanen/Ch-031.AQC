@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import tools.Browser;
+import pages.BasePage;
 
 /**
  * This class describe 'Create new order' page (of 'Ordering' tab for Customer) functionality
@@ -17,10 +17,8 @@ import tools.Browser;
  *
  */
 
-public class CustomerCreateOrderPage {
+public class CustomerCreateOrderPage extends BasePage {
 
-	private WebDriver driver;
-	private Browser browser;
 	private static final String VALUE_OF_ADD_ITEM_BUTTON = "Add Item"; 
 	private static final String VALUE_OF_SAVE_BUTTON = "Save"; 
 	private static final String LINK_FOR_ORDERING = "Ordering"; 
@@ -28,18 +26,9 @@ public class CustomerCreateOrderPage {
 	private static final String ID_OF_ASSIGNEE_DROPDOWN = "assignee";
 	
 	public CustomerCreateOrderPage(WebDriver driver) {
-		this.driver = driver;
-		browser = new Browser(driver); 
+		super(driver);
 	}
 
-	public WebDriver getDriver() {
-		return this.driver;
-	}
-	
-	public Browser getBrowser(){
-		return this.browser;
-	}
-	
     public List<String> getItemFromTableInItemSelection(String tagName) {
 		
 		List<String> names = new ArrayList<String>();
@@ -53,7 +42,7 @@ public class CustomerCreateOrderPage {
 	public CustomerAddProductsToOrderPage clickAddItemButton() {
 		
 		browser.findElementByXpath("//input[@type='submit'][@value = '"+VALUE_OF_ADD_ITEM_BUTTON+"']").click(); 
-		return new CustomerAddProductsToOrderPage(driver);
+		return new CustomerAddProductsToOrderPage(browser.getDriver());
 	}
 	
 	public String enterPreferableDeliveryDate (String date) {
@@ -82,12 +71,13 @@ public class CustomerCreateOrderPage {
 	public CustomerOrderingPage switchToOrderingPage() {
 
 		browser.findElementByLinkText(LINK_FOR_ORDERING).click();
-		return new CustomerOrderingPage(driver);
+		return new CustomerOrderingPage(browser.getDriver());
 	}
 	
 	public CustomerCreateOrderPage clickSaveButton() {
 		
 		browser.findElementByXpath("//input[@type='submit'][@value = '"+VALUE_OF_SAVE_BUTTON+"']").click(); 
-		return new CustomerCreateOrderPage(driver);
+		return new CustomerCreateOrderPage(browser.getDriver());
 	}
+	
 }
