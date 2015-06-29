@@ -40,7 +40,7 @@ public class InitOrdersClicker extends BaseDBTest {
 		super();
 	}
 
-	public void initProductAndOrders() throws Exception {
+	/*public void initProductAndOrders() throws Exception {
 		
 		LoginPage loginPage = new LoginPage(driver);
 		UserInfoPage userInfo = loginPage.login(USER_NAME_FOR_SUPERVISOR, PASSWORD);
@@ -57,7 +57,7 @@ public class InitOrdersClicker extends BaseDBTest {
 		LoginPage loginPage1 = new LoginPage(driver);
 		UserInfoPage userInfo1 = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD);
 		ordering = userInfo1.switchToOrderingPage();
-		int count = 1;
+		int count = 11;
 
 		CustomerAddProductsToOrderPage addProductsPage;
 		CustomerCreateOrderPage createNewOrderPage;
@@ -103,11 +103,11 @@ public class InitOrdersClicker extends BaseDBTest {
 
 		driver.quit();
 	}
-
+*/
 	public static void main(String[] args) throws Exception {
 
 		InitOrdersClicker initOrdersClicker = new InitOrdersClicker("");
-		initOrdersClicker.initProductAndOrders();
+		//initOrdersClicker.initProductAndOrders();
 	}
 
 }
