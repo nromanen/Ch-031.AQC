@@ -6,6 +6,8 @@ import pages.BasePage;
 
 public class LoginPage extends BasePage{
 
+    private static final String MESSAGE_LOCATOR = "font";
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -17,4 +19,8 @@ public class LoginPage extends BasePage{
     public UserInfoPage logout() {
         return super.logout();
     }
+    
+    public String findMessageText(){
+    	return browser.findElementByCssSelector(MESSAGE_LOCATOR).getText();
+    }    
 }
