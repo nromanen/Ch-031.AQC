@@ -1,18 +1,14 @@
-package TestCustomer;
+package customer;
 
 import static org.junit.Assert.*;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.FilteredDataSet;
@@ -21,26 +17,17 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import entity.OrderItem;
-import pages.BasePage;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.CustomerAddProductsToOrderPage;
 import pages.ordering.CustomerCreateOrderPage;
 import pages.ordering.CustomerOrderingPage;
 import tools.BaseDBTest;
-import tools.BaseTest;
-import tools.Browser;
 import tools.DBUnitConfig;
 import tools.OrderItemService;
 
@@ -50,8 +37,6 @@ import tools.OrderItemService;
  *
  */
 public class TestSaveNewOrder extends BaseDBTest {
-	
-	private static Browser browser;
 
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
@@ -62,16 +47,13 @@ public class TestSaveNewOrder extends BaseDBTest {
 	String productDescription = "product description";
 	String productPrice = "100.0";
 	
-	static Logger log = LoggerFactory.getLogger(TestSaveNewOrder.class);
+	static Logger LOG = LoggerFactory.getLogger(TestSaveNewOrder.class);
 
 	CustomerOrderingPage ordering;
+
+	public TestSaveNewOrder()   {		
+			super();		
 	
-	public Browser getBrowser(){
-		return TestSaveNewOrder.browser;
-	}
-		
-	public TestSaveNewOrder(String name) throws Exception {
-		super(name);
 	}
 
 	@Before
@@ -87,11 +69,10 @@ public class TestSaveNewOrder extends BaseDBTest {
 		ordering = userInfo.switchToOrderingPage();
 	}
 
-
 	@Test
 	public void testSwitchToOrderingPage(){
 		
-		log.info("------testSwitchToOrderingPage------");					
+		LOG.info("------testSwitchToOrderingPage------");					
 		List <String> expectedValues = new ArrayList<String>();
 		expectedValues.add("Order Name");
 		expectedValues.add("Total price");
@@ -103,13 +84,13 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Delete");				
 		List <String> actualValues =  ordering.getValuesFromTableWithOrders("th");
 	    assertEquals(expectedValues, actualValues);
-	    log.info("----testSwitchToOrderingPage pass----");	
+	    LOG.info("----testSwitchToOrderingPage pass----");	
 	}
 	
 	@Test
 	public void testSwitchToCreatingNewOrderPage(){
 		
-		log.info("------testSwitchToCreatingNewOrderPage------");		
+		LOG.info("------testSwitchToCreatingNewOrderPage------");		
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		List<String> expectedValues = new ArrayList<String>();
 		expectedValues.add("Item Number");
@@ -123,13 +104,13 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Delete");
 		List <String> actualValues =  createNewOrderPage.getItemFromTableInItemSelection("th");
 		assertEquals(expectedValues, actualValues);
-		log.info("----testSwitchToCreatingNewOrderPage pass----");	
+		LOG.info("----testSwitchToCreatingNewOrderPage pass----");	
 	}
 
 	@Test
 	public void testClickAddItemButton(){
 		
-		log.info("------testClickAddItemButton------");	
+		LOG.info("------testClickAddItemButton------");	
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		List<String> expectedValues = new ArrayList<String>();
@@ -138,13 +119,13 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Add");	
 		List <String> actualValues =  addProductsPage.getHeadersFromTableWithProducts();
 	    assertEquals(expectedValues, actualValues);
-	    log.info("----testClickAddItemButton pass----");
+	    LOG.info("----testClickAddItemButton pass----");
 	}
 	
   @Test   
-	public void testSelectProduct() throws Exception{
+	public void testSelectProduct() {
 	  
-	    log.info("------testSelectProduct------");	
+	    LOG.info("------testSelectProduct------");	
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
@@ -152,13 +133,13 @@ public class TestSaveNewOrder extends BaseDBTest {
 		assertEquals(productName, actualName  );
 		String actualPrice = addProductsPage.findPriceOfSelectedProduct();		
 		assertEquals(productPrice, actualPrice);
-		log.info("----testSelectProduct pass----");
+		LOG.info("----testSelectProduct pass----");
 	}
 
 	@Test
-	public void testClickDoneButton() throws Exception{ 
+	public void testClickDoneButton() { 
 		
-		log.info("------testClickDoneButton------");				
+		LOG.info("------testClickDoneButton------");				
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
@@ -175,27 +156,27 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Delete");	
 		List <String> actualValues =  result.getItemFromTableInItemSelection("td");				
 	   	assertEquals(expectedValues, actualValues);	   	
-	    log.info("----testClickDoneButton pass----");	
+	    LOG.info("----testClickDoneButton pass----");	
 	   	
 	   	}
 	
 	@Test
-	public void testSelectAssignee() throws Exception{ 
+	public void testSelectAssignee() { 
 		
-		log.info("------testSelectAssignee------");
+		LOG.info("------testSelectAssignee------");
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
 		addProductsPage.clickDoneButton();
 		String result = createNewOrderPage.selectAssignee(SELECTED_ASSIGNEE);
 		assertEquals("merch1",result);
-		log.info("----testSelectAssignee pass----");
+		LOG.info("----testSelectAssignee pass----");
 	}
 	
 	@Test
-	public void testClickSaveButton() throws Exception{ 
+	public void testClickSaveButton() { 
 
-		log.info("------TestClickSaveButton------");
+		LOG.info("------TestClickSaveButton------");
     	CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
@@ -217,11 +198,11 @@ public class TestSaveNewOrder extends BaseDBTest {
 		List <String> actualValues =  ordering.getValuesFromTableWithOrders("td");
 	    assertEquals(expectedValues, actualValues);	
 	    
-	    log.info("----TestClickSaveButton pass----");	   
+	    LOG.info("----TestClickSaveButton pass----");	   
 	}
 	
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() { 
 		 
 		driver.quit();		
 		try{
@@ -236,8 +217,11 @@ public class TestSaveNewOrder extends BaseDBTest {
 				System.out.println(e.getMessage());
 			}
 		
-		DatabaseOperation.DELETE.execute(getConnection(), getDataSet());
-		
-	}
-	
+		try {
+			DatabaseOperation.DELETE.execute(getConnection(), getDataSet());
+		} catch 
+			(Exception e ){	
+				System.out.println(e.getMessage());			
+		}		
+	}	
 }
