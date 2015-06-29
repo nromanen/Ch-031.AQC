@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.BasePage;
 import tools.Browser;
 
 /**
@@ -17,24 +18,13 @@ import tools.Browser;
  *
  */
 
-public class CustomerAddProductsToOrderPage {
+public class CustomerAddProductsToOrderPage extends BasePage {
 
-	private WebDriver driver;
-	private Browser browser;
 	private static final String DONE_BUTTON_VALUE_LOCATOR  = "Done"; 
-	private static final String QUANTITY_FIELD_ID_LOCATOR = "quantity";
+	//private static final String QUANTITY_FIELD_ID_LOCATOR = "quantity";
 
-	public CustomerAddProductsToOrderPage(WebDriver driver) {
-		this.driver = driver;
-		browser = new Browser(driver);
-	}
-
-	public WebDriver getDriver() {
-		return this.driver;
-	}
-	
-	public Browser getBrowser(){
-		return this.browser;
+	public CustomerAddProductsToOrderPage(WebDriver driver) { 		
+		super(driver);
 	}
 
     public List<String> getHeadersFromTableWithProducts() { 
@@ -63,6 +53,7 @@ public class CustomerAddProductsToOrderPage {
     
     public CustomerCreateOrderPage clickDoneButton() { 
     	browser.findElementByXpath("//input[@type='submit'][@value = '"+DONE_BUTTON_VALUE_LOCATOR+"']").click();  
-    	return new CustomerCreateOrderPage(driver);  	
+    	return new CustomerCreateOrderPage(browser.getDriver());   	
     }
+    
 }
