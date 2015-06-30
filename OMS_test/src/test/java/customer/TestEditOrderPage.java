@@ -3,63 +3,58 @@
  * This is the test class for testing Edit Order's Save and Order functions.
  */
 
-package TestCustomer;
+package customer;
 
+import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.auth.LoginPage;
-import org.openqa.selenium.WebDriver;
+import pages.BasePage;;
 import pages.auth.UserInfoPage;
 import pages.ordering.*;
+import tools.BaseDBTest;
 import tools.CheckTableValue;
-import tools.DBUnitConfig;
 
-import java.io.File;
+public class TestEditOrderPage extends BaseDBTest {
+    private OrderPage orderPage;
+    private BasePage basePage;
+    private static final String LOGIN = "customer1";
+    private static final String PASS = "qwerty";
 
-
-public class TestEditOrderPage extends DBUnitConfig{
-    private static WebDriver driver;
-    private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
-    String LOGIN = "customer1";
-    String PASS = "qwerty";
-
-    public TestEditOrderPage(String name) {
-        super(name);
+    public TestEditOrderPage() throws Exception{
+        super("");
     }
 
     @Before
     public  void setUp() throws Exception {
+        IDataSet productData;
+        try {
+            productData = getDataFromFile("data/partial.xml");
+            beforeData = new IDataSet[] {productData};
+        } catch(DataSetException e){
+            e.printStackTrace();
+        }
 
-        System.out.println("dbunt begins");
-        IDataSet productData = getDataFromFile("data/partial.xml");
-        beforeData = new IDataSet[] {productData};
-        super.setUp();
+        try {
+            super.setUp();
+        } catch (Exception e) {
 
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        driver = new ChromeDriver();
-        //driver = new FirefoxDriver();
-        driver.get(HOME_PAGE);
+            e.printStackTrace();
+        }
+
+        basePage = new BasePage(driver);
+        UserInfoPage userInfoPage = basePage.login(LOGIN, PASS);
+        orderPage = userInfoPage.goToOrderingTab();
     }
-
-
 
     @Test
     public  void testEditOrderStatus() throws javax.script.ScriptException{
-
-        LoginPage lp = new LoginPage(driver);
-        UserInfoPage ui = lp.login(LOGIN, PASS);
-        OrderPage op = ui.goToOrderingTab();
-        EditOrderPage eo = op.goTo1EditOrder();
+        EditOrderPage eo = orderPage.goTo1EditOrder();
         assertTrue("Can't edit order", eo.isAddItem() == true);
     }
 
     @Test
     public void testAddItem() throws Exception{
-        LoginPage lp = new LoginPage(driver);
-        UserInfoPage ui = lp.login(LOGIN, PASS);
-        OrderPage op = ui.goToOrderingTab();
-        EditOrderPage eo = op.goTo1EditOrder();
+        EditOrderPage eo = orderPage.goTo1EditOrder();
         AddItemPage add = eo.addItemClick();
         add.selectFirstItem();
         String itemQuantity = "2";
@@ -71,11 +66,7 @@ public class TestEditOrderPage extends DBUnitConfig{
 
     @Test
     public void testSaveButton() throws Exception{
-        LoginPage loginPage = new LoginPage(driver);
-        UserInfoPage userInfoPage = loginPage.login(LOGIN, PASS);
-        OrderPage orderPage = userInfoPage.goToOrderingTab();
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
-
         String expectedOrderNumber = "100";
         editOrderPage.setOrderNumber(expectedOrderNumber);
         String expectedPreferableDate = "10/05/2015";
@@ -91,9 +82,6 @@ public class TestEditOrderPage extends DBUnitConfig{
 
     @Test
     public void testVisaOrderButton() throws Exception{
-        LoginPage loginPage = new LoginPage(driver);
-        UserInfoPage userInfoPage = loginPage.login(LOGIN, PASS);
-        OrderPage orderPage = userInfoPage.goToOrderingTab();
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("100");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -111,9 +99,6 @@ public class TestEditOrderPage extends DBUnitConfig{
 
     @Test
     public void testMasterCardOrderButton() throws Exception{
-        LoginPage loginPage = new LoginPage(driver);
-        UserInfoPage userInfoPage = loginPage.login(LOGIN, PASS);
-        OrderPage orderPage = userInfoPage.goToOrderingTab();
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("101");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -131,9 +116,6 @@ public class TestEditOrderPage extends DBUnitConfig{
 
     @Test
     public void testAmericanExpressOrderButton() throws Exception{
-        LoginPage loginPage = new LoginPage(driver);
-        UserInfoPage userInfoPage = loginPage.login(LOGIN, PASS);
-        OrderPage orderPage = userInfoPage.goToOrderingTab();
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("102");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -151,9 +133,6 @@ public class TestEditOrderPage extends DBUnitConfig{
 
     @Test
     public void testMaestroOrderButton() throws Exception{
-        LoginPage loginPage = new LoginPage(driver);
-        UserInfoPage userInfoPage = loginPage.login(LOGIN, PASS);
-        OrderPage orderPage = userInfoPage.goToOrderingTab();
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
 
         editOrderPage.setOrderNumber("103");
@@ -176,7 +155,6 @@ public class TestEditOrderPage extends DBUnitConfig{
     @After
     public  void tearDown() throws Exception{
         super.tearDown();
-        driver.quit();
     }
 
 

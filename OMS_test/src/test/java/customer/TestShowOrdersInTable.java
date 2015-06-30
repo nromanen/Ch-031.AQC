@@ -43,8 +43,8 @@ public class TestShowOrdersInTable extends BaseDBTest {
 	
 	CustomerOrderingPage ordering;
 	
-	public TestShowOrdersInTable()  {
-		super();
+	public TestShowOrdersInTable()  throws Exception{
+		super("");
 	}
 	
 	@Before

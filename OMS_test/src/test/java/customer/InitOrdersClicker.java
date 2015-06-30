@@ -36,8 +36,8 @@ public class InitOrdersClicker extends BaseDBTest {
 	
 	CustomerOrderingPage ordering;
 
-	public InitOrdersClicker(String name) {
-		super();
+	public InitOrdersClicker(String name) throws Exception{
+		super("");
 	}
 
 	/*public void initProductAndOrders() throws Exception {

@@ -44,7 +44,7 @@ public class UserInfoPage extends BasePage{
     }
     
      public String findLink(String link){
-    	return browser.findElementByLinkText(link).getText();
+         return browser.findElementByLinkText(link).getText();
     }
     
     public String findUserInfoText(){

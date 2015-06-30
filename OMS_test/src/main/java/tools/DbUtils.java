@@ -24,7 +24,7 @@ import java.util.List;
 public class DbUtils extends DBUnitConfig {
 
     public DbUtils(String name) {
-        super(name);
+        super();
     }
 
     /**

@@ -1,23 +1,10 @@
 package customer;
 
-import static org.junit.Assert.*;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-
-import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.DataSetException;
-import org.dbunit.dataset.FilteredDataSet;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +19,6 @@ import pages.ordering.CustomerAddProductsToOrderPage;
 import pages.ordering.CustomerCreateOrderPage;
 import pages.ordering.CustomerOrderingPage;
 import tools.BaseDBTest;
-import tools.DBUnitConfig;
 import tools.OrderItemService;
 
 /**
@@ -55,8 +41,8 @@ public class TestSaveNewOrder extends BaseDBTest {
 
 	CustomerOrderingPage ordering;
 
-	public TestSaveNewOrder()   {		
-			super();		
+	public TestSaveNewOrder()   throws Exception{
+			super("");
 	
 	}
 
@@ -145,7 +131,7 @@ public class TestSaveNewOrder extends BaseDBTest {
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
 		String actualName = addProductsPage.findNameOfSelectedProduct();
-		assertEquals(productName, actualName  );
+		assertEquals(productName, actualName);
 		String actualPrice = addProductsPage.findPriceOfSelectedProduct();		
 		assertEquals(productPrice, actualPrice);
 		LOG.info("----testSelectProduct pass----");

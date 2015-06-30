@@ -20,7 +20,7 @@ import java.util.Locale;
 public class XmlBuilder extends DBUnitConfig {
 
     public XmlBuilder(String name) {
-        super(name);
+        super();
     }
 
     public static void main(String[] args) throws Exception {

@@ -1,15 +1,10 @@
-package TestCustomer;
+package customer;
 
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.auth.UserInfoPage;
-import pages.ordering.*;
-import tools.DBUnitConfig;
-import tools.Navigation;
+import tools.BaseDBTest;
 
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -19,22 +14,21 @@ import java.sql.DriverManager;
  * Created by lumberjack85 on 6/21/15.
  * Used for creating an initial data xml
  */
-public class InitDataClicker extends DBUnitConfig{
-    private static WebDriver driver;
+public class InitDataClicker extends BaseDBTest{
+/*    private static WebDriver driver;
     private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
     String LOGIN = "supervisor1";
     String PASS = "qwerty";
-    String LOGIN2 = "customer1";
-    private Navigation navigation;
+    String LOGIN2 = "customer1";*/
 
-    public InitDataClicker(String name) {
+    public InitDataClicker(String name) throws Exception{
         super(name);
     }
 
 
     public void initTest() throws Exception{
         InitDataClicker init = new InitDataClicker("");
-        init.initProduct();
+        //init.initProduct();
 
         Class driverClass = Class.forName("org.hsqldb.jdbcDriver");
         Connection jdbcConnection = DriverManager.getConnection(
@@ -43,7 +37,6 @@ public class InitDataClicker extends DBUnitConfig{
 
         System.out.println("connected");
 
-        // partial database export
         QueryDataSet partialDataSet = new QueryDataSet(connection);
         System.out.println("query");
         partialDataSet.addTable("Products");
@@ -56,7 +49,7 @@ public class InitDataClicker extends DBUnitConfig{
     }
 
 
-    public  void initProduct() throws Exception{
+  /*  public  void initProduct() throws Exception{
         System.setProperty("webdriver.chrome.driver", "./OMS_test/chromedriver");
         driver = new ChromeDriver();
         //driver = new FirefoxDriver();
@@ -85,7 +78,7 @@ public class InitDataClicker extends DBUnitConfig{
         navigation.logout();
 
         driver.quit();
-    }
+    }*/
 
     public static void main(String[] args) throws Exception{
 

@@ -5,21 +5,18 @@
 package pages.ordering;
 
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
 import tools.Browser;
 
-public class AddItemPage {
-
-    private WebDriver driver;
-    private Browser browser;
+public class AddItemPage extends BasePage {
 
     public AddItemPage(WebDriver driver) {
-        this.driver = driver;
-        this.browser = new Browser(driver);
+        super(driver);
     }
 
     public EditOrderPage clickDoneButton(){
         browser.findElementByCssSelector("input[value=\"Done\"]").click();
-        return new EditOrderPage(driver);
+        return new EditOrderPage(browser.getDriver());
     }
 
     public void clickCancelButton(){

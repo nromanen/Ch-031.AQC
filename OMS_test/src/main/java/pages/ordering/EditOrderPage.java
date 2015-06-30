@@ -8,21 +8,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import tools.Browser;
+import pages.BasePage;
 
-public class EditOrderPage {
+public class EditOrderPage extends BasePage {
 
-    private WebDriver driver;
-    private Browser browser;
 
     public EditOrderPage(WebDriver driver) {
-        this.driver = driver;
-        browser = new Browser(driver);
+        super(driver);
     }
 
     public AddItemPage addItemClick(){
         browser.findElementByCssSelector("input[value=\"Add Item\"]").click();
-        return new AddItemPage(driver);
+        return new AddItemPage(browser.getDriver()) ;
     }
 
     public Boolean isAddItem(){
@@ -64,7 +61,7 @@ public class EditOrderPage {
     }
 
     public String checkAssignee(){
-        Select select = new Select(driver.findElement(By.id("assignee")));
+        Select select = new Select(browser.findElementById("assignee"));
         String option = select.getFirstSelectedOption().getText().replaceAll("\\s", "");
         return option;
     }
@@ -104,17 +101,17 @@ public class EditOrderPage {
 
     public EditOrderPage clickCancel(){
         browser.findElementByXpath("//form[@id='cancelButton']/input[@value='Cancel']").click();
-        return new EditOrderPage(driver) ;
+        return new EditOrderPage(browser.getDriver());
     }
 
     public EditOrderPage clickSave(){
         browser.findElementById("save").click();
-        return new EditOrderPage(driver) ;
+        return new EditOrderPage(browser.getDriver()) ;
     }
 
     public OrderPage clickOrder(){
         browser.findElementByXpath("//form[@id='orderButton']/input[@value='Order']").click();
-        return new OrderPage(driver) ;
+        return new OrderPage(browser.getDriver()) ;
     }
 
 }
