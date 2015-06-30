@@ -179,10 +179,5 @@ public class TestEditOrderPage extends DBUnitConfig{
         driver.quit();
     }
 
-    @AfterClass
-    public static void deleteInitFile(){
-        File file = new File("data/partial.xml");
-        file.delete();
-    }
 
 }
