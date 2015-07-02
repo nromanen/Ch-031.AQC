@@ -40,12 +40,8 @@ public class TestShowOrdersInTable extends BaseDBTest {
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
 	static Logger log = LoggerFactory.getLogger(TestShowOrdersInTable.class);
-	
 	CustomerOrderingPage ordering;
-	
-	public TestShowOrdersInTable()  throws Exception{
-		super("");
-	}
+
 	
 	@Before
 	public void setUp()   {	 
@@ -110,7 +106,6 @@ public class TestShowOrdersInTable extends BaseDBTest {
 	@After  
 	public void tearDown() {
 
-		driver.quit();		
 		try{
 
 			List<OrderItem>  orderItems = OrderItemService.getAll(); 

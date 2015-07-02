@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
+import tools.BaseDBTest;
+import tools.BaseTest;
 import tools.Browser;
 
 import java.util.concurrent.TimeUnit;
@@ -18,35 +20,27 @@ import static org.junit.Assert.assertEquals;
  * @author Olesia
  *
  */
-public class TestLogin  {
-
-	private static WebDriver driver;
-	private static Browser browser;
-	private static final String HOME_URL = "http://localhost:8080/OMS/";
+public class TestLogin extends BaseTest {
+	private Browser browser;
 	private static final int TIMEOUT = 2;
-	
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD = "qwerty";
 	private static final String USER_NAME_FOR_SUPERVISOR = "supervisor1";
 	private static final String USER_NAME_FOR_ADMINISTRATOR = "admin1";
 	private static final String USER_NAME_FOR_MERCHANDISER = "merch1";
-	
 	private static final String WRONG_USER_NAME_FOR_CUSTOMER = "lohghgbh";
 	private static final String WRONG_PASSWORD_FOR_CUSTOMER = "qwerty4544";
-	
-        private static final String LINK_FOR_ORDERING = "Ordering";  
-        private static final String LINK_FOR_ADMINISTRATION = "Administration";
-        private static final String LINK_FOR_ITEM_MANAGEMENT = "Item Management";
+    private static final String LINK_FOR_ORDERING = "Ordering";
+    private static final String LINK_FOR_ADMINISTRATION = "Administration";
+    private static final String LINK_FOR_ITEM_MANAGEMENT = "Item Management";
 		
 	@Before
 	public void setUp() throws Exception {
-		
-		driver = new FirefoxDriver();
+		super.setUp();
 		browser = new Browser(driver);
-		driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-		driver.get(HOME_URL);				
+
 	}
-	
+
 	@Test
 	public void testLoginAsCustomer() throws Exception { 
 
@@ -130,9 +124,5 @@ public class TestLogin  {
 		login.login(USER_NAME_FOR_CUSTOMER, "");
 		assertEquals("Password is incorrect – please try again.", browser.findElementByCssSelector("font").getText());		
 	}
-	
-	@After
-	public void tearDown() throws Exception {
-		driver.quit(); 
-	}
+
 }

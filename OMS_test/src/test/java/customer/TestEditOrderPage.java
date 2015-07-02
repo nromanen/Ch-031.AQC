@@ -14,15 +14,14 @@ import pages.ordering.*;
 import tools.BaseDBTest;
 import tools.CheckTableValue;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class TestEditOrderPage extends BaseDBTest {
     private OrderPage orderPage;
-    private BasePage basePage;
     private static final String LOGIN = "customer1";
     private static final String PASS = "qwerty";
 
-    public TestEditOrderPage() throws Exception{
-        super("");
-    }
 
     @Before
     public  void setUp() throws Exception {
@@ -41,7 +40,6 @@ public class TestEditOrderPage extends BaseDBTest {
             e.printStackTrace();
         }
 
-        basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(LOGIN, PASS);
         orderPage = userInfoPage.goToOrderingTab();
     }

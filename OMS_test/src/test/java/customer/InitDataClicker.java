@@ -21,13 +21,9 @@ public class InitDataClicker extends BaseDBTest{
     String PASS = "qwerty";
     String LOGIN2 = "customer1";*/
 
-    public InitDataClicker(String name) throws Exception{
-        super(name);
-    }
-
 
     public void initTest() throws Exception{
-        InitDataClicker init = new InitDataClicker("");
+        InitDataClicker init = new InitDataClicker();
         //init.initProduct();
 
         Class driverClass = Class.forName("org.hsqldb.jdbcDriver");
@@ -85,7 +81,7 @@ public class InitDataClicker extends BaseDBTest{
         /**
          * for Sasha's tests
          */
-        InitDataClicker initDataClicker = new InitDataClicker("");
+        InitDataClicker initDataClicker = new InitDataClicker();
         initDataClicker.initTest();
     }
 

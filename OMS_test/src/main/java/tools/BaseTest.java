@@ -2,8 +2,11 @@ package tools;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import pages.BasePage;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -14,6 +17,7 @@ public class BaseTest {
     private static final String BASEURL = "http://localhost:8080/OMS/";
     private static final int TIMEOUT = 30;
     protected WebDriver driver;
+    protected BasePage basePage;
     protected EntityManager em = Persistence.createEntityManagerFactory("persistence").createEntityManager();
 
     @Before
@@ -22,10 +26,18 @@ public class BaseTest {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get(BASEURL);
+        basePage = new BasePage(driver);
+        screenShootRule.setDriver(driver);
+
     }
 
-    @After
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
+    @Rule
+    public ScreenShotUtils screenShootRule = new ScreenShotUtils() {
+        @Override
+        protected void finished(Description description) {
+            super.finished(description);
+            basePage.logout();
+            driver.quit();
+        }
+    };
 }
