@@ -33,10 +33,10 @@ public class BaseDBTest extends DBUnitConfig {
         super.setUp();
 
         // Selenium
-      // driver = new FirefoxDriver();
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+       driver = new FirefoxDriver();
+        //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         //System.setProperty("webdriver.chrome.driver", "chromedriver");
-        driver = new ChromeDriver();
+        //driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get(BASEURL);
         basePage = new BasePage(driver);
