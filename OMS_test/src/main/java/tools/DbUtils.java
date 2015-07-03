@@ -24,7 +24,7 @@ import java.util.List;
 public class DbUtils extends DBUnitConfig {
 
     public DbUtils(String name) {
-        super(name);
+        super();
     }
 
     /**
@@ -32,16 +32,16 @@ public class DbUtils extends DBUnitConfig {
      * @param numberOfProducts sets the number of generated products.
      * @throws Exception if products could not be written in file.
      */
-    public void persistAndWriteToFileRandomProducts(int numberOfProducts) throws Exception {
+/*    public void persistAndWriteToFileRandomProducts(int numberOfProducts) throws Exception {
         persistAndWriteToFile(EntityUtils.generateRandomProducts(numberOfProducts));
-    }
+    }*/
 
     /**
      * Persist and write to file a list of database entities.
      * @param entities the list of database entities.
      * @throws Exception if the list contains entities that don't represent a database table.
      */
-    private void persistAndWriteToFile(List<? extends AbstractEntity> entities) throws Exception {
+   /* private void persistAndWriteToFile(List<? extends AbstractEntity> entities) throws Exception {
         Annotation ann = entities.get(0).getClass().getDeclaredAnnotation(Table.class);
         if (ann == null) {
             throw new RuntimeException("Not a table entity");
@@ -62,7 +62,7 @@ public class DbUtils extends DBUnitConfig {
         File file = new File(fileName);
         file.createNewFile();
         FlatXmlDataSet.write(fds, new FileOutputStream(file));
-    }
+    }*/
 
     /**
      * Fetch database data after executing code.

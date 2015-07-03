@@ -1,41 +1,26 @@
 package pages.auth;
 
 import org.openqa.selenium.WebDriver;
+
 import pages.BasePage;
 
 public class LoginPage extends BasePage{
 
-    private static String loginInputNameLocator = "j_username";
-    private static String passwordInputNameLocator = "j_password";
-    private static String submitButtonNameLocator = "submit";
-    private static String cancelButtonNameLocator = "reset";
-    private static final String USER_FIELD_NAME = "j_username";
-    private static final String PASSWORD_FIELD_NAME = "j_password";
-    private static final String LOGIN_BUTTON_NAME = "submit";
-    private static final String CANCEL_BUTTON_NAME = "reset";
-    private static final String LOGOUT_ID = "logout";
+    private static final String MESSAGE_LOCATOR = "font";
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
     public UserInfoPage login(String userName, String password) {
-        browser.findElementByName(USER_FIELD_NAME).clear();
-        browser.findElementByName(USER_FIELD_NAME).sendKeys(userName);
-        browser.findElementByName(PASSWORD_FIELD_NAME).clear();
-        browser.findElementByName(PASSWORD_FIELD_NAME).sendKeys(password);
-        browser.findElementByName(LOGIN_BUTTON_NAME).click();
-        return new UserInfoPage(browser.getDriver());
+    	return super.login(userName, password);
     }
 
     public UserInfoPage logout() {
-        browser.findElementById(LOGOUT_ID).click();
-        browser.alertAccept();
-        return new UserInfoPage(browser.getDriver());
+        return super.logout();
     }
-
-    public UserInfoPage loginEmpty() {
-        browser.findElementByName(LOGIN_BUTTON_NAME).click();
-        return new UserInfoPage(browser.getDriver());
-    }
+    
+    public String findMessageText(){
+    	return browser.findElementByCssSelector(MESSAGE_LOCATOR).getText();
+    }    
 }

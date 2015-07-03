@@ -4,17 +4,18 @@ import org.openqa.selenium.WebDriver;
 import pages.auth.UserInfoPage;
 import tools.Browser;
 
+import java.io.IOException;
 
 public class BasePage {
-
 //    protected WebDriver driver;
     protected Browser browser;
 
     private static final String BASEURL = "http://localhost:8080/OMS/";
-    private static String loginInputNameLocator = "j_username";
-    private static String passwordInputNameLocator = "j_password";
-    private static String submitButtonNameLocator = "submit";
-
+    private static final String LOGIN_INPUT_NAME_LOCATOR = "j_username";
+    private static final String PASSWORD_INPUT_NAME_LOCATOR = "j_password";
+    private static final String SUBMIT_BUTTON_NAME_LOCATOR = "submit";
+    private static final String LOGOUT_ID = "logout";
+   
     public BasePage(WebDriver driver) {
         browser = new Browser(driver);
     }
@@ -33,7 +34,7 @@ public class BasePage {
     }
 
     public UserInfoPage logout() {
-        browser.findElementById("logout").click();
+        browser.findElementById(LOGOUT_ID).click();
         browser.alertAccept();
         return new UserInfoPage(browser.getDriver());
     }
@@ -43,10 +44,17 @@ public class BasePage {
      * You may use just any_page.login(name, pass)
      */
     public UserInfoPage login(String userName, String password) {
-        browser.findElementByName(loginInputNameLocator).sendKeys(userName);
-        browser.findElementByName(passwordInputNameLocator).sendKeys(password);
-        browser.findElementByName(submitButtonNameLocator).click();
+        browser.findElementByName(LOGIN_INPUT_NAME_LOCATOR).sendKeys(userName);
+        browser.findElementByName(PASSWORD_INPUT_NAME_LOCATOR).sendKeys(password);
+        browser.findElementByName(SUBMIT_BUTTON_NAME_LOCATOR).click();
         return new UserInfoPage(browser.getDriver());
+    }
+    public void screenShot(String fileName) {
+        try {
+            browser.screenShot(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
    }
 

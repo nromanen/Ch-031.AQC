@@ -15,6 +15,7 @@ public class UserInfoPage extends BasePage{
     private static final String USERS_LOCATOR = "Administration";
     private static final String ORDERING = "Ordering";
     private static final String LINK_FOR_ORDERING = "Ordering";  
+    private static final String USER_INFO_TEXT_LOCATOR = "legend";
 
 
     public UserInfoPage(WebDriver driver) {
@@ -27,7 +28,6 @@ public class UserInfoPage extends BasePage{
     }
     
     public CustomerOrderingPage switchToOrderingPage() {
-//        Browser browser = new Browser(driver);
 		browser.findElementByLinkText(LINK_FOR_ORDERING).click();
 		return new CustomerOrderingPage(browser.getDriver());
 	}
@@ -42,8 +42,13 @@ public class UserInfoPage extends BasePage{
         browser.findElementByLinkText(ORDERING).click();
         return new OrderPage(browser.getDriver());
     }
-
-
-
+    
+     public String findLink(String link){
+         return browser.findElementByLinkText(link).getText();
+    }
+    
+    public String findUserInfoText(){
+    	return browser.findElementByTagName(USER_INFO_TEXT_LOCATOR).getText();
+    }
 
 }

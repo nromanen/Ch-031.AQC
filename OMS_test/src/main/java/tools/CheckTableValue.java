@@ -36,7 +36,7 @@ public class CheckTableValue {
 
                 "   found = table.rows[0].cells[i];"+
                 "  console.log(found);"+
-                " count = i;"+
+                " var count = i;"+
                 "console.log(count);"+
                 "break;"+
                 "}}"+

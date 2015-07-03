@@ -49,31 +49,31 @@
             <version>2.4.9</version>
         </dependency>
 
-            <dependency>
-              <groupId>org.slf4j</groupId>
-              <artifactId>log4j-over-slf4j</artifactId>
-              <version>1.7.10</version>
-            </dependency>
-        
-            <dependency>
-              <groupId>org.slf4j</groupId>
-              <artifactId>slf4j-api</artifactId>
-              <version>1.7.10</version>
-            </dependency>
-        
-            <dependency>
-              <groupId>ch.qos.logback</groupId>
-              <artifactId>logback-core</artifactId>
-              <version>1.1.2</version>
-            </dependency>
-        
-            <dependency>
-              <groupId>ch.qos.logback</groupId>
-              <artifactId>logback-classic</artifactId>
-              <version>1.1.2</version>
-            </dependency>
-        
-        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -110,6 +110,13 @@
             <artifactId>httpcore</artifactId>
             <version>4.3.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.10</version>
+        </dependency>
+
     </dependencies>
 
     <reporting>

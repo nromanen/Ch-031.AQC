@@ -2,44 +2,42 @@ package pages.ordering;
 
 
 import org.openqa.selenium.WebDriver;
-import tools.Browser;
+import pages.BasePage;
 import tools.ColoredString;
 /**
  * This class describe Add Product Page functionality and provides a way to use it.
  * @author Olya.
  */
-public class AddProductPage {
+public class AddProductPage extends BasePage {
 
-    private WebDriver driver;
-    private Browser browser;
-    private static String productNameErrorIdLocator = "productName.errors";
-    private static String productPriceErrorIdLocator = "productPrice.errors";
-    private static String productDescriptionErrorIdLocator = "productDescription.errors";
-    private static String okButtonCssLocator = "input[type=\"submit\"]";
-    private static String cancelButtonCssLocator = "input[type=\"button\"]";
-    private static String productNameValueIdLocator = "name";
-    private static String productDescriptionValueIdLocator = "description";
-    private static String productPriceValueIdLocator = "price";
-
+    private static final String PRODUCT_NAME_ERROR_ID_LOCATOR = "productName.errors";
+    private static final String PRODUCT_PRICE_ERROR_ID_LOCATOR = "productPrice.errors";
+    private static final String PRODUCT_DESCRIPTION_ERROR_ID_LOCATOR = "productDescription.errors";
+    private static final String OK_BUTTON_CSS_LOCATOR = "input[type=\"submit\"]";
+    private static final String CANCEL_BUTTON_CSS_LOCATOR = "input[type=\"button\"]";
+    private static final String PRODUCT_NAME_VALUE_ID_LOCATOR = "name";
+    private static final String PRODUCT_DESCRIPTION_VALUE_ID_LOCATOR = "description";
+    private static final String PRODUCT_PRICE_VALUE_ID_LOCATOR = "price";
+    private final String VALUE_ATTRIBUTE_SELECTOR = "value";
+    private final String COLOR_STYLE_SELECTOR = "color";
 
     public AddProductPage(WebDriver driver) {
+        super(driver);
 
-        this.driver = driver;
-        browser = new Browser(driver);
     }
 
-    /**
+     /**
      * This method clicks on the "Ok" button.
      */
     public void clickOkButton(){
-        browser.findElementByCssSelector(okButtonCssLocator).click();
+        browser.findElementByCssSelector(OK_BUTTON_CSS_LOCATOR).click();
     }
 
     /**
      * This method clicks on the "Cancel" button.
      */
     public void clickCancelButton(){
-        browser.findElementByCssSelector(cancelButtonCssLocator).click();
+        browser.findElementByCssSelector(CANCEL_BUTTON_CSS_LOCATOR).click();
     }
 
     /**
@@ -47,8 +45,8 @@ public class AddProductPage {
      * @param value the product name value.
      */
     public void setProductNameValue(String value){
-        browser.findElementById(productNameValueIdLocator).clear();
-        browser.findElementById(productNameValueIdLocator).sendKeys(value);
+        browser.findElementById(PRODUCT_NAME_VALUE_ID_LOCATOR).clear();
+        browser.findElementById(PRODUCT_NAME_VALUE_ID_LOCATOR).sendKeys(value);
     }
 
     /**
@@ -56,8 +54,8 @@ public class AddProductPage {
      * @param value the description value.
      */
     public void setProductDescriptionValue (String value){
-        browser.findElementById(productDescriptionValueIdLocator).clear();
-        browser.findElementById(productDescriptionValueIdLocator).sendKeys(value);
+        browser.findElementById(PRODUCT_DESCRIPTION_VALUE_ID_LOCATOR).clear();
+        browser.findElementById(PRODUCT_DESCRIPTION_VALUE_ID_LOCATOR).sendKeys(value);
     }
 
     /**
@@ -65,8 +63,8 @@ public class AddProductPage {
      * @param value the price value.
      */
     public void setProductPriceValue (String value){
-        browser.findElementById(productPriceValueIdLocator).clear();
-        browser.findElementById(productPriceValueIdLocator).sendKeys(value);
+        browser.findElementById(PRODUCT_PRICE_VALUE_ID_LOCATOR).clear();
+        browser.findElementById(PRODUCT_PRICE_VALUE_ID_LOCATOR).sendKeys(value);
     }
 
     /**
@@ -74,8 +72,7 @@ public class AddProductPage {
      * @return product price value.
      */
     public String getProductPriceValue () {
-        String elementvalue = browser.findElementById(productPriceValueIdLocator).getAttribute("value");
-    return elementvalue;
+        return browser.findElementById(PRODUCT_PRICE_VALUE_ID_LOCATOR).getAttribute(VALUE_ATTRIBUTE_SELECTOR);
     }
 
     /**
@@ -83,8 +80,7 @@ public class AddProductPage {
      * @return product description value.
      */
     public String getProductDescriptionValue () {
-        String elementvalue = browser.findElementById(productDescriptionValueIdLocator).getAttribute("value");
-        return elementvalue;
+        return browser.findElementById(PRODUCT_DESCRIPTION_VALUE_ID_LOCATOR).getAttribute(VALUE_ATTRIBUTE_SELECTOR);
     }
 
     /**
@@ -92,8 +88,7 @@ public class AddProductPage {
      * @return product name value.
      */
     public String getProductNameValue () {
-        String elementvalue = browser.findElementById(productNameValueIdLocator).getAttribute("value");
-        return elementvalue;
+        return browser.findElementById(PRODUCT_NAME_VALUE_ID_LOCATOR).getAttribute(VALUE_ATTRIBUTE_SELECTOR);
     }
 
     /**
@@ -102,8 +97,8 @@ public class AddProductPage {
      */
     public ColoredString getProductNameErrorMessage() {
         ColoredString coloredString = new ColoredString();
-        coloredString.setString(browser.findElementById(productNameErrorIdLocator).getText());
-        coloredString.setColorFromString(browser.findElementById(productNameErrorIdLocator).getCssValue("color"));
+        coloredString.setString(browser.findElementById(PRODUCT_NAME_ERROR_ID_LOCATOR).getText());
+        coloredString.setColorFromString(browser.findElementById(PRODUCT_NAME_ERROR_ID_LOCATOR).getCssValue(COLOR_STYLE_SELECTOR));
         return  coloredString;
     }
 
@@ -113,8 +108,8 @@ public class AddProductPage {
      */
     public ColoredString getProductDescriptionErrorMessage() {
         ColoredString coloredString = new ColoredString();
-        coloredString.setString(browser.findElementById(productDescriptionErrorIdLocator).getText());
-        coloredString.setColorFromString(browser.findElementById(productDescriptionErrorIdLocator).getCssValue("color"));
+        coloredString.setString(browser.findElementById(PRODUCT_DESCRIPTION_ERROR_ID_LOCATOR).getText());
+        coloredString.setColorFromString(browser.findElementById(PRODUCT_DESCRIPTION_ERROR_ID_LOCATOR).getCssValue(COLOR_STYLE_SELECTOR));
         return coloredString;
     }
 
@@ -124,8 +119,8 @@ public class AddProductPage {
      */
     public ColoredString getProductPriceErrorMessage() {
         ColoredString coloredString = new ColoredString();
-        coloredString.setString(browser.findElementById(productPriceErrorIdLocator).getText());
-        coloredString.setColorFromString(browser.findElementById(productPriceErrorIdLocator).getCssValue("color"));
+        coloredString.setString(browser.findElementById(PRODUCT_PRICE_ERROR_ID_LOCATOR).getText());
+        coloredString.setColorFromString(browser.findElementById(PRODUCT_PRICE_ERROR_ID_LOCATOR).getCssValue(COLOR_STYLE_SELECTOR));
         return coloredString;
     }
 }
