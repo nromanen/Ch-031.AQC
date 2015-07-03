@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <logger name="org.hibernate">
+        <level value="WARN"/>
+    </logger>
+
+    <appender name="StdoutFile" class="ch.qos.logback.core.FileAppender">
+        <file>logs/stdout.log</file>
+        <encoder>
+            <Pattern>%d [%thread] %level %logger - %m%n</Pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="StdoutFile"/>
+    </root>
+</configuration>

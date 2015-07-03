@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
-import tools.Browser;
 import tools.TableRow;
 
 import java.util.ArrayList;
@@ -18,13 +17,17 @@ import java.util.List;
  */
 public class ItemManagementPage extends BasePage {
 
-    private static String filterBySelectBoxIdLocator = "field";
-    private static String productTableIdLocator = "table";
-    private static String tableRowTagNameLocator = "tr";
-    private static String tableHeaderTagNameLocator = "th";
-    private static String showItemLinkXPathLocator = "//div[@id='list']/p/a";
-    private static String createReportLinkTextLocator = "create report";
-    private static String addProductLinkTextLocator = "Add Product";
+    private static final String FILTER_BY_SELECT_BOX_ID_LOCATOR = "field";
+    private static final String PRODUCT_TABLE_ID_LOCATOR = "table";
+    private static final String TABLE_ROW_TAG_NAME_LOCATOR = "tr";
+    private static final String TABLE_HEADER_TAG_NAME_LOCATOR = "th";
+    private static final String SHOW_ITEM_LINK_X_PATH_LOCATOR = "//div[@id='list']/p/a";
+    private static final String CREATE_REPORT_LINK_TEXT_LOCATOR = "create report";
+    private static final String ADD_PRODUCT_LINK_TEXT_LOCATOR = "Add Product";
+    private static final int DELETE_COLUMN_INDEX = 4;
+    private static final String A_TAG_NAME = "a";
+    private static final int EDIT_COLUMN_INDEX = 3;
+    private static final int NAME_INDEX_NUMBER = 0;
 
 
     public ItemManagementPage(WebDriver driver) {
@@ -39,7 +42,7 @@ public class ItemManagementPage extends BasePage {
      */
     public List<String> getFilterValues() {
         List<String> values = new ArrayList<String>();
-        Select select = new Select(browser.findElementById(filterBySelectBoxIdLocator));
+        Select select = new Select(browser.findElementById(FILTER_BY_SELECT_BOX_ID_LOCATOR));
         for (WebElement option : select.getOptions()) {
             values.add(option.getText());
         }
@@ -52,7 +55,7 @@ public class ItemManagementPage extends BasePage {
      * @return the currently selected value from drop down list in "Search by" section.
      */
     public String getFilterCurrentValue() {
-        Select select = new Select(browser.findElementById(filterBySelectBoxIdLocator));
+        Select select = new Select(browser.findElementById(FILTER_BY_SELECT_BOX_ID_LOCATOR));
         return select.getFirstSelectedOption().getText();
 
     }
@@ -64,7 +67,7 @@ public class ItemManagementPage extends BasePage {
      */
     public List<String> getProductTableHeadersNames() {
         List<String> names = new ArrayList<String>();
-        List<WebElement> headers = browser.findElementsByTagName(tableHeaderTagNameLocator);
+        List<WebElement> headers = browser.findElementsByTagName(TABLE_HEADER_TAG_NAME_LOCATOR);
         for (WebElement header : headers) {
             names.add(header.getText());
         }
@@ -77,7 +80,7 @@ public class ItemManagementPage extends BasePage {
      * @return the row count of "Products" table.
      */
     public Integer getProductTableElementSize() {
-        List<WebElement> rows = browser.findElementsByTagName(tableRowTagNameLocator);
+        List<WebElement> rows = browser.findElementsByTagName(TABLE_ROW_TAG_NAME_LOCATOR);
         return rows.size() - 1;
     }
 
@@ -87,14 +90,14 @@ public class ItemManagementPage extends BasePage {
      * @return the text value of the show item link.
      */
     public String getShowItemText() {
-        return browser.findElementByXpath(showItemLinkXPathLocator).getText();
+        return browser.findElementByXpath(SHOW_ITEM_LINK_X_PATH_LOCATOR).getText();
     }
 
     /**
      * This method makes a click on the show item link.
      */
     public void clickShowItemLink() {
-        browser.findElementByXpath(showItemLinkXPathLocator).click();
+        browser.findElementByXpath(SHOW_ITEM_LINK_X_PATH_LOCATOR).click();
     }
 
     /**
@@ -104,11 +107,11 @@ public class ItemManagementPage extends BasePage {
      * @return {@link tools.TableRow} when found and null if not found.
      */
     public TableRow findProductByNameInTable(String productName) {
-        List<WebElement> rows = browser.findElementsByTagName(tableRowTagNameLocator);
+        List<WebElement> rows = browser.findElementsByTagName(TABLE_ROW_TAG_NAME_LOCATOR);
         for (int i = 1; i< rows.size(); i++) {
             WebElement webElement = rows.get(i);
             TableRow tableRow = new TableRow(webElement);
-            if (tableRow.getNthColumnValue(0).equals(productName)) {
+            if (tableRow.getNthColumnValue(NAME_INDEX_NUMBER).equals(productName)) {
                 return tableRow;
             }
         }
@@ -121,26 +124,28 @@ public class ItemManagementPage extends BasePage {
      * @return {@link pages.ordering.AddProductPage}.
      */
     public AddProductPage goToAddProduct() {
-        browser.findElementByLinkText(addProductLinkTextLocator).click();
+        browser.findElementByLinkText(ADD_PRODUCT_LINK_TEXT_LOCATOR).click();
         return PageFactory.initElements(browser.getDriver(), AddProductPage.class);
     }
 
     public AddProductPage clickEditLinkOnProduct(String productName) {
-        findProductByNameInTable(productName).getNthColumnElement(3).findElement(By.tagName("a")).click();
+        findProductByNameInTable(productName).getNthColumnElement(EDIT_COLUMN_INDEX).findElement(By.tagName(A_TAG_NAME)).click();
         return PageFactory.initElements(browser.getDriver(), AddProductPage.class);
     }
 
     public void clickDeleteLinkOnProductAndAccept(String productName) {
-        findProductByNameInTable(productName).getNthColumnElement(4).findElement(By.tagName("a")).click();
+        findProductByNameInTable(productName).getNthColumnElement(DELETE_COLUMN_INDEX).findElement(By.tagName(A_TAG_NAME)).click();
         browser.alertAccept();
 
     }
 
     public void clickDeleteLinkOnProductAndDismiss(String productName) {
         findProductByNameInTable(productName)
-                .getNthColumnElement(4)
-                .findElement(By.tagName("a"))
+                .getNthColumnElement(DELETE_COLUMN_INDEX)
+                .findElement(By.tagName(A_TAG_NAME))
                 .click();
         browser.alertDismiss();
     }
 }
+
+

@@ -1,20 +1,22 @@
+/**
+ * author: Alexander Melnychuk
+ */
+
 package pages.ordering;
 
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
 import tools.Browser;
 
-public class AddItemPage {
-
-    private WebDriver driver;
-    private Browser browser;
+public class AddItemPage extends BasePage {
 
     public AddItemPage(WebDriver driver) {
-        this.driver = driver;
-        this.browser = new Browser(driver);
+        super(driver);
     }
 
-    public void clickDoneButton(){
+    public EditOrderPage clickDoneButton(){
         browser.findElementByCssSelector("input[value=\"Done\"]").click();
+        return new EditOrderPage(browser.getDriver());
     }
 
     public void clickCancelButton(){
@@ -23,6 +25,15 @@ public class AddItemPage {
 
     public void clickResetButton(){
         browser.findElementByCssSelector("input[value=\"Reset\"]").click();
+    }
+
+    public void selectFirstItem(){
+        browser.findElementByXpath("//form[@id='selectFrom1']//a").click();
+    }
+
+    public void setItemQuantity(String qty){
+        browser.findElementByXpath("//form[@id='doneForm']//table//input[@name='quantity']").clear();
+        browser.findElementByXpath("//form[@id='doneForm']//table//input[@name='quantity']").sendKeys(qty);
     }
 
 

@@ -1,52 +1,61 @@
 package pages.auth;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
 import pages.BasePage;
 import pages.administration.UsersPage;
 import pages.ordering.CustomerOrderingPage;
 import pages.ordering.ItemManagementPage;
+import pages.ordering.MerchandiserOrderingPage;
+import pages.ordering.OrderPage;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
+public class UserInfoPage extends BasePage{
 
-import tools.Browser;
 
-public class UserInfoPage {
-    public UserInfoPage() {
-		
-	}
-
-	private WebDriver driver;
-    private Browser browser;
-    private static final String ITEM_MANAGEMENT_TAB_LINK_TEXT_LOCATOR = "Item Management";
+    private static final String itemManagementTabLinkTextLocator = "Item Management";
     private static final String USERS_LOCATOR = "Administration";
+    private static final String ORDERING = "Ordering";
     private static final String LINK_FOR_ORDERING = "Ordering";  
+    private static final String USER_INFO_TEXT_LOCATOR = "legend";
 
 
-    
-    public WebDriver getDriver() {
-		return this.driver;
-	}
-
-	public Browser getBrowser() {
-		return this.browser;
-	}
+    public UserInfoPage(WebDriver driver) {
+        super(driver);
+    }
 
     public ItemManagementPage selectItemManagementTab() {
-        browser.findElementByLinkText(ITEM_MANAGEMENT_TAB_LINK_TEXT_LOCATOR).click();
-        return PageFactory.initElements(driver, ItemManagementPage.class);
+        browser.findElementByLinkText(itemManagementTabLinkTextLocator).click();
+        return PageFactory.initElements(browser.getDriver(), ItemManagementPage.class);
     }
     
-    public CustomerOrderingPage switchToOrderingPage() {
-		
-		Browser browser = new Browser(driver); 
+    public CustomerOrderingPage selectOrderingTabByCustomer() {
 		browser.findElementByLinkText(LINK_FOR_ORDERING).click();
-		return new CustomerOrderingPage(driver);
+		return new CustomerOrderingPage(browser.getDriver());
 	}
+    
+    public MerchandiserOrderingPage selectOrderingTabByMerchandiser() {
+		browser.findElementByLinkText(LINK_FOR_ORDERING).click();
+		return new MerchandiserOrderingPage(browser.getDriver());
+	} 
 
     public UsersPage gotoUsers() {
         browser.findElementByLinkText(USERS_LOCATOR).click();
-        return new UsersPage(driver);
+
+        return new UsersPage(browser.getDriver());
     }
 
+    public OrderPage goToOrderingTab(){
+        browser.findElementByLinkText(ORDERING).click();
+        return new OrderPage(browser.getDriver());
+    }
+    
+     public String findLink(String link){
+         return browser.findElementByLinkText(link).getText();
+    }
+    
+    public String findUserInfoText(){
+    	return browser.findElementByTagName(USER_INFO_TEXT_LOCATOR).getText();
+    }
 
 }
