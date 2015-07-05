@@ -1,11 +1,19 @@
 package tools;
 
+import org.dbunit.database.DatabaseConnection;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.database.QueryDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,6 +26,7 @@ public class BaseDBTest extends DBUnitConfig {
     private static final int TIMEOUT = 30;
 
     protected WebDriver driver;
+
 
     @Before
     public void setUp() throws Exception {

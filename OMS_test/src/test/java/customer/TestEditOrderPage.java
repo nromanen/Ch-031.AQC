@@ -14,15 +14,19 @@ import pages.ordering.*;
 import tools.BaseDBTest;
 import tools.CheckTableValue;
 
+
 public class TestEditOrderPage extends BaseDBTest {
     private OrderPage orderPage;
     private BasePage basePage;
     private static final String LOGIN = "customer1";
     private static final String PASS = "qwerty";
 
+
     public TestEditOrderPage() throws Exception{
         super("");
     }
+
+
 
     @Before
     public  void setUp() throws Exception {
@@ -156,6 +160,5 @@ public class TestEditOrderPage extends BaseDBTest {
     public  void tearDown() throws Exception{
         super.tearDown();
     }
-
 
 }

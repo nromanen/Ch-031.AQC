@@ -37,6 +37,7 @@ public class DBUnitConfig extends DBTestCase {
 
     }
 
+
     protected FlatXmlDataSet getDataFromFile(String fileName) throws DataSetException {
         return new FlatXmlDataSetBuilder().build(
                 Thread.currentThread().getContextClassLoader()
