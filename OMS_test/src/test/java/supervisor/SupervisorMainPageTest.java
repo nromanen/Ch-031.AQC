@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
  * This test case is designed for testing of the Item Management view.
  * @author Olya.
@@ -24,9 +28,6 @@ public class SupervisorMainPageTest extends BaseDBTest {
     private static final String SUPERVISOR_PASSWORD = "qwerty";
     static Logger log = LoggerFactory.getLogger(SupervisorMainPageTest.class);
 
-    public SupervisorMainPageTest(String name) throws Exception {
-        super(name);
-    }
 
     @Before
     public void setUp() throws Exception {

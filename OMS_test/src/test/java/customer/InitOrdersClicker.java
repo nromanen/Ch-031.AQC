@@ -36,9 +36,6 @@ public class InitOrdersClicker extends BaseDBTest {
 	
 	CustomerOrderingPage ordering;
 
-	public InitOrdersClicker(String name) throws Exception{
-		super("");
-	}
 
 	/*public void initProductAndOrders() throws Exception {
 		
@@ -106,7 +103,7 @@ public class InitOrdersClicker extends BaseDBTest {
 */
 	public static void main(String[] args) throws Exception {
 
-		InitOrdersClicker initOrdersClicker = new InitOrdersClicker("");
+		InitOrdersClicker initOrdersClicker = new InitOrdersClicker();
 		//initOrdersClicker.initProductAndOrders();
 	}
 

@@ -14,18 +14,12 @@ import java.sql.DriverManager;
  * Created by lumberjack85 on 6/21/15.
  * Used for creating an initial data xml
  */
-public class InitDataClicker{
+public class InitDataClicker extends BaseDBTest{
 /*    private static WebDriver driver;
     private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
     String LOGIN = "supervisor1";
     String PASS = "qwerty";
     String LOGIN2 = "customer1";*/
-
-/*
-    public InitDataClicker(String name) throws Exception{
-        super(name);
-    }
-*/
 
 
     public void initTest() throws Exception{

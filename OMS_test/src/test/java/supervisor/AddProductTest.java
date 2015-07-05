@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  * @author Olya.
  */
 public class AddProductTest extends BaseTest {
-    private BasePage basePage;
+
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
@@ -31,7 +31,6 @@ public class AddProductTest extends BaseTest {
      * and price PRODUCT_PRICE is created and is visible in product table on Item Management page.
      */
     public void testAddProducts() throws Exception {
-        basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
         itemManagementPage = userInfoPage.selectItemManagementTab();
         AddProductPage addProductPage = itemManagementPage.goToAddProduct();

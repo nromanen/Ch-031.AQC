@@ -14,6 +14,8 @@ import tools.BaseDBTest;
 import tools.ColoredString;
 import java.awt.*;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * This test case is designed for validation of error messages on Add Product page.
  * @author Olya.
@@ -28,9 +30,6 @@ public class ProductValidationErrorMessagePageTest extends BaseDBTest {
     static Logger log = LoggerFactory.getLogger(ProductValidationErrorMessagePageTest.class);
 
 
-    public ProductValidationErrorMessagePageTest(String name) throws Exception {
-        super(name);
-    }
 
     @Before
     public void setUp() throws Exception {
@@ -76,8 +75,8 @@ public class ProductValidationErrorMessagePageTest extends BaseDBTest {
      * When entered invalid characters (symbols) on product price field, , then after clicking on OK button
      * the following error message will appear in red color "Please enter only numbers".
      */
-    public void testProductPriceCharactersErrorMessage() throws Throwable {
-        try {
+    public void testProductPriceCharactersErrorMessage() {
+
             AddProductPage addProductPage = itemManagementPage.goToAddProduct();
             addProductPage.setProductPriceValue(PRODUCT_PRICE_CHARACTERS_VALUE);
             addProductPage.clickOkButton();
@@ -86,20 +85,14 @@ public class ProductValidationErrorMessagePageTest extends BaseDBTest {
             Color expectedColor = Color.red;
             assertEquals(expectedMessage, actualColoredString.getString());
             assertEquals(expectedColor, actualColoredString.getColor());
-        } catch (Throwable e){
-            log.error("test failed. Taking  a screenshot");
-            itemManagementPage.screenShot("logs/ProductPriceCharactersErrorMessage.png");
-            throw e;
         }
-    }
 
     @Test // A test fails!
     /**
      * This test verify that when entered text is >999 or <1 on product price field, then after clicking on OK button
      * the following error message will appear in red color "Please enter price in range of 1-999".
      */
-    public void testProductPriceRangeErrorMessage() throws Throwable {
-        try {
+    public void testProductPriceRangeErrorMessage() {
             AddProductPage addProductPage = itemManagementPage.goToAddProduct();
             addProductPage.setProductNameValue("checking");
             addProductPage.setProductPriceValue(PRODUCT_PRICE_RANGE_VALUE);
@@ -109,15 +102,10 @@ public class ProductValidationErrorMessagePageTest extends BaseDBTest {
             Color expectedColor = Color.red;
             assertEquals(expectedMessage, actualColoredString.getString());
             assertEquals(expectedColor, actualColoredString.getColor());
-        } catch (Throwable e) {
-            log.error("test failed. Taking  a screenshot");
-            itemManagementPage.screenShot("logs/ProductPriceRangeErrorMessage.png");
-            throw e;
-        }
+
     }
     @After
     public void tearDown() throws Exception {
-        basePage.logout();
         super.tearDown();
     }
 }

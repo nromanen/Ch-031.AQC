@@ -1,19 +1,14 @@
 package tools;
 
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.database.QueryDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import pages.BasePage;
 
-import java.io.FileOutputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,29 +21,36 @@ public class BaseDBTest extends DBUnitConfig {
     private static final int TIMEOUT = 30;
 
     protected WebDriver driver;
+    protected BasePage basePage;
 
+    public WebDriver getDriver() {
+        return  driver;
+    }
 
     @Before
     public void setUp() throws Exception {
         // DBUnit
         super.setUp();
-        // Selenium
-        //driver = new FirefoxDriver();
 
+        // Selenium
+       driver = new FirefoxDriver();
         //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
-        driver = new ChromeDriver();
+        //System.setProperty("webdriver.chrome.driver", "chromedriver");
+        //driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get(BASEURL);
+        basePage = new BasePage(driver);
+        screenShootRule.setDriver(driver);
     }
 
-    public BaseDBTest(String name) throws Exception {
-        // DBUnit constructor
-        super();
-    }
+    @Rule
+    public ScreenShotUtils screenShootRule = new ScreenShotUtils() {
+        @Override
+        protected void finished(Description description) {
+            super.finished(description);
+            basePage.logout();
+            driver.quit();
+        }
+    };
 
-    @After
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
 }

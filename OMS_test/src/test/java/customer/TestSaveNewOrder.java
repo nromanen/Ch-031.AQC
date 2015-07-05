@@ -21,6 +21,8 @@ import pages.ordering.CustomerOrderingPage;
 import tools.BaseDBTest;
 import tools.OrderItemService;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * This test case is designed for testing (step by step) the Save Order functionality.
  * @author Olesia
@@ -40,11 +42,6 @@ public class TestSaveNewOrder extends BaseDBTest {
 	static Logger LOG = LoggerFactory.getLogger(TestSaveNewOrder.class);
 
 	CustomerOrderingPage ordering;
-
-	public TestSaveNewOrder()   throws Exception{
-			super("");
-	
-	}
 
 	@Before
 	public void setUp() throws Exception {	
@@ -204,8 +201,7 @@ public class TestSaveNewOrder extends BaseDBTest {
 	
 	@After
 	public void tearDown() { 
-		 
-		driver.quit();		
+
 		try{
 
 			List<OrderItem>  orderItems = OrderItemService.getAll(); 

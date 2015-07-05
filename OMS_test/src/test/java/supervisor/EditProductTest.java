@@ -11,6 +11,8 @@ import pages.ordering.ItemManagementPage;
 import tools.BaseDBTest;
 import tools.TableRow;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * This test case is designed for testing the Edit Product functionality.
  * @author Olya.
@@ -27,10 +29,6 @@ public class EditProductTest extends BaseDBTest {
     private static final String EDIT_PRODUCT_NAME = "1NotName";
     private static final String PRODUCT_DESCRIPTION = "Very yellow";
     private static final String PRODUCT_PRICE = "14.0";
-
-    public EditProductTest(String name) throws Exception {
-        super(name);
-    }
 
 
     @Before

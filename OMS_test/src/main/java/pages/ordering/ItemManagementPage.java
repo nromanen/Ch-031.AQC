@@ -110,6 +110,7 @@ public class ItemManagementPage extends BasePage {
         List<WebElement> rows = browser.findElementsByTagName(TABLE_ROW_TAG_NAME_LOCATOR);
         for (int i = 1; i< rows.size(); i++) {
             WebElement webElement = rows.get(i);
+
             TableRow tableRow = new TableRow(webElement);
             if (tableRow.getNthColumnValue(NAME_INDEX_NUMBER).equals(productName)) {
                 return tableRow;
