@@ -59,7 +59,7 @@ public class TestEditOrderPage extends BaseDBTest {
         add.setItemQuantity(itemQuantity);
         add.clickDoneButton();
         CheckTableValue tableValue = new CheckTableValue(driver);
-        assertEquals("Item was added, quantity is wrong", itemQuantity, tableValue.findValue("list", "Quantity", 1));
+        assertEquals("Item was added, quantity is wrong", itemQuantity, tableValue.findValue("list", 2, 6));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class TestEditOrderPage extends BaseDBTest {
         editOrderPage.clickOrder();
 
         CheckTableValue tableValue = new CheckTableValue(driver);
-        assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
+        assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", 2, 5));
     }
 
     @Test
@@ -107,9 +107,10 @@ public class TestEditOrderPage extends BaseDBTest {
         editOrderPage.setCVV2("111");
         editOrderPage.setExpiryDate("02", "2017");
         editOrderPage.clickOrder();
+        Thread.sleep(3000);
 
         CheckTableValue tableValue = new CheckTableValue(driver);
-        assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
+        assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", 2, 5));
     }
 
     @Test
@@ -126,7 +127,7 @@ public class TestEditOrderPage extends BaseDBTest {
         editOrderPage.clickOrder();
 
         CheckTableValue tableValue = new CheckTableValue(driver);
-        assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
+        assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", 2, 5));
     }
 
     @Test
@@ -146,12 +147,13 @@ public class TestEditOrderPage extends BaseDBTest {
         editOrderPage.clickOrder();
 
         CheckTableValue tableValue = new CheckTableValue(driver);
-        assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", "Status", 0));
+        assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", 2, 5));
     }
 
 
     @After
     public  void tearDown() throws Exception{
+        orderPage.logout();
         super.tearDown();
     }
 
