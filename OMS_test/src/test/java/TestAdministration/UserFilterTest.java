@@ -46,10 +46,10 @@ public class UserFilterTest extends BaseTest {
                 { "All Columns", "equals", "", 5 },
                 
                 { "All Columns", "equals", "Nelly", 2 },
-//                { "All Columns", "not equals to", "Nelly", 3 },
-//                { "All Columns", "starts with", "Ne", 2 },
-//                { "All Columns", "contains", "B", 1 },
-//                { "All Columns", "does not contain", "B", 4 },
+                { "All Columns", "not equals to", "Nelly", 3 },
+                { "All Columns", "starts with", "Ne", 2 },
+                { "All Columns", "contains", "B", 1 },
+                { "All Columns", "does not contain", "B", 4 },
 //
 //                { "First Name", "equals", "Nelly", 2 },
 //                { "First Name", "not equals to", "Nelly", 3 },

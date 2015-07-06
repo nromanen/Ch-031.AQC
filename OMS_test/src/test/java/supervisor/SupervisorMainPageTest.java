@@ -122,7 +122,6 @@ public class SupervisorMainPageTest extends BaseDBTest {
 
     @After
     public void tearDown() throws Exception {
-        itemManagementPage.logout();
         super.tearDown();
         }
 }

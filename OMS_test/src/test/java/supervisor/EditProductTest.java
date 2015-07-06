@@ -73,7 +73,6 @@ public class EditProductTest extends BaseDBTest {
 
     @After
     public void tearDown() throws Exception {
-        basePage.logout();
         super.tearDown();
     }
 }

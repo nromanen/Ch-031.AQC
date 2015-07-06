@@ -14,7 +14,6 @@ import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.*;
 import tools.BaseDBTest;
-import tools.DBUnitConfig;
 
 import java.io.File;
 import java.io.FileOutputStream;
