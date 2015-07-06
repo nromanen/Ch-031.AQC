@@ -8,7 +8,6 @@ package customer;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.junit.*;
-import pages.BasePage;;
 import pages.auth.UserInfoPage;
 import pages.ordering.*;
 import tools.BaseDBTest;
