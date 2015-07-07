@@ -118,7 +118,7 @@ public class Product extends AbstractEntity implements Comparable<Product> {
 		return true;
 	}
 
-	//@Override
+	@Override
 	public int compareTo(final Product product) {
 		if (productName.compareTo(product.productName) < 0) {
 			return -1;

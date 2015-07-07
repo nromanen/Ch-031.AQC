@@ -91,7 +91,7 @@ public class Role extends AbstractEntity implements Comparable<Role>,
 		return true;
 	}
 
-	//@Override
+	@Override
 	public int compareTo(final Role o) {
 		return roleName.compareTo(o.roleName);
 	}
