@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-    private static final String BASEURL = "http://localhost:8080/OMS/";
+    private static final String BASEURL = "http://localhost:8083/OMS/";
     private static final int TIMEOUT = 30;
     protected static WebDriver driver = new FirefoxDriver();
     protected BasePage basePage;
