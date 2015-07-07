@@ -24,7 +24,7 @@ import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.CustomerOrderingPage;
 import tools.BaseDBTest;
-import tools.DBUnitConfig;
+
 import tools.OrderItemService;
 
 /**

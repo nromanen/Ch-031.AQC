@@ -17,7 +17,7 @@ import java.util.Locale;
 /**
  * @author Olya
  */
-public class XmlBuilder extends DBUnitConfig {
+public class XmlBuilder extends BaseDBTest {
 
     public XmlBuilder(String name) {
         super();

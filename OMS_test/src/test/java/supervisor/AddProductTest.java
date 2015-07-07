@@ -45,10 +45,5 @@ public class AddProductTest extends BaseTest {
         assertEquals(PRODUCT_DESCRIPTION, row.getNthColumnValue(1));
         assertEquals(PRODUCT_PRICE, row.getNthColumnValue(2));
     }
-
-    @After
-    public void tearDown() throws Exception {
-        basePage.logout();
-    }
 }
 

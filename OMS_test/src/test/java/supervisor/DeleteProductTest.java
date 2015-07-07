@@ -29,6 +29,7 @@ public class DeleteProductTest extends BaseDBTest {
 
    @Before
    public void setUp() throws Exception {
+       //initTables();
        beforeData = new IDataSet[]{getDataFromFile("data/productData.xml")};
        super.setUp();
    }
@@ -42,13 +43,12 @@ public class DeleteProductTest extends BaseDBTest {
         itemManagementPage.clickDeleteLinkOnProductAndDismiss(PRODUCT_NAME_DELETE);
         assertNotNull(itemManagementPage.findProductByNameInTable(PRODUCT_NAME_DELETE));
         itemManagementPage.clickDeleteLinkOnProductAndAccept(PRODUCT_NAME_DELETE);
+
         assertNull(itemManagementPage.findProductByNameInTable(PRODUCT_NAME_DELETE));
     }
 
     @After
     public void tearDown() throws Exception {
-//        basePage.logout();
         super.tearDown();
-//        driver.quit();
     }
 }

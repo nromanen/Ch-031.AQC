@@ -21,7 +21,7 @@ import java.util.List;
  * This class provides a set of util methods to make the work with database in tests easier.
  * @author Olya.
  */
-public class DbUtils extends DBUnitConfig {
+public class DbUtils extends BaseDBTest {
 
     public DbUtils(String name) {
         super();

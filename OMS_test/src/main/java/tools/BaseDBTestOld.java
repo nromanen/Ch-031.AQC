@@ -5,30 +5,42 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.BasePage;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import java.util.concurrent.TimeUnit;
 
-public class BaseTest {
+/**
+ * It's necessary for DBUnit test to have beforeData
+ * If you dont need one use emptyset
+ */
+public class BaseDBTestOld extends BaseDBTest {
 
     private static final String BASEURL = "http://localhost:8080/OMS/";
     private static final int TIMEOUT = 30;
+
     protected static WebDriver driver = new FirefoxDriver();
     protected BasePage basePage;
-    protected static EntityManager em = Persistence.createEntityManagerFactory("persistence").createEntityManager();
+
+    public WebDriver getDriver() {
+        return  driver;
+    }
 
     @Before
     public void setUp() throws Exception {
+        // DBUnit
+        super.setUp();
+
         // Selenium
-        //driver = new FirefoxDriver();
+       //driver = new FirefoxDriver();
+       // System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "chromedriver");
+        //driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get(BASEURL);
         basePage = new BasePage(driver);
         screenShootRule.setDriver(driver);
-
     }
 
     @Rule
@@ -40,4 +52,5 @@ public class BaseTest {
             //driver.quit();
         }
     };
+
 }
