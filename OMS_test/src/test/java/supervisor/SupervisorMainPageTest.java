@@ -26,7 +26,7 @@ public class SupervisorMainPageTest extends BaseDBTest {
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
-    static Logger log = LoggerFactory.getLogger(SupervisorMainPageTest.class);
+
 
 
     @Before
@@ -43,7 +43,6 @@ public class SupervisorMainPageTest extends BaseDBTest {
      * have two options – "Name" and "Description" (according to SRS).
      */
     public void testFilterByValues() throws Exception {
-        log.info("------TestFilterByValues------");
         List<String> expectedValues = new ArrayList<String>();
         expectedValues.add("Name");
         expectedValues.add("Description");
@@ -52,8 +51,6 @@ public class SupervisorMainPageTest extends BaseDBTest {
         for (String actualValue : actualValues) {
             assertTrue(expectedValues.contains(actualValue));
         }
-
-        log.info("----TestFilterByValues pass----");
     }
 
     @Test

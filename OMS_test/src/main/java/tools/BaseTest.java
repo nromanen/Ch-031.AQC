@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.BasePage;
 
@@ -17,13 +18,17 @@ public class BaseTest {
     private static final String BASEURL = "http://localhost:8080/OMS/";
     private static final int TIMEOUT = 30;
     protected static WebDriver driver = new FirefoxDriver();
+    //protected static WebDriver driver = new ChromeDriver();
+    static {
+        //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "chromedriver");
+    }
+
     protected BasePage basePage;
     protected static EntityManager em = Persistence.createEntityManagerFactory("persistence").createEntityManager();
 
     @Before
     public void setUp() throws Exception {
-        // Selenium
-        //driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get(BASEURL);
         basePage = new BasePage(driver);
@@ -37,7 +42,6 @@ public class BaseTest {
         protected void finished(Description description) {
             super.finished(description);
             basePage.logout();
-            //driver.quit();
         }
     };
 }
