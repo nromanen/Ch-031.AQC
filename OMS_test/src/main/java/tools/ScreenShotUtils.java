@@ -1,13 +1,11 @@
 package tools;
 
 import com.cloudinary.Cloudinary;
-import org.apache.commons.lang.ObjectUtils;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.BasePage;
 
 import java.io.File;
 import java.io.IOException;
