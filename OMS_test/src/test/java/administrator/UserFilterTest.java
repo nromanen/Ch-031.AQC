@@ -1,4 +1,4 @@
-package TestAdministration;
+package administrator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

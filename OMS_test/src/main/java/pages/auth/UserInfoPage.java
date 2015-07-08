@@ -2,10 +2,12 @@ package pages.auth;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+
 import pages.BasePage;
 import pages.administration.UsersPage;
 import pages.ordering.CustomerOrderingPage;
 import pages.ordering.ItemManagementPage;
+import pages.ordering.MerchandiserOrderingPage;
 import pages.ordering.OrderPage;
 
 public class UserInfoPage extends BasePage{
@@ -31,6 +33,11 @@ public class UserInfoPage extends BasePage{
 		browser.findElementByLinkText(LINK_FOR_ORDERING).click();
 		return new CustomerOrderingPage(browser.getDriver());
 	}
+    
+    public MerchandiserOrderingPage selectOrderingTabByMerchandiser() {
+		browser.findElementByLinkText(LINK_FOR_ORDERING).click();
+		return new MerchandiserOrderingPage(browser.getDriver());
+	} 
 
     public UsersPage gotoUsers() {
         browser.findElementByLinkText(USERS_LOCATOR).click();

@@ -1,17 +1,11 @@
-package TestAdministration;
+package administrator;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
-import tools.BaseDBTest;
 import tools.BaseTest;
 import tools.Browser;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 

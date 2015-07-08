@@ -70,7 +70,6 @@ public class TestSaveNewOrder extends BaseDBTest {
 	@Test
 	public void testSwitchToOrderingPage(){
 		
-		LOG.info("------testSwitchToOrderingPage------");					
 		List <String> expectedValues = new ArrayList<String>();
 		expectedValues.add("Order Name");
 		expectedValues.add("Total price");
@@ -82,13 +81,11 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Delete");				
 		List <String> actualValues =  ordering.getValuesFromTableWithOrders("th");
 	    assertEquals(expectedValues, actualValues);
-	    LOG.info("----testSwitchToOrderingPage pass----");	
 	}
 	
 	@Test
 	public void testSwitchToCreatingNewOrderPage(){
 		
-		LOG.info("------testSwitchToCreatingNewOrderPage------");		
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		List<String> expectedValues = new ArrayList<String>();
 		expectedValues.add("Item Number");
@@ -102,13 +99,11 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Delete");
 		List <String> actualValues =  createNewOrderPage.getItemFromTableInItemSelection("th");
 		assertEquals(expectedValues, actualValues);
-		LOG.info("----testSwitchToCreatingNewOrderPage pass----");	
 	}
 
 	@Test
 	public void testClickAddItemButton(){
 		
-		LOG.info("------testClickAddItemButton------");	
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		List<String> expectedValues = new ArrayList<String>();
@@ -117,13 +112,11 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Add");	
 		List <String> actualValues =  addProductsPage.getHeadersFromTableWithProducts();
 	    assertEquals(expectedValues, actualValues);
-	    LOG.info("----testClickAddItemButton pass----");
 	}
 	
   @Test   
 	public void testSelectProduct() {
 	  
-	    LOG.info("------testSelectProduct------");	
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
@@ -131,13 +124,11 @@ public class TestSaveNewOrder extends BaseDBTest {
 		assertEquals(productName, actualName);
 		String actualPrice = addProductsPage.findPriceOfSelectedProduct();		
 		assertEquals(productPrice, actualPrice);
-		LOG.info("----testSelectProduct pass----");
 	}
 
 	@Test
 	public void testClickDoneButton() { 
 		
-		LOG.info("------testClickDoneButton------");				
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
@@ -154,27 +145,21 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Delete");	
 		List <String> actualValues =  result.getItemFromTableInItemSelection("td");				
 	   	assertEquals(expectedValues, actualValues);	   	
-	    LOG.info("----testClickDoneButton pass----");	
-	   	
+
 	   	}
 	
 	@Test
 	public void testSelectAssignee() { 
-		
-		LOG.info("------testSelectAssignee------");
 		CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
 		addProductsPage.clickDoneButton();
 		String result = createNewOrderPage.selectAssignee(SELECTED_ASSIGNEE);
 		assertEquals("merch1",result);
-		LOG.info("----testSelectAssignee pass----");
 	}
 	
 	@Test
 	public void testClickSaveButton() { 
-
-		LOG.info("------TestClickSaveButton------");
     	CustomerCreateOrderPage createNewOrderPage = ordering.switchToCreatingNewOrderPage();
 		CustomerAddProductsToOrderPage addProductsPage = createNewOrderPage.clickAddItemButton();
 		addProductsPage.selectInitProduct();
@@ -195,8 +180,6 @@ public class TestSaveNewOrder extends BaseDBTest {
 		expectedValues.add("Delete");
 		List <String> actualValues =  ordering.getValuesFromTableWithOrders("td");
 	    assertEquals(expectedValues, actualValues);	
-	    
-	    LOG.info("----TestClickSaveButton pass----");	   
 	}
 	
 	@After
