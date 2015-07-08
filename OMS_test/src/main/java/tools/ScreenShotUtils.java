@@ -62,7 +62,7 @@ public class ScreenShotUtils extends TestWatcher {
     @Override
     protected void finished(Description description) {
         super.finished(description);
-        LOG.info("------" + description.getMethodName() + " pass! ------");
+        LOG.info("------" + description.getMethodName() + " finished! ------");
     }
 
     public WebDriver getDriver() {
