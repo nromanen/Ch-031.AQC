@@ -1,21 +1,16 @@
 package merchandiser;
 
 import static org.junit.Assert.*;
-
-import org.dbunit.dataset.IDataSet;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.MerchandiserOrderingPage;
-import tools.BaseDBTest;
+import tools.BaseTest;
 
-public class TestMerchandiserOrderingPageFunctionality extends BaseDBTest {
+public class TestMerchandiserOrderingPageFunctionality extends BaseTest {
 
 	private static String MERCHANDISER_LOGIN = "merch1";
 	private static String MERCHANDISER_PASSWORD = "qwerty";
@@ -25,13 +20,14 @@ public class TestMerchandiserOrderingPageFunctionality extends BaseDBTest {
 			.getLogger(TestMerchandiserEditOrder.class);
 
 	@Before
-	public void setUp() throws Exception {
-		beforeData = new IDataSet[] { getDataFromFile("data/testOrdersDataForMerchTemp.xml") };
+	public void setUp() {
+		initDataBase("data/testOrdersDataForMerchTemp.xml");
 		super.setUp();
-        basePage = new BasePage(driver);
-        UserInfoPage userInfoPage = basePage.login(MERCHANDISER_LOGIN, MERCHANDISER_PASSWORD);
-        merchOrderingPage = userInfoPage.selectOrderingTabByMerchandiser();
+		UserInfoPage userInfoPage = basePage.login(MERCHANDISER_LOGIN,
+				MERCHANDISER_PASSWORD);
+		merchOrderingPage = userInfoPage.selectOrderingTabByMerchandiser();
 	}
+
 
 	@Test
 	/**
@@ -59,14 +55,10 @@ public class TestMerchandiserOrderingPageFunctionality extends BaseDBTest {
 		assertEquals(TEST_ORDER_NAME,
 				merchOrderingPage.getFoundedOrderNameText());
 	}
-
+	
 	@After
 	public void tearDown() {
-		try {
-			super.tearDown();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		cleanDataBase();
 	}
 
 }

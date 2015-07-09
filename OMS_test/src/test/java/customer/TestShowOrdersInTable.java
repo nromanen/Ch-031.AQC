@@ -20,11 +20,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import entity.OrderItem;
+import pages.BasePage;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.CustomerOrderingPage;
-import tools.BaseDBTest;
-
+import tools.BaseTest;
+import tools.DBUnitConfig;
 import tools.OrderItemService;
 
 /**
@@ -35,15 +36,23 @@ import tools.OrderItemService;
  *
  */
 
-public class TestShowOrdersInTable extends BaseDBTest {
+public class TestShowOrdersInTable extends BaseTest {
 	
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
 	static Logger log = LoggerFactory.getLogger(TestShowOrdersInTable.class);
 	CustomerOrderingPage ordering;
-
 	
-	@Before
+	 @Before
+	    public void setUp() {
+			initDataBase("data/initOrders.xml");
+			super.setUp();
+			basePage = new BasePage(driver);
+	        UserInfoPage userInfoPage = basePage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
+	        ordering = userInfoPage.switchToOrderingPage();
+		}
+	
+/*	@Before
 	public void setUp()   {	 
 		 
 		IDataSet orderData;
@@ -65,7 +74,7 @@ public class TestShowOrdersInTable extends BaseDBTest {
 		LoginPage loginPage = new LoginPage(driver);
 		UserInfoPage userInfo = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
 		ordering = userInfo.switchToOrderingPage();
-	}
+	}*/
 		
 	@Test
 	public void testChangeShowTenOrFiveItemsLink(){  
@@ -103,7 +112,12 @@ public class TestShowOrdersInTable extends BaseDBTest {
 		log.info("----testClickShowTenItemsLink pass----");
 	}
 	
-	@After  
+	@After
+	public void tearDown() {
+		cleanDataBase();
+	}
+	
+/*	@After  
 	public void tearDown() {
 
 		try{
@@ -122,5 +136,5 @@ public class TestShowOrdersInTable extends BaseDBTest {
 		}  catch (Exception e) {
 			log.debug(e.getMessage());
 		}				
-	}
+	}*/
 }

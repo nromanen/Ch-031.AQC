@@ -1,8 +1,6 @@
 package supervisor;
 
-import org.junit.After;
 import org.junit.Test;
-import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;

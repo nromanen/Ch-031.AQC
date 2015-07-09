@@ -11,21 +11,18 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import java.io.IOException;
 import java.util.Properties;
 
-public class BaseDBTest extends BaseTest{
+public class DBUnitConfig{
     private Properties prop;
     protected IDataSet[] beforeData;
-    private static final Logger logger = LoggerFactory.getLogger(BaseDBTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(DBUnitConfig.class);
     private IDatabaseTester tester;
     private IOperationListener operationListener;
 
 
-    public BaseDBTest() {
+    public DBUnitConfig() {
 
         prop = new Properties();
         try {
@@ -43,10 +40,15 @@ public class BaseDBTest extends BaseTest{
 
     }
 
-    protected FlatXmlDataSet getDataFromFile(String fileName) throws DataSetException {
-        return new FlatXmlDataSetBuilder().build(
-                Thread.currentThread().getContextClassLoader()
-                        .getResourceAsStream((fileName)));
+    protected FlatXmlDataSet getDataFromFile(String fileName)  {
+        try {
+			return new FlatXmlDataSetBuilder().build(
+			       Thread.currentThread().getContextClassLoader()
+			               .getResourceAsStream(fileName));
+		} catch (DataSetException e) {
+			e.printStackTrace();
+			return null;
+		}
     }
 
     /**
@@ -119,25 +121,37 @@ public class BaseDBTest extends BaseTest{
         return DatabaseOperation.CLEAN_INSERT;
     }
 
-
+    public void initDataBase(String... dataFile) {
+		if (dataFile.length != 0) {
+			IDataSet[] data = new IDataSet[dataFile.length];
+			for (int i = 0; i < dataFile.length; i++) {
+				data[i] = getDataFromFile(dataFile[i]);
+			}
+			beforeData = data;
+			setUp();
+		} else {
+			logger.info("Incorrect use of initDataBase(String ...) method");
+		}
+	}
 
 
     ////////////////////////////////////////////////////////////////////////////
     // TestCase class
 
-    public void setUp() throws Exception
-    {
+    public void setUp(){
+    	try{
         logger.debug("setUp() - start");
-
         final IDatabaseTester databaseTester = getDatabaseTester();
         databaseTester.setSetUpOperation( getSetUpOperation() );
         databaseTester.setDataSet( getDataSet() );
         databaseTester.setOperationListener(getOperationListener());
         databaseTester.onSetup();
-        super.setUp();
+    	}catch(Exception e){
+    		logger.debug("setUp error");
+    	}
     }
 
-    protected void tearDown() throws Exception
+    public void tearDown()
     {
         logger.debug("tearDown() - start");
 
@@ -147,10 +161,16 @@ public class BaseDBTest extends BaseTest{
             databaseTester.setDataSet( getDataSet() );
             databaseTester.setOperationListener(getOperationListener());
             databaseTester.onTearDown();
-        } finally {
+        }
+        catch (Exception e){
+        	logger.debug("Error in DatabaseTester");
+        }
+        finally {
             tester = null;
         }
     }
+    
+    
 
     /**
      * @return The {@link org.dbunit.IOperationListener} to be used by the {@link IDatabaseTester}.
