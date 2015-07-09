@@ -4,7 +4,7 @@ import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
-import tools.BaseDBTest;
+import tools.DBUnitConfig;
 
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -14,7 +14,7 @@ import java.sql.DriverManager;
  * Created by lumberjack85 on 6/21/15.
  * Used for creating an initial data xml
  */
-public class InitDataClicker extends BaseDBTest{
+public class InitDataClicker extends DBUnitConfig{
 /*    private static WebDriver driver;
     private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
     String LOGIN = "supervisor1";

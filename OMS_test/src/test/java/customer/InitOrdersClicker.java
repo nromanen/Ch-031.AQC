@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.*;
-import tools.BaseDBTest;
+import tools.DBUnitConfig;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 /**
  *  Used for creating an initial product, orders and orderItems in xml
  */
-public class InitOrdersClicker extends BaseDBTest {
+public class InitOrdersClicker extends DBUnitConfig {
 	private static WebDriver driver;
 	//private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
 	private static final String USER_NAME_FOR_SUPERVISOR = "supervisor1";

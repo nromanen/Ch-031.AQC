@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
+import tools.DBUnitConfig;
 import tools.BaseTest;
 import tools.Browser;
 
@@ -29,7 +30,7 @@ public class TestLogin extends BaseTest {
     private static final String LINK_FOR_ITEM_MANAGEMENT = "Item Management";
 		
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		super.setUp();
 		browser = new Browser(driver);
 

@@ -4,13 +4,9 @@ import static org.junit.Assert.*;
 import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.MerchandiserOrderingPage;
-import tools.BaseDBTest;
 import tools.BaseTest;
-
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /** 
@@ -39,11 +35,7 @@ public class TestMerchandiserOrderingPage extends BaseTest {
 	
 	@Before
 	public void setUp(){
-		try {
-			super.setUp();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		super.setUp();
 		basePage = new BasePage(driver);
 		UserInfoPage userInfoPage = basePage.login(MERCHANDISER_LOGIN, MERCHANDISER_PASSWORD);
         MERCH_ORDERING_PAGE = userInfoPage.selectOrderingTabByMerchandiser();

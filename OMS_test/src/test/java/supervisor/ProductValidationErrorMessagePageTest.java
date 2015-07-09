@@ -1,17 +1,18 @@
 package supervisor;
 
-import org.dbunit.dataset.IDataSet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
-import tools.BaseDBTest;
+import tools.BaseTest;
 import tools.ColoredString;
+
 import java.awt.*;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertEquals;
  * This test case is designed for validation of error messages on Add Product page.
  * @author Olya.
  */
-public class ProductValidationErrorMessagePageTest extends BaseDBTest {
+public class ProductValidationErrorMessagePageTest extends BaseTest {
     private BasePage basePage;
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
@@ -30,16 +31,15 @@ public class ProductValidationErrorMessagePageTest extends BaseDBTest {
     static Logger log = LoggerFactory.getLogger(ProductValidationErrorMessagePageTest.class);
 
 
-
     @Before
-    public void setUp() throws Exception {
-        beforeData = new IDataSet[] {getDataFromFile("data/productData.xml")};
-        super.setUp();
-        basePage = new BasePage(driver);
+    public void setUp() {
+		initDataBase("data/productData.xml");
+		super.setUp();
+		basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
         itemManagementPage = userInfoPage.selectItemManagementTab();
-    }
-
+	}
+    
     @Test
     /**
      * This test verify that when product name field is empty, then after clicking on OK button the following
@@ -104,8 +104,8 @@ public class ProductValidationErrorMessagePageTest extends BaseDBTest {
             assertEquals(expectedColor, actualColoredString.getColor());
 
     }
-    @After
-    public void tearDown() throws Exception {
-        super.tearDown();
-    }
+	@After
+	public void tearDown() {
+		cleanDataBase();
+	}
 }
