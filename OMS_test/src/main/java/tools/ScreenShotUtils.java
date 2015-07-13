@@ -21,22 +21,27 @@ import java.util.Map;
  */
 public class ScreenShotUtils extends TestWatcher {
 	private WebDriver driver;
+    private static Cloudinary cloudinary;
 	private static final String SCREEN_SHOT_CATALOG = "logs/";
-	private static Cloudinary cloudinary;
+    private static final String CLOUD_NAME_VALUE = PropertiesProvider.getProperty("cloudinary.cloud.name");
+    private static final String API_SECRET_VALUE = PropertiesProvider.getProperty("cloudinary.api.secret");
+    private static final String API_KEY_VALUE = PropertiesProvider.getProperty("cloudinary.api.key");
+    private static final String CLOUD_NAME = "cloud_name";
+    private static final String API_SECRET = "api_secret";
+    private static final String API_KEY = "api_key";
 
-	static {
+    static {
 		cloudinary = new Cloudinary(new HashMap<String, Object>() {
 			{
-				put("cloud_name", "ch-031");
-				put("api_secret", "U3CRczVh1BN1OZpzircEL5fMNhM");
-				put("api_key", "681724576471196");
+				put(CLOUD_NAME, CLOUD_NAME_VALUE);
+				put(API_SECRET, API_SECRET_VALUE);
+				put(API_KEY, API_KEY_VALUE);
 			}
 		});
 	}
-
 	private static Logger LOG = LoggerFactory.getLogger(ScreenShotUtils.class);
 
-	public ScreenShotUtils(WebDriver driver) {
+    public ScreenShotUtils(WebDriver driver) {
 		this.driver = driver;
 	}
 

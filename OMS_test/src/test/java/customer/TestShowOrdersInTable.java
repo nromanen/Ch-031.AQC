@@ -40,7 +40,6 @@ public class TestShowOrdersInTable extends BaseTest {
 	
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
-	static Logger log = LoggerFactory.getLogger(TestShowOrdersInTable.class);
 	CustomerOrderingPage ordering;
 	
 	 @Before
@@ -79,7 +78,6 @@ public class TestShowOrdersInTable extends BaseTest {
 	@Test
 	public void testChangeShowTenOrFiveItemsLink(){  
 		
-		log.info("------testChangeShowTenOrFiveItemsLink------");	
 		ordering.clickShowTenItems();
 		boolean result1 = ordering.findShowFiveItemsLink();
 		assertTrue(result1);
@@ -87,29 +85,24 @@ public class TestShowOrdersInTable extends BaseTest {
 		ordering.clickShowFiveItems();
 		boolean result2 = ordering.findShowTenItemsLink();
 		assertTrue(result2);
-		log.info("----testChangeShowTenOrFiveItemsLink pass----");
-        
+
 	}
 	
 	@Test
 	public void testClickShowFiveItemsLink(){ 
 		
-		log.info("------testClickShowFiveItemsLink------");
 		ordering.clickShowTenItems();
 		ordering.clickShowFiveItems();
 		int result = ordering.getCountOfOrdersInTable();	
 		assertEquals(5, result);	
-		log.info("----testClickShowFiveItemsLink pass----");
 	}
 	
 	@Test
 	public void testClickShowTenItemsLink(){ 
 		
-		log.info("------testClickShowTenItemsLink------");
 		ordering.clickShowTenItems();
 		int result = ordering.getCountOfOrdersInTable();
 		assertEquals(10, result);	
-		log.info("----testClickShowTenItemsLink pass----");
 	}
 	
 	@After

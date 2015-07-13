@@ -16,8 +16,6 @@ public class TestMerchandiserOrderingPageFunctionality extends BaseTest {
 	private static String MERCHANDISER_PASSWORD = "qwerty";
 	private static String TEST_ORDER_NAME = "OrderName11";
 	private MerchandiserOrderingPage merchOrderingPage;
-	static Logger LOG = LoggerFactory
-			.getLogger(TestMerchandiserEditOrder.class);
 
 	@Before
 	public void setUp() {

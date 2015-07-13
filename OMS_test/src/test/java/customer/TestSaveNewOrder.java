@@ -30,23 +30,18 @@ import static org.junit.Assert.assertEquals;
  *
  */
 public class TestSaveNewOrder extends BaseTest {
-
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
-
 	private static final String SELECTED_ASSIGNEE = "merch1";
 	private static final String ENTERED_PREFERABLE_DELIVERY_DATE = "10/07/2015";
 	String productName = "product1";
 	String productDescription = "product description";
 	String productPrice = "100.0";
-	
-	static Logger LOG = LoggerFactory.getLogger(TestSaveNewOrder.class);
-
 	CustomerOrderingPage ordering;
 	
 	 @Before
 	    public void setUp() {
-			initDataBase("data/productData.xml");
+			initDataBase("data/initProduct.xml");
 			super.setUp();
 			basePage = new BasePage(driver);
 	        UserInfoPage userInfoPage = basePage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);

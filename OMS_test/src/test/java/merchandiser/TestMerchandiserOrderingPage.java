@@ -30,9 +30,7 @@ public class TestMerchandiserOrderingPage extends BaseTest {
 	private static String COLUMN_EDIT_TEXT_FROM_SRS = "Edit";
 	private static String COLUMN_DELETE_TEXT_FROM_SRS = "Delete";
 	private static MerchandiserOrderingPage MERCH_ORDERING_PAGE;
-	static Logger LOG = LoggerFactory
-			.getLogger(TestMerchandiserEditOrder.class);
-	
+
 	@Before
 	public void setUp(){
 		super.setUp();

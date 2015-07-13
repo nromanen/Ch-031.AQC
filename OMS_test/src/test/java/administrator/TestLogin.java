@@ -17,7 +17,6 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestLogin extends BaseTest {
 	private Browser browser;
-	private static final int TIMEOUT = 2;
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD = "qwerty";
 	private static final String USER_NAME_FOR_SUPERVISOR = "supervisor1";

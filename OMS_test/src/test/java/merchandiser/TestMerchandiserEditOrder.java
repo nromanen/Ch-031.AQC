@@ -17,10 +17,6 @@ public class TestMerchandiserEditOrder extends BaseTest {
 	private static String TEST_ORDER_NAME = "OrderName12";
 	private static String TEST_DELIVERY_DATE = "30/06/2015";
 	private MerchandiserOrderingPage merchOrderingPage;
-	static Logger LOG = LoggerFactory
-			.getLogger(TestMerchandiserEditOrder.class);
-
-
 
 
 	@Before
@@ -34,7 +30,6 @@ public class TestMerchandiserEditOrder extends BaseTest {
 
 	@Test
 	public void testEditOrderChangeDeliveryDate() {
-		LOG.info("Start of test testEditOrderChangeDeliveryDate ");
 		merchOrderingPage
 				.findSearchForOrderByValueLinkAndSenKey(TEST_ORDER_NAME);
 		merchOrderingPage.findApplyButtonByXPathLocatorAndClick();
@@ -46,7 +41,6 @@ public class TestMerchandiserEditOrder extends BaseTest {
 		merchOrderingPage.findSaveButtonAndClick();
 		assertEquals(TEST_DELIVERY_DATE,
 				merchOrderingPage.findDeliveryDate1OrderAndGetText());
-		LOG.info("End of test for testEditOrderChangeDeliveryDate");
 
 	}
 	

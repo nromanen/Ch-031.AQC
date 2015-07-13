@@ -15,30 +15,17 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class DBUnitConfig{
+
     private Properties prop;
     protected IDataSet[] beforeData;
     private static final Logger logger = LoggerFactory.getLogger(DBUnitConfig.class);
     private IDatabaseTester tester;
     private IOperationListener operationListener;
+    private final String DB_DRIVER_CLASS = PropertiesProvider.getProperty("db.driver");
+    private final String DB_CONNECTION_URL = PropertiesProvider.getProperty("db.url");
+    private final String DB_USERNAME = PropertiesProvider.getProperty("db.username");
+    private final String DB_PASSWORD = PropertiesProvider.getProperty("db.password");
 
-
-    public DBUnitConfig() {
-
-        prop = new Properties();
-        try {
-            prop.load(Thread.currentThread()
-                    .getContextClassLoader().getResourceAsStream("db.config.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, prop.getProperty("db.driver"));
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, prop.getProperty("db.url"));
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, prop.getProperty("db.username"));
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, prop.getProperty("db.password"));
-        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_SCHEMA, "");
-
-    }
 
     protected FlatXmlDataSet getDataFromFile(String fileName)  {
         try {
@@ -87,7 +74,7 @@ public class DBUnitConfig{
      * @throws Exception
      */
     protected IDatabaseTester newDatabaseTester() throws Exception {
-        return new PropertiesBasedJdbcDatabaseTester();
+        return new JdbcDatabaseTester(DB_DRIVER_CLASS, DB_CONNECTION_URL, DB_USERNAME, DB_PASSWORD);
     }
 
     /**

@@ -16,17 +16,17 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest {
 
 	private DBUnitConfig dbUnitConfig;
-
-	private static final String BASEURL = "http://localhost:8083/OMS/";
-	private static final int TIMEOUT = 30;
-	protected static WebDriver driver;// = new FirefoxDriver();
+	private static final String BASEURL = PropertiesProvider.getProperty("base.url");
+	private static final int TIMEOUT = Integer.parseInt(PropertiesProvider.getProperty("time.out"));
+	protected static WebDriver driver;
 	protected BasePage basePage;
 	protected static EntityManager em = Persistence.createEntityManagerFactory(
 			"persistence").createEntityManager();
+    private static String webdriverName = PropertiesProvider.getProperty("webdriver.name");
 
 	@BeforeClass
 	public static void beforeClassSetUp() {
-		driver = new FirefoxDriver();
+		driver = WebDriverFactory.getDriver(webdriverName);
 	}
 
 	@Before

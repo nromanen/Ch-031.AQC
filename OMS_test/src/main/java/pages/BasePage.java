@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import pages.auth.UserInfoPage;
 import tools.Browser;
+import tools.PropertiesProvider;
 
 import java.io.IOException;
 
@@ -10,7 +11,7 @@ public class BasePage {
 //    protected WebDriver driver;
     protected Browser browser;
 
-    private static final String BASEURL = "http://localhost:8080/OMS/";
+    private static final String BASEURL = PropertiesProvider.getProperty("base.url");
     private static final String LOGIN_INPUT_NAME_LOCATOR = "j_username";
     private static final String PASSWORD_INPUT_NAME_LOCATOR = "j_password";
     private static final String SUBMIT_BUTTON_NAME_LOCATOR = "submit";
