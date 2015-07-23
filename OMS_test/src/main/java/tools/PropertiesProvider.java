@@ -1,12 +1,11 @@
 package tools;
 
-import org.dbunit.PropertiesBasedJdbcDatabaseTester;
-
 import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Created by Olya on 12.07.2015.
+ * This class reads data from properties files.
+ * Provided a single entry point for other classes for getting properties values.
  */
 public class PropertiesProvider {
     private static Properties prop;
@@ -23,9 +22,13 @@ public class PropertiesProvider {
         }
     }
 
-    public static String getProperty(String key) {
-        return prop.getProperty(key);
+    /**
+     * Return property value for property with name "propertyName" .
+     *
+     * @param propertyName it is the property name.
+     * @return property value.
+     */
+    public static String getProperty(String propertyName) {
+        return prop.getProperty(propertyName);
     }
-
-
 }

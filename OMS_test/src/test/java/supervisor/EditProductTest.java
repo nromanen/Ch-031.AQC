@@ -9,11 +9,11 @@ import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
 import tools.BaseTest;
 import tools.TableRow;
+
 import static org.junit.Assert.assertEquals;
 
 /**
  * This test case is designed for testing the Edit Product functionality.
- * @author Olya.
  */
 public class EditProductTest extends BaseTest {
     private BasePage basePage;
@@ -26,15 +26,15 @@ public class EditProductTest extends BaseTest {
     private static final String EDIT_PRODUCT_NAME = "1NotName";
     private static final String PRODUCT_DESCRIPTION = "Very yellow";
     private static final String PRODUCT_PRICE = "14.0";
-    
+
     @Before
-	public void setUp() {
-		initDataBase("data/productData.xml");
-		super.setUp();
-		basePage = new BasePage(driver);
+    public void setUp() {
+        initDataBase("data/productData.xml");
+        super.setUp();
+        basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
         itemManagementPage = userInfoPage.selectItemManagementTab();
-	}
+    }
 
     @Test
     public void testEditName() {
@@ -66,8 +66,8 @@ public class EditProductTest extends BaseTest {
         assertEquals(EDIT_PRODUCT_PRICE, row.getNthColumnValue(2));
     }
 
-	@After
-	public void tearDown() {
-		cleanDataBase();
-	}
+    @After
+    public void tearDown() {
+        cleanDataBase();
+    }
 }

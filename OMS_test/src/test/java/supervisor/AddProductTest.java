@@ -11,8 +11,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * This test case is designed for testing the Add Product functionality.
- *
- * @author Olya.
  */
 public class AddProductTest extends BaseTest {
 

@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * This test case is designed for validation of error messages on Add Product page.
- * @author Olya.
  */
 public class ProductValidationErrorMessagePageTest extends BaseTest {
     private BasePage basePage;
@@ -27,19 +26,19 @@ public class ProductValidationErrorMessagePageTest extends BaseTest {
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
     private static final String PRODUCT_PRICE_RANGE_VALUE = "1765";
-    private static final String PRODUCT_PRICE_CHARACTERS_VALUE ="#4rr";
+    private static final String PRODUCT_PRICE_CHARACTERS_VALUE = "#4rr";
     static Logger log = LoggerFactory.getLogger(ProductValidationErrorMessagePageTest.class);
 
 
     @Before
     public void setUp() {
-		initDataBase("data/productData.xml");
-		super.setUp();
-		basePage = new BasePage(driver);
+        initDataBase("data/productData.xml");
+        super.setUp();
+        basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
         itemManagementPage = userInfoPage.selectItemManagementTab();
-	}
-    
+    }
+
     @Test
     /**
      * This test verify that when product name field is empty, then after clicking on OK button the following
@@ -77,15 +76,15 @@ public class ProductValidationErrorMessagePageTest extends BaseTest {
      */
     public void testProductPriceCharactersErrorMessage() {
 
-            AddProductPage addProductPage = itemManagementPage.goToAddProduct();
-            addProductPage.setProductPriceValue(PRODUCT_PRICE_CHARACTERS_VALUE);
-            addProductPage.clickOkButton();
-            ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
-            String expectedMessage = "Please enter only numbers!"; //the following error message is appear: "Please enter double value!"
-            Color expectedColor = Color.red;
-            assertEquals(expectedMessage, actualColoredString.getString());
-            assertEquals(expectedColor, actualColoredString.getColor());
-        }
+        AddProductPage addProductPage = itemManagementPage.goToAddProduct();
+        addProductPage.setProductPriceValue(PRODUCT_PRICE_CHARACTERS_VALUE);
+        addProductPage.clickOkButton();
+        ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
+        String expectedMessage = "Please enter only numbers!"; //the following error message is appear: "Please enter double value!"
+        Color expectedColor = Color.red;
+        assertEquals(expectedMessage, actualColoredString.getString());
+        assertEquals(expectedColor, actualColoredString.getColor());
+    }
 
     @Test // A test fails!
     /**
@@ -93,19 +92,20 @@ public class ProductValidationErrorMessagePageTest extends BaseTest {
      * the following error message will appear in red color "Please enter price in range of 1-999".
      */
     public void testProductPriceRangeErrorMessage() {
-            AddProductPage addProductPage = itemManagementPage.goToAddProduct();
-            addProductPage.setProductNameValue("checking");
-            addProductPage.setProductPriceValue(PRODUCT_PRICE_RANGE_VALUE);
-            addProductPage.clickOkButton();
-            ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
-            String expectedMessage = "Please enter price in range of 1-999!";    // No error message!
-            Color expectedColor = Color.red;
-            assertEquals(expectedMessage, actualColoredString.getString());
-            assertEquals(expectedColor, actualColoredString.getColor());
+        AddProductPage addProductPage = itemManagementPage.goToAddProduct();
+        addProductPage.setProductNameValue("checking");
+        addProductPage.setProductPriceValue(PRODUCT_PRICE_RANGE_VALUE);
+        addProductPage.clickOkButton();
+        ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
+        String expectedMessage = "Please enter price in range of 1-999!";    // No error message!
+        Color expectedColor = Color.red;
+        assertEquals(expectedMessage, actualColoredString.getString());
+        assertEquals(expectedColor, actualColoredString.getColor());
 
     }
-	@After
-	public void tearDown() {
-		cleanDataBase();
-	}
+
+    @After
+    public void tearDown() {
+        cleanDataBase();
+    }
 }

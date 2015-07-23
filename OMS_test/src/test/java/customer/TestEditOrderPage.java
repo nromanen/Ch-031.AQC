@@ -11,6 +11,7 @@ import pages.auth.UserInfoPage;
 import pages.ordering.*;
 import tools.BaseTest;
 import tools.CheckTableValue;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -21,21 +22,21 @@ public class TestEditOrderPage extends BaseTest {
 
     @Before
     public void setUp() {
-		initDataBase("data/partial.xml");
-		super.setUp();
-		basePage = new BasePage(driver);
-		UserInfoPage userInfoPage = basePage.login(LOGIN, PASS);
+        initDataBase("data/partial.xml");
+        super.setUp();
+        basePage = new BasePage(driver);
+        UserInfoPage userInfoPage = basePage.login(LOGIN, PASS);
         orderPage = userInfoPage.goToOrderingTab();
-	}
+    }
 
     @Test
-    public  void testEditOrderStatus() throws javax.script.ScriptException{
+    public void testEditOrderStatus() throws javax.script.ScriptException {
         EditOrderPage eo = orderPage.goTo1EditOrder();
         assertTrue("Can't edit order", eo.isAddItem() == true);
     }
 
     @Test
-    public void testAddItem() throws Exception{
+    public void testAddItem() throws Exception {
         EditOrderPage eo = orderPage.goTo1EditOrder();
         AddItemPage add = eo.addItemClick();
         add.selectFirstItem();
@@ -47,7 +48,7 @@ public class TestEditOrderPage extends BaseTest {
     }
 
     @Test
-    public void testSaveButton() throws Exception{
+    public void testSaveButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         String expectedOrderNumber = "100";
         editOrderPage.setOrderNumber(expectedOrderNumber);
@@ -63,7 +64,7 @@ public class TestEditOrderPage extends BaseTest {
     }
 
     @Test
-    public void testVisaOrderButton() throws Exception{
+    public void testVisaOrderButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("100");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -80,7 +81,7 @@ public class TestEditOrderPage extends BaseTest {
     }
 
     @Test
-    public void testMasterCardOrderButton() throws Exception{
+    public void testMasterCardOrderButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("101");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -97,7 +98,7 @@ public class TestEditOrderPage extends BaseTest {
     }
 
     @Test
-    public void testAmericanExpressOrderButton() throws Exception{
+    public void testAmericanExpressOrderButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("102");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -114,7 +115,7 @@ public class TestEditOrderPage extends BaseTest {
     }
 
     @Test
-    public void testMaestroOrderButton() throws Exception{
+    public void testMaestroOrderButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
 
         editOrderPage.setOrderNumber("103");
@@ -134,10 +135,10 @@ public class TestEditOrderPage extends BaseTest {
     }
 
 
-	@After
-	public void tearDown() {
-		cleanDataBase();
-	}
+    @After
+    public void tearDown() {
+        cleanDataBase();
+    }
 
 
 }

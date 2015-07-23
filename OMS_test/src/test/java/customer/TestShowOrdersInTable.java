@@ -110,24 +110,24 @@ public class TestShowOrdersInTable extends BaseTest {
 		cleanDataBase();
 	}
 	
-/*	@After  
-	public void tearDown() {
-
-		try{
-
-			List<OrderItem>  orderItems = OrderItemService.getAll(); 
-					
-		  		for(OrderItem orderItem : orderItems){ 
-				OrderItemService.delete(orderItem);					
-			}
-		    }
-			catch (Exception e ){	
-				log.debug(e.getMessage());
-			}
-		try {
-			DatabaseOperation.DELETE.execute(getConnection(), getDataSet());
-		}  catch (Exception e) {
-			log.debug(e.getMessage());
-		}				
-	}*/
+//	@After
+//	public void tearDown() {
+//
+//		try{
+//
+//			List<OrderItem>  orderItems = OrderItemService.getAll();
+//
+//		  		for(OrderItem orderItem : orderItems){
+//				OrderItemService.delete(orderItem);
+//			}
+//		    }
+//			catch (Exception e ){
+//				log.debug(e.getMessage());
+//			}
+//		try {
+//			DatabaseOperation.DELETE.execute(getConnection(), getDataSet());
+//		}  catch (Exception e) {
+//			log.debug(e.getMessage());
+//		}
+//	}
 }
