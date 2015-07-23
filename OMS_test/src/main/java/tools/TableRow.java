@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 
 /**
  * This class represents a HTML table row. It provides an easy to use method for retrieving data from columns.
- * @author Olya.
  */
 public class TableRow {
 
@@ -18,12 +17,17 @@ public class TableRow {
     /**
      * This method returns the text value on the n-th columns in the row.
      * @param columnIndex - the index of the column which text data will be returned.
-     * @return n-th column text date.
+     * @return n-th column text data.
      */
     public String getNthColumnValue(int columnIndex) {
         return getNthColumnElement(columnIndex).getText();
     }
 
+    /**
+     * This method returns the element on the n-th columns in the row.
+     * @param columnIndex - the index of the column which will be returned.
+     * @return n-th column WebElement.
+     */
     public WebElement getNthColumnElement(int columnIndex) {
         return rowWebElement.findElements(By.tagName("td")).get(columnIndex);
     }

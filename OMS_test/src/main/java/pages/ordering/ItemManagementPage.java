@@ -3,7 +3,6 @@ package pages.ordering;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
 import tools.TableRow;
@@ -13,16 +12,15 @@ import java.util.List;
 
 /**
  * This class describe Item Management Page functionality and provides a way to use it.
+ *
  * @author Olya.
  */
 public class ItemManagementPage extends BasePage {
 
     private static final String FILTER_BY_SELECT_BOX_ID_LOCATOR = "field";
-    private static final String PRODUCT_TABLE_ID_LOCATOR = "table";
     private static final String TABLE_ROW_TAG_NAME_LOCATOR = "tr";
     private static final String TABLE_HEADER_TAG_NAME_LOCATOR = "th";
     private static final String SHOW_ITEM_LINK_X_PATH_LOCATOR = "//div[@id='list']/p/a";
-    private static final String CREATE_REPORT_LINK_TEXT_LOCATOR = "create report";
     private static final String ADD_PRODUCT_LINK_TEXT_LOCATOR = "Add Product";
     private static final int DELETE_COLUMN_INDEX = 4;
     private static final String A_TAG_NAME = "a";
@@ -108,7 +106,7 @@ public class ItemManagementPage extends BasePage {
      */
     public TableRow findProductByNameInTable(String productName) {
         List<WebElement> rows = browser.findElementsByTagName(TABLE_ROW_TAG_NAME_LOCATOR);
-        for (int i = 1; i< rows.size(); i++) {
+        for (int i = 1; i < rows.size(); i++) {
             WebElement webElement = rows.get(i);
 
             TableRow tableRow = new TableRow(webElement);
@@ -126,20 +124,35 @@ public class ItemManagementPage extends BasePage {
      */
     public AddProductPage goToAddProduct() {
         browser.findElementByLinkText(ADD_PRODUCT_LINK_TEXT_LOCATOR).click();
-        return PageFactory.initElements(browser.getDriver(), AddProductPage.class);
+        return new AddProductPage(browser.getDriver());
     }
 
+    /**
+     * Clicks on the Edit link on the product with name productName.
+     *
+     * @param productName it is the name of the product we need to edit.
+     * @return {@link pages.ordering.AddProductPage}.
+     */
     public AddProductPage clickEditLinkOnProduct(String productName) {
         findProductByNameInTable(productName).getNthColumnElement(EDIT_COLUMN_INDEX).findElement(By.tagName(A_TAG_NAME)).click();
-        return PageFactory.initElements(browser.getDriver(), AddProductPage.class);
+        return new AddProductPage(browser.getDriver());
     }
 
+    /**
+     * Clicks on the Delete link on the product with name productName and confirm deletion.
+     *
+     * @param productName it is the name of the product we need to delete.
+     */
     public void clickDeleteLinkOnProductAndAccept(String productName) {
         findProductByNameInTable(productName).getNthColumnElement(DELETE_COLUMN_INDEX).findElement(By.tagName(A_TAG_NAME)).click();
         browser.alertAccept();
-
     }
 
+    /**
+     * Clicks on the Delete link on the product with name productName and do not confirm deletion.
+     *
+     * @param productName it is the name of the product we need to delete.
+     */
     public void clickDeleteLinkOnProductAndDismiss(String productName) {
         findProductByNameInTable(productName)
                 .getNthColumnElement(DELETE_COLUMN_INDEX)

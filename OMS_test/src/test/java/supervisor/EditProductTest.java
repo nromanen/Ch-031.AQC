@@ -1,6 +1,5 @@
 package supervisor;
 
-import org.dbunit.dataset.IDataSet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,16 +7,15 @@ import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
-import tools.BaseDBTest;
+import tools.BaseTest;
 import tools.TableRow;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * This test case is designed for testing the Edit Product functionality.
- * @author Olya.
  */
-public class EditProductTest extends BaseDBTest {
+public class EditProductTest extends BaseTest {
     private BasePage basePage;
     private ItemManagementPage itemManagementPage;
     private static final String EDIT_PRODUCT_DESCRIPTION = "NoDescription";
@@ -25,20 +23,17 @@ public class EditProductTest extends BaseDBTest {
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
     private static final String PRODUCT_NAME = "lemon";
-    private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
     private static final String EDIT_PRODUCT_NAME = "1NotName";
     private static final String PRODUCT_DESCRIPTION = "Very yellow";
     private static final String PRODUCT_PRICE = "14.0";
 
-
     @Before
-    public void setUp() throws Exception {
-        beforeData = new IDataSet[]{getDataFromFile("data/productData.xml")};
+    public void setUp() {
+        initDataBase("data/productData.xml");
         super.setUp();
         basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
         itemManagementPage = userInfoPage.selectItemManagementTab();
-
     }
 
     @Test
@@ -72,7 +67,7 @@ public class EditProductTest extends BaseDBTest {
     }
 
     @After
-    public void tearDown() throws Exception {
-        super.tearDown();
+    public void tearDown() {
+        cleanDataBase();
     }
 }

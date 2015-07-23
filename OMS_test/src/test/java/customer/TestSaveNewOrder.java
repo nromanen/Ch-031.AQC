@@ -13,14 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import entity.OrderItem;
+import pages.BasePage;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.CustomerAddProductsToOrderPage;
 import pages.ordering.CustomerCreateOrderPage;
 import pages.ordering.CustomerOrderingPage;
-import tools.BaseDBTest;
+import tools.BaseTest;
+import tools.DBUnitConfig;
 import tools.OrderItemService;
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -28,22 +29,26 @@ import static org.junit.Assert.assertEquals;
  * @author Olesia
  *
  */
-public class TestSaveNewOrder extends BaseDBTest {
-
+public class TestSaveNewOrder extends BaseTest {
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
-
 	private static final String SELECTED_ASSIGNEE = "merch1";
 	private static final String ENTERED_PREFERABLE_DELIVERY_DATE = "10/07/2015";
 	String productName = "product1";
 	String productDescription = "product description";
 	String productPrice = "100.0";
-	
-	static Logger LOG = LoggerFactory.getLogger(TestSaveNewOrder.class);
-
 	CustomerOrderingPage ordering;
+	
+	 @Before
+	    public void setUp() {
+			initDataBase("data/initProduct.xml");
+			super.setUp();
+			basePage = new BasePage(driver);
+	        UserInfoPage userInfoPage = basePage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
+	        ordering = userInfoPage.switchToOrderingPage();
+		}
 
-	@Before
+	/*@Before
 	public void setUp() throws Exception {	
 
 		IDataSet orderData;
@@ -65,7 +70,7 @@ public class TestSaveNewOrder extends BaseDBTest {
 		LoginPage loginPage = new LoginPage(driver);
 		UserInfoPage userInfo = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
 		ordering = userInfo.switchToOrderingPage();		
-	}
+	}*/
 
 	@Test
 	public void testSwitchToOrderingPage(){
@@ -183,6 +188,11 @@ public class TestSaveNewOrder extends BaseDBTest {
 	}
 	
 	@After
+	public void tearDown() {
+		cleanDataBase();
+	}
+	
+/*	@After
 	public void tearDown() { 
 
 		try{
@@ -203,5 +213,5 @@ public class TestSaveNewOrder extends BaseDBTest {
 			(Exception e ){	
 				System.out.println(e.getMessage());			
 		}		
-	}	
+	}	*/
 }

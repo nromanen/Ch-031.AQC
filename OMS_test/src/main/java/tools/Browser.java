@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Selenium WebDriver wrapper which have a set of util method to help work with the web page.
+ */
 public class Browser {
     private WebDriver driver;
 
@@ -23,8 +26,8 @@ public class Browser {
         return driver;
     }
 
-    public String getCurrentUrl () {
-    	return driver.getCurrentUrl();
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 
     public WebElement findElementByName(String locator) {
@@ -88,16 +91,16 @@ public class Browser {
     }
 
     public void screenShot(String fileName) throws IOException {
-        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(fileName));
     }
 
-    public void alertAccept(){
+    public void alertAccept() {
         Alert alert = driver.switchTo().alert();
         alert.accept();
     }
 
-    public void alertDismiss(){
+    public void alertDismiss() {
         Alert alert = driver.switchTo().alert();
         alert.dismiss();
     }

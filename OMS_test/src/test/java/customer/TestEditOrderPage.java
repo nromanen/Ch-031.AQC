@@ -5,53 +5,38 @@
 
 package customer;
 
-import org.dbunit.dataset.DataSetException;
-import org.dbunit.dataset.IDataSet;
 import org.junit.*;
 import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.*;
-import tools.BaseDBTest;
+import tools.BaseTest;
 import tools.CheckTableValue;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class TestEditOrderPage extends BaseDBTest {
+public class TestEditOrderPage extends BaseTest {
     private OrderPage orderPage;
     private static final String LOGIN = "customer1";
     private static final String PASS = "qwerty";
 
-
     @Before
-    public  void setUp() throws Exception {
-        IDataSet productData;
-        try {
-            productData = getDataFromFile("data/partial.xml");
-            beforeData = new IDataSet[] {productData};
-        } catch(DataSetException e){
-            e.printStackTrace();
-        }
-
-        try {
-            super.setUp();
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-
+    public void setUp() {
+        initDataBase("data/partial.xml");
+        super.setUp();
+        basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(LOGIN, PASS);
         orderPage = userInfoPage.goToOrderingTab();
     }
 
     @Test
-    public  void testEditOrderStatus() throws javax.script.ScriptException{
+    public void testEditOrderStatus() throws javax.script.ScriptException {
         EditOrderPage eo = orderPage.goTo1EditOrder();
         assertTrue("Can't edit order", eo.isAddItem() == true);
     }
 
     @Test
-    public void testAddItem() throws Exception{
+    public void testAddItem() throws Exception {
         EditOrderPage eo = orderPage.goTo1EditOrder();
         AddItemPage add = eo.addItemClick();
         add.selectFirstItem();
@@ -63,7 +48,7 @@ public class TestEditOrderPage extends BaseDBTest {
     }
 
     @Test
-    public void testSaveButton() throws Exception{
+    public void testSaveButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         String expectedOrderNumber = "100";
         editOrderPage.setOrderNumber(expectedOrderNumber);
@@ -79,7 +64,7 @@ public class TestEditOrderPage extends BaseDBTest {
     }
 
     @Test
-    public void testVisaOrderButton() throws Exception{
+    public void testVisaOrderButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("100");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -96,7 +81,7 @@ public class TestEditOrderPage extends BaseDBTest {
     }
 
     @Test
-    public void testMasterCardOrderButton() throws Exception{
+    public void testMasterCardOrderButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("101");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -113,7 +98,7 @@ public class TestEditOrderPage extends BaseDBTest {
     }
 
     @Test
-    public void testAmericanExpressOrderButton() throws Exception{
+    public void testAmericanExpressOrderButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
         editOrderPage.setOrderNumber("102");
         editOrderPage.setPreferableDate("10/05/2015");
@@ -130,7 +115,7 @@ public class TestEditOrderPage extends BaseDBTest {
     }
 
     @Test
-    public void testMaestroOrderButton() throws Exception{
+    public void testMaestroOrderButton() throws Exception {
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
 
         editOrderPage.setOrderNumber("103");
@@ -151,8 +136,8 @@ public class TestEditOrderPage extends BaseDBTest {
 
 
     @After
-    public  void tearDown() throws Exception{
-        super.tearDown();
+    public void tearDown() {
+        cleanDataBase();
     }
 
 

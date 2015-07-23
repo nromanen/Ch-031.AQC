@@ -1,10 +1,6 @@
 package supervisor;
 
-import org.junit.After;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
@@ -15,8 +11,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * This test case is designed for testing the Add Product functionality.
- *
- * @author Olya.
  */
 public class AddProductTest extends BaseTest {
 
