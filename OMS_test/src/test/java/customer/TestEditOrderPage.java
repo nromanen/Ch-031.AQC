@@ -30,11 +30,19 @@ public class TestEditOrderPage extends BaseTest {
         orderPage = userInfoPage.goToOrderingTab();
     }
 
+    /**
+     * Checks if there is editable orders
+     */
+
     @Test
     public  void testEditOrderStatus() throws javax.script.ScriptException{
         EditOrderPage eo = orderPage.goTo1EditOrder();
         assertTrue("Can't edit order", eo.isAddItem() == true);
     }
+
+    /**
+     * Checks if added item's quantity is right
+     */
 
     @Test
     public void testAddItem() throws Exception{
@@ -47,6 +55,10 @@ public class TestEditOrderPage extends BaseTest {
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Item was added, quantity is wrong", itemQuantity, tableValue.findValue("list", 2, 6));
     }
+
+    /**
+     * Checks if order saves properly
+     */
 
     @Test
     public void testSaveButton() throws Exception{
@@ -64,6 +76,10 @@ public class TestEditOrderPage extends BaseTest {
         assertEquals("Assignee value is wrong", expectedAssignee, editOrderPage.checkAssignee());
     }
 
+    /**
+     * Checks ordering by using Visa
+     */
+
     @Test
     public void testVisaOrderButton() throws Exception{
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
@@ -80,6 +96,10 @@ public class TestEditOrderPage extends BaseTest {
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", 2, 5));
     }
+
+    /**
+     * Checks ordering by using MasterCard
+     */
 
     @Test
     public void testMasterCardOrderButton() throws Exception{
@@ -99,6 +119,10 @@ public class TestEditOrderPage extends BaseTest {
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", 2, 5));
     }
 
+    /**
+     * Checks ordering by using AmericanExpress
+     */
+
     @Test
     public void testAmericanExpressOrderButton() throws Exception{
         EditOrderPage editOrderPage = orderPage.goTo1EditOrder();
@@ -115,6 +139,10 @@ public class TestEditOrderPage extends BaseTest {
         CheckTableValue tableValue = new CheckTableValue(driver);
         assertEquals("Order doesn't have ordered status", "Ordered", tableValue.findValue("list", 2, 5));
     }
+
+    /**
+     * Checks ordering by using Maestro Card
+     */
 
     @Test
     public void testMaestroOrderButton() throws Exception{

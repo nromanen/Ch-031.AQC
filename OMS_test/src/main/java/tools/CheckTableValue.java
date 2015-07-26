@@ -30,6 +30,12 @@ public class CheckTableValue {
         list.toArray(value);
         return value[tdId];*/
         return mas;
+
+
+        /**
+         * We must use JavaScript for Chrome because there is a bug while working with XPath's property text().
+         * Please, comment Xpath part of function to use it
+         */
       /*  JavascriptExecutor executor = (JavascriptExecutor) driver;
 
         String js ="function find(){"+
