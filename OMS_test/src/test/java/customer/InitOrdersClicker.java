@@ -1,31 +1,14 @@
 package customer;
 
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.database.QueryDataSet;
-import org.dbunit.dataset.FilteredDataSet;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-import pages.auth.LoginPage;
-import pages.auth.UserInfoPage;
 import pages.ordering.*;
-import tools.BaseDBTest;
-import tools.DBUnitConfig;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.concurrent.TimeUnit;
+import tools.BaseTest;
 
 /**
  *  Used for creating an initial product, orders and orderItems in xml
  */
-public class InitOrdersClicker extends BaseDBTest {
+public class InitOrdersClicker extends BaseTest {
 	private static WebDriver driver;
 	//private static final String HOME_PAGE = "http://localhost:8080/OMS/login.htm";
 	private static final String USER_NAME_FOR_SUPERVISOR = "supervisor1";

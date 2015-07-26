@@ -1,15 +1,14 @@
 package supervisor;
 
-import org.dbunit.dataset.IDataSet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.AddProductPage;
 import pages.ordering.ItemManagementPage;
-import tools.BaseDBTest;
+import tools.BaseTest;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,30 +19,28 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * This test case is designed for testing of the Item Management view.
- * @author Olya.
  */
-public class SupervisorMainPageTest extends BaseDBTest {
+public class SupervisorMainPageTest extends BaseTest {
     private ItemManagementPage itemManagementPage;
     private static final String SUPERVISOR_LOGIN = "supervisor1";
     private static final String SUPERVISOR_PASSWORD = "qwerty";
-    static Logger log = LoggerFactory.getLogger(SupervisorMainPageTest.class);
 
 
     @Before
-    public void setUp() throws Exception {
-        beforeData = new IDataSet[] {getDataFromFile("data/productData.xml")};
+    public void setUp() {
+        initDataBase("data/productData.xml");
         super.setUp();
-        UserInfoPage userInfoPage = new UserInfoPage(driver);
-        userInfoPage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
+        basePage = new BasePage(driver);
+        UserInfoPage userInfoPage = basePage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
         itemManagementPage = userInfoPage.selectItemManagementTab();
     }
+
     @Test
     /**
      * This test verify that "Search by" drop-down list on ItemManagement page
      * have two options – "Name" and "Description" (according to SRS).
      */
     public void testFilterByValues() throws Exception {
-        log.info("------TestFilterByValues------");
         List<String> expectedValues = new ArrayList<String>();
         expectedValues.add("Name");
         expectedValues.add("Description");
@@ -52,8 +49,6 @@ public class SupervisorMainPageTest extends BaseDBTest {
         for (String actualValue : actualValues) {
             assertTrue(expectedValues.contains(actualValue));
         }
-
-        log.info("----TestFilterByValues pass----");
     }
 
     @Test
@@ -121,8 +116,7 @@ public class SupervisorMainPageTest extends BaseDBTest {
 
 
     @After
-    public void tearDown() throws Exception {
-        itemManagementPage.logout();
-        super.tearDown();
-        }
+    public void tearDown() {
+        cleanDataBase();
+    }
 }

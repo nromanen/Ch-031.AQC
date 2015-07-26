@@ -5,40 +5,27 @@
 
 package customer;
 
-import org.dbunit.dataset.DataSetException;
-import org.dbunit.dataset.IDataSet;
 import org.junit.*;
+import pages.BasePage;
 import pages.auth.UserInfoPage;
 import pages.ordering.*;
-import tools.BaseDBTest;
+import tools.BaseTest;
 import tools.CheckTableValue;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class TestEditOrderPage extends BaseDBTest {
+public class TestEditOrderPage extends BaseTest {
     private OrderPage orderPage;
     private static final String LOGIN = "customer1";
     private static final String PASS = "qwerty";
 
 
     @Before
-    public  void setUp() throws Exception {
-        IDataSet productData;
-        try {
-            productData = getDataFromFile("data/partial.xml");
-            beforeData = new IDataSet[] {productData};
-        } catch(DataSetException e){
-            e.printStackTrace();
-        }
-
-        try {
-            super.setUp();
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-
+    public  void setUp(){
+        initDataBase("data/partial.xml");
+        super.setUp();
+        basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(LOGIN, PASS);
         orderPage = userInfoPage.goToOrderingTab();
     }
@@ -151,9 +138,8 @@ public class TestEditOrderPage extends BaseDBTest {
 
 
     @After
-    public  void tearDown() throws Exception{
-        orderPage.logout();
-        super.tearDown();
+    public void tearDown() {
+        cleanDataBase();
     }
 
 

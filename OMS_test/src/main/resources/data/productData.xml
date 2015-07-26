@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <products IsProductActive ="1" productName ="potato" productDescription ="Very big" productPrice ="34" />
-    <products IsProductActive ="1" productName ="lemon" productDescription ="Very yellow" productPrice ="14" />
-    <products IsProductActive ="1" productName ="orange" productDescription ="Very sweet" productPrice ="9.5" />
-    <products IsProductActive ="1" productName ="tomato" productDescription ="Very red" productPrice ="12.75" />
-    <products IsProductActive ="1" productName ="banana" productDescription ="Very fresh" productPrice ="42.95" />
-    <products IsProductActive ="1" productName ="cabbage" productDescription ="Very fresh" productPrice ="27" />
-    <products IsProductActive ="1" productName ="carrot" productDescription ="Very long" productPrice ="17" />
-    <products IsProductActive ="1" productName ="onion" productDescription ="Very bitter" productPrice ="10" />
-    <products IsProductActive ="1" productName ="strawberry" productDescription ="Very sweet" productPrice ="50" />
-    <products IsProductActive ="1" productName ="raspberries" productDescription ="Very useful" productPrice ="50" />
+    <Products ID="1" IsProductActive ="1" productName ="potato" productDescription ="Very big" productPrice ="34" />
+    <Products ID="2" IsProductActive ="1" productName ="lemon" productDescription ="Very yellow" productPrice ="14" />
+    <Products ID="3" IsProductActive ="1" productName ="orange" productDescription ="Very sweet" productPrice ="9.5" />
+    <Products ID="4" IsProductActive ="1" productName ="tomato" productDescription ="Very red" productPrice ="12.75" />
+    <Products ID="5" IsProductActive ="1" productName ="banana" productDescription ="Very fresh" productPrice ="42.95" />
+    <Products ID="6" IsProductActive ="1" productName ="cabbage" productDescription ="Very fresh" productPrice ="27" />
+    <Products ID="7" IsProductActive ="1" productName ="carrot" productDescription ="Very long" productPrice ="17" />
+    <Products ID="8" IsProductActive ="1" productName ="onion" productDescription ="Very bitter" productPrice ="10" />
+    <Products ID="9" IsProductActive ="1" productName ="strawberry" productDescription ="Very sweet" productPrice ="50" />
+    <Products ID="10" IsProductActive ="1" productName ="raspberries" productDescription ="Very useful" productPrice ="50" />
 
 </dataset>

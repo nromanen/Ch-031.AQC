@@ -20,10 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import entity.OrderItem;
+import pages.BasePage;
 import pages.auth.LoginPage;
 import pages.auth.UserInfoPage;
 import pages.ordering.CustomerOrderingPage;
-import tools.BaseDBTest;
+import tools.BaseTest;
 import tools.DBUnitConfig;
 import tools.OrderItemService;
 
@@ -35,15 +36,22 @@ import tools.OrderItemService;
  *
  */
 
-public class TestShowOrdersInTable extends BaseDBTest {
-	
+public class TestShowOrdersInTable extends BaseTest {
+
 	private static final String USER_NAME_FOR_CUSTOMER = "customer1";
 	private static final String PASSWORD_FOR_CUSTOMER = "qwerty";
-	static Logger log = LoggerFactory.getLogger(TestShowOrdersInTable.class);
 	CustomerOrderingPage ordering;
 
-	
 	@Before
+	public void setUp() {
+		initDataBase("data/initOrders.xml");
+		super.setUp();
+		basePage = new BasePage(driver);
+		UserInfoPage userInfoPage = basePage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
+		ordering = userInfoPage.switchToOrderingPage();
+	}
+	
+/*	@Before
 	public void setUp()   {	 
 		 
 		IDataSet orderData;
@@ -65,62 +73,61 @@ public class TestShowOrdersInTable extends BaseDBTest {
 		LoginPage loginPage = new LoginPage(driver);
 		UserInfoPage userInfo = loginPage.login(USER_NAME_FOR_CUSTOMER, PASSWORD_FOR_CUSTOMER);
 		ordering = userInfo.switchToOrderingPage();
-	}
-		
+	}*/
+
 	@Test
-	public void testChangeShowTenOrFiveItemsLink(){  
-		
-		log.info("------testChangeShowTenOrFiveItemsLink------");	
+	public void testChangeShowTenOrFiveItemsLink(){
+
 		ordering.clickShowTenItems();
 		boolean result1 = ordering.findShowFiveItemsLink();
 		assertTrue(result1);
-		
+
 		ordering.clickShowFiveItems();
 		boolean result2 = ordering.findShowTenItemsLink();
 		assertTrue(result2);
-		log.info("----testChangeShowTenOrFiveItemsLink pass----");
-        
+
 	}
-	
+
 	@Test
-	public void testClickShowFiveItemsLink(){ 
-		
-		log.info("------testClickShowFiveItemsLink------");
+	public void testClickShowFiveItemsLink(){
+
 		ordering.clickShowTenItems();
 		ordering.clickShowFiveItems();
-		int result = ordering.getCountOfOrdersInTable();	
-		assertEquals(5, result);	
-		log.info("----testClickShowFiveItemsLink pass----");
+		int result = ordering.getCountOfOrdersInTable();
+		assertEquals(5, result);
 	}
-	
+
 	@Test
-	public void testClickShowTenItemsLink(){ 
-		
-		log.info("------testClickShowTenItemsLink------");
+	public void testClickShowTenItemsLink(){
+
 		ordering.clickShowTenItems();
 		int result = ordering.getCountOfOrdersInTable();
-		assertEquals(10, result);	
-		log.info("----testClickShowTenItemsLink pass----");
+		assertEquals(10, result);
 	}
-	
-	@After  
+
+	@After
 	public void tearDown() {
-
-		try{
-
-			List<OrderItem>  orderItems = OrderItemService.getAll(); 
-					
-		  		for(OrderItem orderItem : orderItems){ 
-				OrderItemService.delete(orderItem);					
-			}
-		    }
-			catch (Exception e ){	
-				log.debug(e.getMessage());
-			}
-		try {
-			DatabaseOperation.DELETE.execute(getConnection(), getDataSet());
-		}  catch (Exception e) {
-			log.debug(e.getMessage());
-		}				
+		cleanDataBase();
 	}
+
+//	@After
+//	public void tearDown() {
+//
+//		try{
+//
+//			List<OrderItem>  orderItems = OrderItemService.getAll();
+//
+//		  		for(OrderItem orderItem : orderItems){
+//				OrderItemService.delete(orderItem);
+//			}
+//		    }
+//			catch (Exception e ){
+//				log.debug(e.getMessage());
+//			}
+//		try {
+//			DatabaseOperation.DELETE.execute(getConnection(), getDataSet());
+//		}  catch (Exception e) {
+//			log.debug(e.getMessage());
+//		}
+//	}
 }
