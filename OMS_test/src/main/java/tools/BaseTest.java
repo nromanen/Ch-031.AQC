@@ -23,7 +23,7 @@ public class BaseTest {
     private DBUnitConfig dbUnitConfig;
     private static final String BASEURL = PropertiesProvider.getProperty("base.url");
     private static final int TIMEOUT = Integer.parseInt(PropertiesProvider.getProperty("time.out"));
-    private static Logger LOG = LoggerFactory.getLogger(ScreenShotRule.class);
+    private static Logger LOG = LoggerFactory.getLogger(BaseTest.class);
     protected static WebDriver driver;
     protected BasePage basePage;
     protected static EntityManager em = Persistence.createEntityManagerFactory(
