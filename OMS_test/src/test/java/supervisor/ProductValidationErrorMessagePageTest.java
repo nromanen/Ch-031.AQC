@@ -32,7 +32,7 @@ public class ProductValidationErrorMessagePageTest extends BaseTest {
 
     @Before
     public void setUp() {
-        initDataBase("data/productData.xml");
+        //initDataBase("data/productData.xml");
         super.setUp();
         basePage = new BasePage(driver);
         UserInfoPage userInfoPage = basePage.login(SUPERVISOR_LOGIN, SUPERVISOR_PASSWORD);
@@ -69,7 +69,7 @@ public class ProductValidationErrorMessagePageTest extends BaseTest {
         assertEquals(expectedColor, actualColoredString.getColor());
     }
 
-    @Test // A test fails!
+    @Test // This test fails! Bug in Jira - https://ssu-jira.softserveinc.com/browse/CHZZZ-14
     /**
      * When entered invalid characters (symbols) on product price field, , then after clicking on OK button
      * the following error message will appear in red color "Please enter only numbers".
@@ -80,13 +80,13 @@ public class ProductValidationErrorMessagePageTest extends BaseTest {
         addProductPage.setProductPriceValue(PRODUCT_PRICE_CHARACTERS_VALUE);
         addProductPage.clickOkButton();
         ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
-        String expectedMessage = "Please enter only numbers!"; //the following error message is appear: "Please enter double value!"
+        String expectedMessage = "Please enter only numbers!";
         Color expectedColor = Color.red;
         assertEquals(expectedMessage, actualColoredString.getString());
         assertEquals(expectedColor, actualColoredString.getColor());
     }
 
-    @Test // A test fails!
+    @Test // This test fails! Bug in Jira - https://ssu-jira.softserveinc.com/browse/CHZZZ-15
     /**
      * This test verify that when entered text is >999 or <1 on product price field, then after clicking on OK button
      * the following error message will appear in red color "Please enter price in range of 1-999".
@@ -97,7 +97,7 @@ public class ProductValidationErrorMessagePageTest extends BaseTest {
         addProductPage.setProductPriceValue(PRODUCT_PRICE_RANGE_VALUE);
         addProductPage.clickOkButton();
         ColoredString actualColoredString = addProductPage.getProductPriceErrorMessage();
-        String expectedMessage = "Please enter price in range of 1-999!";    // No error message!
+        String expectedMessage = "Please enter price in range of 1-999!";
         Color expectedColor = Color.red;
         assertEquals(expectedMessage, actualColoredString.getString());
         assertEquals(expectedColor, actualColoredString.getColor());
