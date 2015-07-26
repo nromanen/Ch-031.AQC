@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<users id ="101" IsUserActive = "1" Balance = "10" Email = "mail" FirstName = "ivanka" LastName = "horoshko" Login = "iva" Password = "qwerty" CustomerTypeRef = "1" RegionRef = "4" RoleRef ="1"/>
+</dataset>

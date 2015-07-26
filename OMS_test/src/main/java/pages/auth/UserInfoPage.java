@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.BasePage;
+import pages.administration.AdministrationPage;
 import pages.administration.UsersPage;
 import pages.ordering.CustomerOrderingPage;
 import pages.ordering.ItemManagementPage;
@@ -24,6 +25,11 @@ public class UserInfoPage extends BasePage{
         super(driver);
     }
 
+    public AdministrationPage selectAdministrationTab(){
+    	browser.findElementByLinkText(USERS_LOCATOR).click();
+    	return new AdministrationPage(browser.getDriver());
+    }
+    
     public ItemManagementPage selectItemManagementTab() {
         browser.findElementByLinkText(itemManagementTabLinkTextLocator).click();
         return PageFactory.initElements(browser.getDriver(), ItemManagementPage.class);
@@ -41,7 +47,6 @@ public class UserInfoPage extends BasePage{
 
     public UsersPage gotoUsers() {
         browser.findElementByLinkText(USERS_LOCATOR).click();
-
         return new UsersPage(browser.getDriver());
     }
 

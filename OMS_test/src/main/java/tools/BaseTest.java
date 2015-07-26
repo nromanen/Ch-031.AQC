@@ -16,7 +16,7 @@ public class BaseTest {
 
 	private DBUnitConfig dbUnitConfig;
 
-	private static final String BASEURL = "http://localhost:8083/OMS/";
+	private static final String BASEURL = "http://localhost:8080/OMS/";
 	private static final int TIMEOUT = 30;
 	protected static WebDriver driver;// = new FirefoxDriver();
 	protected BasePage basePage;
