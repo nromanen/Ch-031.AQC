@@ -33,13 +33,16 @@ public class MerchandiserOrderingPage extends BasePage {
 	private static String saveButtonXPathLocator = "//*[@id=\"edit\"]/div/form[1]/input";
 	private static String deliveryDateOfTestOrderXPathLocator = "//*[@id=\"list\"]/table/tbody/tr[2]/td[4]";
 	
-	public void login(){
-		
-	}
+	/**
+	 * to find ordering Tab. 
+	 */
 	public void findOrderingTabAndClick(){
 		browser.findElementByXpath(orderingTabXPathLocator).click();		
 	}
 	
+	/**
+	 * find Show Items link. methods for testing of this link
+	 */
 	public String findShow10ItemsLinkByXpathAndGetText(){
 		return browser.findElementByXpath(showItemsXPathLocator).getText();
 	}
@@ -47,11 +50,15 @@ public class MerchandiserOrderingPage extends BasePage {
 	public void findShowItemsLinkByXPathAndClick(){
 		browser.findElementByXpath(showItemsXPathLocator).click();
 	}
-	
+	/**
+	 * method to get number of orders in column
+	 */
 	public String findPageCountLinkByXPathLocatorAndGetText(){
 		return browser.findElementByXpath(pageCountLinkXPathLocator).getText();
 	}
-	
+	/**
+	 * methods which get text from links
+	 */
 	public String findHeaderLinkByTagNameLocatorAndGetText(){
 		return browser.findElementByTagName(headerLinkTagNameLocator).getText();
 	}
@@ -67,7 +74,9 @@ public class MerchandiserOrderingPage extends BasePage {
 	public String findOrderingTabByXPathLocatorAndGetText(){
 		return browser.findElementByXpath(orderingTabXPathLocator).getText();
 	}
-	//for testing Search for order by line
+	/**
+	 * group of methods to work with Search Field
+	 */
 	public String findSearhForOrderByLinkByXPathLocatorAndGetText(){
 		return browser.findElementByXpath(searchForOrdersByLinkXPathLocator).getText();
 	}
@@ -97,7 +106,9 @@ public class MerchandiserOrderingPage extends BasePage {
 	public String findApplyButtonByXPathLocatorAndGetText(){
 		return browser.findElementByXpath(applyBottomXPathLocator).getText();
 	}
-	//For testing OrderName column
+	/**
+	 * group of methods to find/find and click/ getText from Order name column
+	 */
 	public void findOrderNameLinkByXPathLocator(){
 		browser.findElementByXpath(orderNameLinkXPathLocator);
 	}
@@ -110,7 +121,9 @@ public class MerchandiserOrderingPage extends BasePage {
 		return browser.findElementByXpath(orderNameLinkXPathLocator).getText();
 	}
 	
-	//For testing TotalPrice column	
+	/**
+	 * methods for testing total price column
+	 */
 	public void findTotalPriceLinkByXPathLocator(){
 		browser.findElementByXpath(totalPriceLinkXPathLocator);
 	}
@@ -123,7 +136,9 @@ public class MerchandiserOrderingPage extends BasePage {
 		return browser.findElementByXpath(totalPriceLinkXPathLocator).getText();
 	}
 	
-	//For testing MaxDiscount column
+	/**
+	 * for testing maxDiscount column
+	 */
 	public void findMaxDiscountLinkByXPathLocator(){
 		browser.findElementByXpath(maxDiscountLinkXPathLocator);
 	}
@@ -136,7 +151,9 @@ public class MerchandiserOrderingPage extends BasePage {
 		return browser.findElementByXpath(maxDiscountLinkXPathLocator).getText();
 	}
 	
-	//For testing DeliveryDate column
+	/**
+	 * methods for testing Delivery Date column
+	 */
 	public void findDeliveryDateLinkByXPathLocator(){
 		browser.findElementByXpath(deliveryDateLinkXPathLocator);
 	}
@@ -158,7 +175,9 @@ public class MerchandiserOrderingPage extends BasePage {
 		browser.findElementByXpath(deliveryDateFieldXPathLocator).sendKeys(testDate);
 	}
 	
-	//for testing Status column
+	/**
+	 * testing status column
+	 */
 	public void findStatusLinkByXPathLocator(){
 		browser.findElementByXpath(statusLinkXPathLocator);
 	}
@@ -171,7 +190,10 @@ public class MerchandiserOrderingPage extends BasePage {
 		return browser.findElementByXpath(statusLinkXPathLocator).getText();
 	}
 	
-	//for testing Edit column
+	/**
+	 * testing edit column
+	 * 
+	 */
 	public String getEditItemText(){
 		return browser.findElementByXpath(editLinkXPathLocator).getText();
 	}
@@ -180,18 +202,24 @@ public class MerchandiserOrderingPage extends BasePage {
 		browser.findElementByXpath(editOrder1LinkXPathLocator).click();
 	}
 	
-	//for testing Delete column
+	/**
+	 * for testing delete column
+	 */
 	public String getDeleteItemText(){
 		return browser.findElementByXpath(deleteLinkXPathlocator).getText();
 	}
 	
-	//testSearchforOrderByOrderName
+	/**
+	 * method to get test from first order's name at the column Order name.
+	 */
 	public String getFoundedOrderNameText(){
 		return browser.findElementByXpath(orderNameColumnFirstElementXPathLocator).getText();
 	}
 	
-	
-	//testing Edit Order
+		
+	/**
+	 * method to find save button on edit page. temporarily in this page.
+	 */
 	public void findSaveButtonAndClick(){
 		browser.findElementByXpath(saveButtonXPathLocator).click();
 	}
