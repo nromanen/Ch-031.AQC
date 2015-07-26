@@ -7,24 +7,36 @@
 
 package tools;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CheckTableValue {
-    private WebDriver driver;
-    public CheckTableValue(WebDriver driver) {
-        this.driver = driver;
-    }
+        private WebDriver driver;
+        public CheckTableValue(WebDriver driver) {
+                this.driver = driver;
+        }
 
-    public String findValue(String id, String th,int tdId) throws Exception{
-/*        String mas = (driver.findElement(By.xpath("//div[@id='"+id+"']//table//td["+td+"]//text()"))).toString();
-        List<String> list = Arrays.asList(mas.split("\\s*,\\s*"));
+        public String findValue(String id, int trId,int tdId) throws Exception{
+                String mas = (driver.findElement(By.xpath("//div[@id='" + id + "']//table/tbody/tr[" + trId + "]//td[" + tdId + "]"))).getText();
+                //*[@id="orderItems"]/tbody/tr[1]/td[6]
+                System.out.println(mas);
+/*        List<String> list = Arrays.asList(mas.split("\\s*,\\s*"));
         String[] value = new String[list.size()];
         list.toArray(value);
         return value[tdId];*/
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
+                return mas;
+
+
+                /**
+                 * We must use JavaScript for Chrome because there is a bug while working with XPath's property text().
+                 * Please, comment Xpath part of function to use it
+                 */
+      /*  JavascriptExecutor executor = (JavascriptExecutor) driver;
 
         String js ="function find(){"+
                 "var table = document.getElementById(\""+id+"\").getElementsByTagName(\"table\")[0];"+
@@ -47,10 +59,14 @@ public class CheckTableValue {
                 "td.push(el);"+
                 "}"+
                 "return td;}"+
-                "return find();";
-        Object obj = (Object) executor.executeScript(js);
+                "return find();";*/
+/*        Object obj = (Object) executor.executeScript(js);
         ArrayList value = new ArrayList();
         value = (ArrayList) obj;
-        return (String)value.get(tdId);
-    }
+        return (String)value.get(tdId);*/
+        }
+
+
 }
+
+
