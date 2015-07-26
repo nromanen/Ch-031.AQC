@@ -5,14 +5,22 @@
         <level value="WARN"/>
     </logger>
 
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
     <appender name="StdoutFile" class="ch.qos.logback.core.FileAppender">
         <file>logs/stdout.log</file>
         <encoder>
-            <Pattern>%d [%thread] %level %logger - %m%n</Pattern>
+            <Pattern>%d [%thread] %-5level [%logger{36}] - %msg%n</Pattern>
         </encoder>
     </appender>
 
     <root level="INFO">
         <appender-ref ref="StdoutFile"/>
+        <appender-ref ref="consoleAppender"/>
     </root>
 </configuration>
