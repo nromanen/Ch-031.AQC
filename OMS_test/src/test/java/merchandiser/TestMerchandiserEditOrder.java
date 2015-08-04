@@ -31,7 +31,9 @@ public class TestMerchandiserEditOrder extends BaseTest {
 				MERCHANDISER_PASSWORD);
 		merchOrderingPage = userInfoPage.selectOrderingTabByMerchandiser();
 	}
-
+	/**
+	 * Test 
+	 */
 	@Test
 	public void testEditOrderChangeDeliveryDate() {
 		LOG.info("Start of test testEditOrderChangeDeliveryDate ");
